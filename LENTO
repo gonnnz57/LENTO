@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lento Running Club &#8212; Stavanger</title>
+<meta name="description" content="A running club in Stavanger, Norway. Five pace groups from 4:30 to 7:30 per km. Slow is still moving. All paces, one community.">
+<meta property="og:title" content="Lento Running Club">
+<meta property="og:description" content="Stavanger. All paces, one community.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2314302B'/%3E%3Crect x='12' y='20' width='40' height='5' rx='2.5' fill='%23EFEFEC'/%3E%3Crect x='12' y='30' width='28' height='5' rx='2.5' fill='%23EFEFEC'/%3E%3Crect x='12' y='40' width='16' height='5' rx='2.5' fill='%232F4BFF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   LENTO RUNNING CLUB — core stylesheet
+   Design system notes:
+   - One typeface (Archivo variable). Hierarchy is carried by
+     WIDTH, not by swapping families. Expanded = loud,
+     condensed = data, normal = read.
+   - Palette is cool/Nordic: granite paper, fjord green,
+     electric signal blue. No warm cream.
+   - The "pace scale" (4:30 -> 7:30) is the recurring motif.
+   ========================================================= */
+ 
+/* ---------- tokens ---------- */
+:root {
+  --paper:   #EFEFEC;
+  --paper-2: #E3E3DE;
+  --stone:   #CFCFC8;
+  --ink:     #17191B;
+  --fjord:   #14302B;
+  --fjord-2: #1E4139;
+  --signal:  #2F4BFF;
+  --haze:    #74787C;
+  --accent-lt: #93A4FF;   /* signal blue, legible on fjord */
+ 
+  --fg: var(--ink);
+  --bg: var(--paper);
+  --rule: rgba(23, 25, 27, .16);
+  --dim: var(--haze);
+ 
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --maxw: 1560px;
+ 
+  --step--1: clamp(.78rem, .74rem + .18vw, .875rem);
+  --step-0:  clamp(.95rem, .9rem + .25vw, 1.0625rem);
+  --step-1:  clamp(1.15rem, 1rem + .7vw, 1.5rem);
+  --step-2:  clamp(1.6rem, 1.2rem + 1.8vw, 2.75rem);
+  --step-3:  clamp(2.4rem, 1.4rem + 4.4vw, 5rem);
+  --step-4:  clamp(3.4rem, 1rem + 11vw, 11rem);
+ 
+  --ease: cubic-bezier(.16, .84, .32, 1);
+  --nav-h: 68px;
+}
+ 
+/* dark inversion — applied per section */
+.invert {
+  --fg: var(--paper);
+  --bg: var(--fjord);
+  --rule: rgba(239, 239, 236, .2);
+  --dim: rgba(239, 239, 236, .6);
+  background: var(--bg);
+  color: var(--fg);
+}
+ 
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-variation-settings: "wdth" 100, "wght" 400;
+  font-size: var(--step-0);
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+h1, h2, h3, h4, p, figure, blockquote { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+ 
+/* ---------- type roles ---------- */
+.display {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  font-size: var(--step-3);
+  line-height: .88;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+}
+.display--xl { font-size: var(--step-4); }
+.headline {
+  font-variation-settings: "wdth" 112, "wght" 700;
+  font-size: var(--step-2);
+  line-height: 1.02;
+  letter-spacing: -.02em;
+}
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.4;
+  max-width: 30ch;
+  font-variation-settings: "wdth" 100, "wght" 400;
+}
+.data {
+  font-variation-settings: "wdth" 68, "wght" 600;
+  letter-spacing: .01em;
+  font-variant-numeric: tabular-nums;
+}
+.tag {
+  font-size: var(--step--1);
+  font-variation-settings: "wdth" 88, "wght" 600;
+  color: var(--dim);
+  letter-spacing: .005em;
+}
+.prose { max-width: 62ch; }
+.prose p + p { margin-top: 1em; }
+ 
+/* ---------- layout ---------- */
+.rail {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.band {
+  padding-block: clamp(4rem, 9vw, 9rem);
+  background: var(--bg);
+  color: var(--fg);
+  position: relative;
+}
+.band--tight { padding-block: clamp(2.5rem, 5vw, 4.5rem); }
+.band--flush { padding-block: 0; }
+ 
+.split {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+  .split--even { grid-template-columns: 1fr 1fr; }
+}
+ 
+.hr {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: var(--rule);
+}
+ 
+/* ---------- grain + cursor ---------- */
+.grain {
+  position: fixed; inset: 0; z-index: 900;
+  pointer-events: none; opacity: .3; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+}
+.cursor {
+  position: fixed; top: 0; left: 0; z-index: 950;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--signal);
+  pointer-events: none;
+  transform: translate3d(-50px, -50px, 0);
+  transition: width .3s var(--ease), height .3s var(--ease), background .3s;
+  margin: -5px 0 0 -5px;
+}
+.cursor.is-wide { width: 76px; height: 76px; margin: -38px 0 0 -38px; background: rgba(47,75,255,.28); }
+@media (hover: none), (pointer: coarse) { .cursor { display: none; } }
+ 
+/* ---------- preloader ---------- */
+.boot {
+  position: fixed; inset: 0; z-index: 1000;
+  background: var(--fjord); color: var(--paper);
+  display: grid; place-items: end start;
+  padding: var(--gutter);
+  transition: transform .9s var(--ease);
+}
+.boot__num {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  font-size: clamp(4rem, 22vw, 16rem);
+  line-height: .82; letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+}
+body.booted .boot { transform: translateY(-101%); }
+body.booting { overflow: hidden; }
+ 
+/* ---------- nav ---------- */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  transition: background .4s var(--ease), color .4s var(--ease);
+}
+.nav__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
+}
+.nav.is-stuck { background: var(--paper); box-shadow: 0 1px 0 var(--rule); }
+.nav.on-dark { color: var(--paper); }
+.nav.is-stuck.on-dark { background: var(--fjord); box-shadow: 0 1px 0 rgba(239,239,236,.18); }
+.nav.on-dark .btn { background: var(--paper); color: var(--ink); }
+.nav.on-dark .btn:hover { background: var(--signal); color: #fff; }
+.brand {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  font-size: 1.15rem; letter-spacing: -.01em; text-transform: uppercase;
+  display: flex; align-items: baseline; gap: .55rem;
+}
+.brand small {
+  font-size: .58rem; letter-spacing: .12em;
+  font-variation-settings: "wdth" 75, "wght" 600;
+  opacity: .6; text-transform: uppercase;
+}
+.nav__links { display: none; gap: clamp(1rem, 2.2vw, 2.2rem); align-items: center; }
+@media (min-width: 860px) { .nav__links { display: flex; } .menu-btn { display: none; } }
+.nav__links a {
+  font-size: var(--step--1);
+  font-variation-settings: "wdth" 92, "wght" 500;
+  position: relative; padding-block: .35rem;
+}
+.nav__links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .4s var(--ease);
+}
+.nav__links a:hover::after,
+.nav__links a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+ 
+.menu-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: var(--step--1); font-variation-settings: "wdth" 92, "wght" 600;
+}
+.menu-btn i { width: 22px; height: 9px; position: relative; display: block; font-style: normal; }
+.menu-btn i::before, .menu-btn i::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor;
+  transition: transform .35s var(--ease);
+}
+.menu-btn i::before { top: 0; }
+.menu-btn i::after { bottom: 0; }
+body.menu-open .menu-btn i::before { transform: translateY(3.75px) rotate(45deg); }
+body.menu-open .menu-btn i::after  { transform: translateY(-3.75px) rotate(-45deg); }
+ 
+/* full screen menu */
+.sheet {
+  position: fixed; inset: 0; z-index: 790;
+  background: var(--fjord); color: var(--paper);
+  padding: calc(var(--nav-h) + 2rem) var(--gutter) var(--gutter);
+  display: flex; flex-direction: column; justify-content: space-between;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .6s var(--ease);
+  visibility: hidden;
+}
+body.menu-open .sheet { clip-path: inset(0 0 0 0); visibility: visible; }
+body.menu-open { overflow: hidden; }
+.sheet__links a {
+  display: block;
+  font-variation-settings: "wdth" 120, "wght" 800;
+  font-size: clamp(2.2rem, 11vw, 5.5rem);
+  line-height: 1.02; text-transform: uppercase; letter-spacing: -.03em;
+  padding-block: .1em;
+  border-bottom: 1px solid rgba(239,239,236,.15);
+  transition: color .3s, padding-left .4s var(--ease);
+}
+.sheet__links a:hover { color: var(--accent-lt); padding-left: .12em; }
+.sheet__foot { display: flex; flex-wrap: wrap; gap: 1rem 2rem; font-size: var(--step--1); opacity: .75; }
+ 
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: .6rem;
+  padding: .95em 1.6em;
+  border-radius: 999px;
+  background: var(--ink); color: var(--paper);
+  font-size: var(--step--1);
+  font-variation-settings: "wdth" 95, "wght" 650;
+  letter-spacing: .01em;
+  transition: transform .35s var(--ease), background .3s, color .3s;
+  will-change: transform;
+}
+.btn:hover { background: var(--signal); color: #fff; }
+.btn--ghost {
+  background: transparent; color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.btn--ghost:hover { background: var(--fg); color: var(--bg); box-shadow: none; }
+.btn--signal { background: var(--signal); color: #fff; }
+.btn--signal:hover { background: var(--ink); }
+ 
+/* ---------- hero ---------- */
+.hero {
+  min-height: 100svh;
+  padding-top: calc(var(--nav-h) + 2rem);
+  padding-bottom: 2rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.hero__type { position: relative; z-index: 2; }
+.hero__mask { overflow: hidden; display: block; }
+.hero__word {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  font-size: clamp(3.6rem, 21vw, 19rem);
+  line-height: .8; letter-spacing: -.045em;
+  text-transform: uppercase;
+  display: flex; flex-wrap: nowrap;
+}
+.hero__word > span {
+  display: inline-block;
+  transform: translateY(104%);
+  transition: transform 1s var(--ease);
+}
+body.booted .hero__word > span { transform: translateY(0); }
+.hero__word > span:nth-child(1) { transition-delay: .05s; }
+.hero__word > span:nth-child(2) { transition-delay: .11s; }
+.hero__word > span:nth-child(3) { transition-delay: .17s; }
+.hero__word > span:nth-child(4) { transition-delay: .23s; }
+.hero__word > span:nth-child(5) { transition-delay: .29s; }
+.hero__meta {
+  display: grid; gap: 1.5rem 2rem;
+  grid-template-columns: 1fr;
+  align-items: end;
+  padding-top: 2rem;
+}
+@media (min-width: 900px) { .hero__meta { grid-template-columns: 1fr auto; } }
+ 
+.hero__media {
+  position: absolute; inset: 0; z-index: 0;
+  opacity: .34;
+}
+.hero__media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, var(--paper) 0%, rgba(239,239,236,.1) 40%, var(--paper) 96%);
+}
+ 
+/* ---------- pace scale (signature motif) ---------- */
+.scale { position: relative; padding-top: 1.6rem; }
+.scale__line { height: 1px; background: var(--rule); position: relative; }
+.scale__line::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--fg);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 1.4s var(--ease) .5s;
+}
+body.booted .scale__line::after { transform: scaleX(1); }
+.scale__ticks {
+  display: flex; justify-content: space-between;
+  margin-top: .7rem;
+  font-size: var(--step--1);
+  font-variation-settings: "wdth" 68, "wght" 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--dim);
+}
+.scale__dots { position: absolute; inset-inline: 0; top: 1.6rem; height: 1px; }
+.scale__dot {
+  position: absolute; top: 50%; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%; background: var(--signal);
+  opacity: 0;
+  animation: dotIn .7s var(--ease) forwards;
+}
+@keyframes dotIn { to { opacity: 1; } }
+ 
+/* ---------- marquee ---------- */
+.marquee {
+  overflow: hidden; white-space: nowrap;
+  border-block: 1px solid var(--rule);
+  padding-block: .7rem;
+  background: var(--bg); color: var(--fg);
+}
+.marquee__track { display: inline-flex; will-change: transform; animation: slide 30s linear infinite; }
+.marquee span {
+  padding-right: 2.5rem;
+  font-variation-settings: "wdth" 118, "wght" 750;
+  font-size: clamp(1.4rem, 4.5vw, 3rem);
+  text-transform: uppercase; letter-spacing: -.015em;
+  display: inline-flex; align-items: center; gap: 2.5rem;
+}
+.marquee em { font-style: normal; color: var(--signal); }
+@keyframes slide { to { transform: translateX(-50%); } }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+ 
+/* ---------- media blocks ---------- */
+.media {
+  position: relative; overflow: hidden;
+  background-color: var(--paper-2);
+  /* real photo sits on top; the two gradients below are the fallback,
+     so a missing file looks designed instead of broken */
+  background-image:
+    var(--img, none),
+    repeating-linear-gradient(135deg, rgba(23,25,27,.05) 0 2px, transparent 2px 10px),
+    linear-gradient(155deg, var(--stone), var(--paper-2) 55%, var(--stone));
+  background-size: cover, auto, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  aspect-ratio: var(--ratio, 4 / 5);
+}
+.media__label {
+  position: absolute; left: 0; bottom: 0;
+  padding: .5rem .75rem;
+  background: var(--ink); color: var(--paper);
+  font-size: .68rem; font-variation-settings: "wdth" 70, "wght" 600;
+  letter-spacing: .06em;
+}
+.media--wide { --ratio: 16 / 10; }
+.media--tall { --ratio: 3 / 4; }
+.media--sq   { --ratio: 1 / 1; }
+ 
+/* ---------- stat rows ---------- */
+.rows { border-top: 1px solid var(--rule); }
+.row {
+  display: grid; gap: .35rem 2rem;
+  grid-template-columns: 1fr;
+  padding-block: 1.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+@media (min-width: 760px) {
+  .row { grid-template-columns: 7rem minmax(0,1fr) minmax(0,1.1fr); align-items: baseline; }
+}
+.row__k {
+  font-variation-settings: "wdth" 68, "wght" 700;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--step-1);
+}
+.row__t { font-variation-settings: "wdth" 105, "wght" 650; font-size: var(--step-1); }
+.row__d { color: var(--dim); font-size: var(--step--1); }
+ 
+/* ---------- pace picker ---------- */
+.picker { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); grid-template-columns: 1fr; }
+@media (min-width: 980px) { .picker { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } }
+.picker__list { border-top: 1px solid var(--rule); }
+.picker__item {
+  width: 100%; text-align: left;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 1rem;
+  align-items: baseline;
+  padding-block: clamp(1rem, 2.4vw, 1.6rem);
+  border-bottom: 1px solid var(--rule);
+  transition: padding-left .4s var(--ease), color .3s;
+}
+.picker__item:hover, .picker__item.is-on { padding-left: .8rem; }
+.picker__item.is-on { color: var(--signal); }
+.invert .picker__item.is-on { color: var(--accent-lt); }
+.picker__pace {
+  font-variation-settings: "wdth" 68, "wght" 700;
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.3rem, 3.2vw, 2rem);
+}
+.picker__name { font-variation-settings: "wdth" 105, "wght" 600; }
+.picker__n { font-size: .7rem; opacity: .5; font-variation-settings: "wdth" 70, "wght" 600; }
+.picker__panel { position: relative; }
+@media (min-width: 980px) { .picker__panel { position: sticky; top: calc(var(--nav-h) + 2rem); } }
+.picker__big {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  font-size: clamp(3.4rem, 11vw, 8rem);
+  line-height: .85; letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+}
+.picker__copy { margin-top: 1rem; max-width: 34ch; color: var(--dim); }
+.fade-swap { animation: fadeSwap .45s var(--ease); }
+@keyframes fadeSwap { from { opacity: 0; transform: translateY(8px); } }
+ 
+/* ---------- horizontal gallery ---------- */
+.hscroll { position: relative; }
+.hscroll__sticky {
+  position: sticky; top: 0; height: 100svh;
+  display: flex; align-items: center; overflow: hidden;
+}
+.hscroll__track {
+  display: flex; gap: clamp(1rem, 2vw, 2rem);
+  padding-inline: var(--gutter);
+  will-change: transform;
+}
+.hscroll__item { flex: 0 0 auto; width: clamp(240px, 34vw, 460px); }
+.hscroll__item .media { --ratio: 3 / 4; }
+.hscroll__item p { margin-top: .7rem; font-size: var(--step--1); color: var(--dim); }
+@media (max-width: 900px) {
+  .hscroll { height: auto !important; }
+  .hscroll__sticky { position: static; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 1rem; }
+  .hscroll__track { transform: none !important; }
+  .hscroll__item { scroll-snap-align: start; width: 74vw; }
+}
+ 
+/* ---------- logo strip ---------- */
+.partners { display: flex; flex-wrap: wrap; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.partner {
+  flex: 1 1 200px;
+  background: var(--bg);
+  padding: clamp(1.6rem, 4vw, 3rem) 1.2rem;
+  text-align: center;
+  font-variation-settings: "wdth" 118, "wght" 700;
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  text-transform: uppercase; letter-spacing: -.01em;
+  transition: background .3s, color .3s;
+}
+.partner:hover { background: var(--signal); color: #fff; }
+ 
+/* ---------- cards / grid ---------- */
+.grid { display: grid; gap: clamp(1.2rem, 3vw, 2.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.tile__t { margin-top: .9rem; font-variation-settings: "wdth" 108, "wght" 650; font-size: var(--step-1); }
+.tile__d { color: var(--dim); font-size: var(--step--1); margin-top: .3rem; }
+ 
+/* ---------- forms ---------- */
+.field { display: flex; flex-wrap: wrap; gap: .6rem; max-width: 520px; }
+.field input {
+  flex: 1 1 220px;
+  padding: .95em 1.1em;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: transparent; color: var(--fg);
+  font: inherit; font-size: var(--step--1);
+}
+.field input::placeholder { color: var(--dim); }
+.field input:focus { outline: none; border-color: currentColor; }
+.form-note { font-size: var(--step--1); color: var(--dim); margin-top: .8rem; }
+ 
+/* ---------- footer ---------- */
+.foot { background: var(--fjord); color: var(--paper); padding-block: clamp(3rem, 7vw, 6rem) 2rem; }
+.foot a:hover { opacity: .6; }
+.foot__word {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  font-size: clamp(2.6rem, 18.5vw, 16rem);
+  line-height: .78; letter-spacing: -.045em; text-transform: uppercase;
+  margin-top: clamp(2rem, 6vw, 5rem);
+  opacity: .95;
+}
+.foot__cols { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+.foot__cols h4 { font-size: var(--step--1); font-variation-settings: "wdth" 80, "wght" 600; opacity: .55; margin-bottom: .8rem; }
+.foot__cols li { padding-block: .18rem; }
+.foot__bar {
+  display: flex; flex-wrap: wrap; gap: .8rem 2rem; justify-content: space-between;
+  font-size: var(--step--1); opacity: .6;
+  border-top: 1px solid rgba(239,239,236,.18);
+  margin-top: 2.5rem; padding-top: 1.2rem;
+}
+ 
+/* ---------- reveal ---------- */
+.up { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.up.in { opacity: 1; transform: none; }
+ 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .up { opacity: 1; transform: none; }
+  .hero__word > span { transform: none; }
+  .cursor { display: none; }
+}
+ 
+ 
+/* ---------- one-page anchors clear the fixed nav ---------- */
+section[id], main[id] { scroll-margin-top: var(--nav-h); }
+ 
+</style>
+</head>
+<body>
+ 
+<!-- ===== boot ===== -->
+<div class="boot"><div class="boot__num">000</div></div>
+<div class="grain" aria-hidden="true"></div>
+ 
+<!-- ===== nav ===== -->
+<header class="nav">
+  <div class="rail nav__inner">
+    <a class="brand" href="#top">Lento <small>Stavanger</small></a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="#club">Club</a>
+      <a href="#runs">Runs</a>
+      <a href="#collabs">Collabs</a>
+      <a href="#shop">Shop</a>
+      <a class="btn" href="#join" data-magnet>Join a run</a>
+    </nav>
+    <button class="menu-btn" aria-expanded="false" aria-controls="sheet">Menu <i aria-hidden="true"></i></button>
+  </div>
+</header>
+ 
+<!-- ===== menu overlay ===== -->
+<div class="sheet" id="sheet" aria-hidden="true">
+  <nav class="sheet__links" aria-label="Menu">
+    <a href="#club">Club</a>
+    <a href="#runs">Runs</a>
+    <a href="#collabs">Collabs</a>
+    <a href="#shop">Shop</a>
+    <a href="#join">Join</a>
+  </nav>
+  <div class="sheet__foot">
+    <span>club@lento.no</span>
+    <a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">@lentorunning</a>
+    <span>Stavanger <span data-clock></span></span>
+  </div>
+</div>
+ 
+<main id="top">
+ 
+<!-- ===== hero ===== -->
+<section class="hero">
+  <div class="hero__media media" style="--img:url('assets/img/hero.jpg')" aria-hidden="true"></div>
+ 
+  <div class="rail hero__type" style="margin-top:auto">
+    <div class="hero__mask">
+      <h1 class="hero__word" aria-label="Lento">
+        <span aria-hidden="true">L</span><span aria-hidden="true">E</span><span aria-hidden="true">N</span><span aria-hidden="true">T</span><span aria-hidden="true">O</span>
+      </h1>
+    </div>
+  </div>
+ 
+  <div class="rail hero__type">
+    <div class="scale">
+      <div class="scale__line"></div>
+      <div class="scale__dots" aria-hidden="true"></div>
+      <div class="scale__ticks">
+        <span>4:30</span><span>5:00</span><span>5:30</span><span>6:00</span><span>6:45</span><span>7:30</span>
+      </div>
+    </div>
+    <div class="hero__meta">
+      <p class="lede">Slow is still moving.<br>All paces, one community.</p>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <a class="btn" href="#join" data-magnet>Sign up on Spond</a>
+        <a class="btn btn--ghost" href="#club">Read our story</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ===== marquee ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Slow is still moving <em>&#9670;</em> All paces, one community <em>&#9670;</em> Stavanger, Norway <em>&#9670;</em></span>
+    <span>Slow is still moving <em>&#9670;</em> All paces, one community <em>&#9670;</em> Stavanger, Norway <em>&#9670;</em></span>
+  </div>
+</div>
+ 
+<!-- ===== club ===== -->
+<section class="band" id="club">
+  <div class="rail split">
+    <h2 class="headline up">Nobody gets<br>dropped here.</h2>
+    <div>
+      <div class="prose up" data-delay=".08">
+        <p>Lento means slow. We named the club after the thing most running clubs treat as a problem.</p>
+        <p>If you have ever turned up to a group run, watched the pack disappear round the first corner and jogged home alone, you know exactly why this club exists. Being the slowest person there should not cost you the run.</p>
+        <p>So we built it the other way round. Five pace groups, each with a leader and a sweeper. The 7:30 group leaves at the same time as the 4:30 group, runs the same route, and gets the same welcome at the finish.</p>
+      </div>
+      <div class="rows up" data-delay=".16" style="margin-top:2.5rem">
+        <div class="row">
+          <span class="row__k">4:30&#8211;7:30</span>
+          <span class="row__t">Five pace groups</span>
+          <span class="row__d">Per kilometre. Nobody runs alone at either end.</span>
+        </div>
+        <div class="row">
+          <span class="row__k">Weekly</span>
+          <span class="row__t">One club run</span>
+          <span class="row__d">Sign-ups open on Spond a few days before.</span>
+        </div>
+        <div class="row">
+          <span class="row__k">Free</span>
+          <span class="row__t">No membership fee</span>
+          <span class="row__d">Turn up, run, stay for the coffee.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ===== pace picker ===== -->
+<section class="band invert" data-nav-dark id="runs">
+  <div class="rail">
+    <h2 class="headline up" style="margin-bottom:clamp(2rem,5vw,3.5rem)">Find your group.</h2>
+ 
+    <div class="picker" data-picker>
+      <div class="picker__list" role="tablist" aria-label="Pace groups">
+        <button class="picker__item" role="tab" aria-selected="true"
+          data-pace="4:30" data-name="The front"
+          data-copy="Threshold efforts and long steady miles. Race-focused, but never a race."
+          data-img="assets/img/pace-1.jpg">
+          <span class="picker__pace">4:30&#8211;5:00</span><span class="picker__name">The front</span><span class="picker__n">01</span>
+        </button>
+        <button class="picker__item" role="tab" aria-selected="false"
+          data-pace="5:00" data-name="Steady"
+          data-copy="Comfortably quick. You can hold a conversation, but only just."
+          data-img="assets/img/pace-2.jpg">
+          <span class="picker__pace">5:00&#8211;5:30</span><span class="picker__name">Steady</span><span class="picker__n">02</span>
+        </button>
+        <button class="picker__item" role="tab" aria-selected="false"
+          data-pace="5:30" data-name="Conversational"
+          data-copy="The biggest group most weeks. Full sentences the whole way round."
+          data-img="assets/img/pace-3.jpg">
+          <span class="picker__pace">5:30&#8211;6:00</span><span class="picker__name">Conversational</span><span class="picker__n">03</span>
+        </button>
+        <button class="picker__item" role="tab" aria-selected="false"
+          data-pace="6:00" data-name="Easy"
+          data-copy="Where most people start. Recovery days and first-timers welcome."
+          data-img="assets/img/pace-4.jpg">
+          <span class="picker__pace">6:00&#8211;6:45</span><span class="picker__name">Easy</span><span class="picker__n">04</span>
+        </button>
+        <button class="picker__item" role="tab" aria-selected="false"
+          data-pace="6:45" data-name="Lento"
+          data-copy="Run, walk, run again. Same route, same finish, same coffee. This group is the whole point."
+          data-img="assets/img/pace-5.jpg">
+          <span class="picker__pace">6:45&#8211;7:30</span><span class="picker__name">Lento</span><span class="picker__n">05</span>
+        </button>
+      </div>
+ 
+      <div class="picker__panel">
+        <div class="media media--wide" data-picker-media style="--img:url('assets/img/pace-1.jpg')">
+          <span class="media__label" data-picker-name>The front</span>
+        </div>
+        <div class="picker__big" data-picker-pace style="margin-top:1.5rem">4:30</div>
+        <p class="picker__copy" data-picker-copy>Threshold efforts and long steady miles.</p>
+      </div>
+    </div>
+ 
+    <p class="tag up" style="margin-top:2rem;max-width:52ch">Not sure? Start one group slower than you think. It is much easier to move up next week than to hang on this week.</p>
+  </div>
+</section>
+ 
+<!-- ===== how a run works ===== -->
+<section class="band">
+  <div class="rail">
+    <h2 class="headline up" style="margin-bottom:clamp(2rem,5vw,3rem)">How a run works</h2>
+    <!-- EDIT ME: day, time and meeting point are placeholders -->
+    <div class="rows up" data-delay=".06">
+      <div class="row"><span class="row__k">Tuesday</span><span class="row__t">Every week, all year</span><span class="row__d">Winter runs stick to lit routes.</span></div>
+      <div class="row"><span class="row__k">18:30</span><span class="row__t">Meet 18:15</span><span class="row__d">Fifteen minutes for introductions and splitting into groups.</span></div>
+      <div class="row"><span class="row__k">Start</span><span class="row__t">Stavanger sentrum</span><span class="row__d">Exact meeting point is posted with each Spond event.</span></div>
+      <div class="row"><span class="row__k">5&#8211;10 km</span><span class="row__t">Short and long loops</span><span class="row__d">Same start, same finish, whichever you pick.</span></div>
+      <div class="row"><span class="row__k">After</span><span class="row__t">Stay for a bit</span><span class="row__d">Coffee, stretching, and a lot of standing around.</span></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ===== horizontal gallery ===== -->
+<section class="hscroll" data-hscroll aria-label="Photos from recent runs">
+  <div class="hscroll__sticky">
+    <div class="hscroll__track">
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('assets/img/run-01.jpg')"><span class="media__label">Sunday long run</span></div>
+        <p>Rain, again. Everyone came anyway.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('assets/img/run-02.jpg')"><span class="media__label">Lento &#215; Oakberry</span></div>
+        <p>A&#231;a&#237; at the finish. Round two was busier than round one.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('assets/img/run-03.jpg')"><span class="media__label">Lento &#215; Saucony &#215; Anton Sport</span></div>
+        <p>Two start times, one very full shop floor.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('assets/img/run-04.jpg')"><span class="media__label">Pace group five</span></div>
+        <p>Last in, loudest at the coffee.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('assets/img/run-05.jpg')"><span class="media__label">Harbour loop</span></div>
+        <p>The route everyone knows by heart.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('assets/img/run-06.jpg')"><span class="media__label">First timers</span></div>
+        <p>Four people ran their first 5k with us this month.</p>
+      </figure>
+    </div>
+  </div>
+</section>
+ 
+<!-- ===== collabs ===== -->
+<section class="band" id="collabs">
+  <div class="rail">
+    <div class="split" style="margin-bottom:clamp(2rem,5vw,3.5rem)">
+      <h2 class="headline up">We build runs<br>with brands.</h2>
+      <p class="prose up" data-delay=".08">Product launches, store takeovers, post-run activations. We handle the route, the crowd, the photography and the film &#8212; and hand it back to you inside 48 hours.</p>
+    </div>
+ 
+    <div class="partners up" data-delay=".12">
+      <div class="partner">Saucony</div>
+      <div class="partner">Anton Sport</div>
+      <div class="partner">Oakberry</div>
+      <a class="partner" href="mailto:club@lento.no" style="color:var(--signal)">Your brand</a>
+    </div>
+  </div>
+</section>
+ 
+<section class="band invert" data-nav-dark>
+  <div class="rail">
+    <h2 class="headline up" style="margin-bottom:clamp(2rem,5vw,3.5rem)">Two ways in</h2>
+    <div class="split split--even">
+      <div class="up">
+        <div class="picker__big">10 000<span style="font-size:.28em;font-variation-settings:'wdth' 80,'wght' 600;letter-spacing:0"> NOK</span></div>
+        <h3 class="tile__t" style="font-size:var(--step-2)">Community run</h3>
+        <div class="rows" style="margin-top:1.5rem">
+          <div class="row"><span class="row__k">01</span><span class="row__t">Hosted club run</span><span class="row__d">Route, leaders and sweepers for all five groups.</span></div>
+          <div class="row"><span class="row__k">02</span><span class="row__t">Club-shot photography</span><span class="row__d">Edited stills from the run and the finish.</span></div>
+          <div class="row"><span class="row__k">03</span><span class="row__t">Post and stories</span><span class="row__d">One feed post plus story coverage on @lentorunning.</span></div>
+          <div class="row"><span class="row__k">04</span><span class="row__t">Spond event</span><span class="row__d">Branded event pushed to the whole club.</span></div>
+        </div>
+      </div>
+      <div class="up" data-delay=".08">
+        <div class="picker__big" style="color:var(--accent-lt)">14 500<span style="font-size:.28em;font-variation-settings:'wdth' 80,'wght' 600;letter-spacing:0"> NOK</span></div>
+        <h3 class="tile__t" style="font-size:var(--step-2)">Signature collab</h3>
+        <div class="rows" style="margin-top:1.5rem">
+          <div class="row"><span class="row__k">01</span><span class="row__t">Full camera team</span><span class="row__d">Up to two photographers on the ground.</span></div>
+          <div class="row"><span class="row__k">02</span><span class="row__t">Drone footage</span><span class="row__d">Aerial coverage of the route and the group.</span></div>
+          <div class="row"><span class="row__k">03</span><span class="row__t">Photo and video package</span><span class="row__d">Edited stills and cut video, yours to keep and reuse.</span></div>
+          <div class="row"><span class="row__k">04</span><span class="row__t">Co-branded post and reel</span><span class="row__d">Published together, credited to both.</span></div>
+          <div class="row"><span class="row__k">05</span><span class="row__t">Delivered in 48 hours</span><span class="row__d">Everything in your hands two days after the run.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="up" style="margin-top:2.5rem">
+      <a class="btn btn--signal" href="mailto:club@lento.no?subject=Collab%20with%20Lento" data-magnet>club@lento.no</a>
+    </div>
+  </div>
+</section>
+ 
+<!-- ===== shop ===== -->
+<section class="band" id="shop">
+  <div class="rail split--even split">
+    <div>
+      <h2 class="display up">Kit is<br>coming.</h2>
+      <p class="lede up" data-delay=".08" style="margin-top:1.5rem;color:var(--dim)">A small first drop, made for Norwegian weather and worn by the people who actually show up. Put your name down and you will hear first.</p>
+      <form class="field up" data-delay=".12" data-form method="post" action="https://formspree.io/f/YOUR_FORM_ID" style="margin-top:2rem">
+        <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn btn--signal" type="submit">Notify me</button>
+      </form>
+      <p class="form-note">One email when the drop goes live. Nothing else.</p>
+    </div>
+    <div class="grid up" data-delay=".1">
+      <div class="media media--tall" style="--img:url('assets/img/kit-01.jpg')"><span class="media__label">Club tee</span></div>
+      <div class="media media--tall" style="--img:url('assets/img/kit-02.jpg')"><span class="media__label">Pace cap</span></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ===== join ===== -->
+<section class="band invert" data-nav-dark id="join">
+  <div class="rail split">
+    <h2 class="headline up">Sign up</h2>
+    <div>
+      <div class="prose up" data-delay=".08">
+        <p>We run sign-ups through Spond so we know how many leaders and sweepers to bring. It is free and takes about a minute.</p>
+      </div>
+      <div class="rows up" data-delay=".12" style="margin-top:2rem">
+        <div class="row"><span class="row__k">01</span><span class="row__t">Download Spond</span><span class="row__d">Available on iOS and Android.</span></div>
+        <div class="row"><span class="row__k">02</span><span class="row__t">Join with code PETIK</span><span class="row__d">Enter the invite code to find Lento Running Club.</span></div>
+        <div class="row"><span class="row__k">03</span><span class="row__t">Accept the next run</span><span class="row__d">Choose your pace group and turn up.</span></div>
+      </div>
+      <div class="up" data-delay=".16" style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap">
+        <a class="btn btn--signal" href="https://spond.com/landing/signup" target="_blank" rel="noopener" data-magnet>Open Spond</a>
+        <a class="btn btn--ghost" href="mailto:club@lento.no">Ask us anything</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+</main>
+ 
+<!-- ===== footer ===== -->
+<footer class="foot" data-nav-dark>
+  <div class="rail">
+    <div class="foot__cols">
+      <div><h4>Club</h4><ul><li><a href="#club">Our story</a></li><li><a href="#runs">Pace groups</a></li><li><a href="#join">Weekly runs</a></li></ul></div>
+      <div><h4>Brands</h4><ul><li><a href="#collabs">Work with us</a></li><li><a href="mailto:club@lento.no">Request rate card</a></li></ul></div>
+      <div><h4>Shop</h4><ul><li><a href="#shop">Drop 01</a></li></ul></div>
+      <div><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:club@lento.no">club@lento.no</a></li></ul></div>
+    </div>
+    <div class="foot__word" aria-hidden="true">Lento</div>
+    <div class="foot__bar">
+      <span>Stavanger, Norway &#8212; <span data-clock></span> local</span>
+      <span>Slow is still moving</span>
+      <span>&#169; <span data-year></span> Lento Running Club</span>
+    </div>
+  </div>
+</footer>
+ 
+ 
+<script>
+/* LENTO RUNNING CLUB — interactions
+   Vanilla JS, no dependencies. Everything degrades gracefully. */
+ 
+(function () {
+  "use strict";
+ 
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+ 
+  /* ---------- 1. boot sequence ---------- */
+  function boot() {
+    var el = $(".boot");
+    if (!el) { document.body.classList.add("booted"); return; }
+    var num = $(".boot__num", el);
+    document.body.classList.add("booting");
+ 
+    function done() {
+      document.body.classList.remove("booting");
+      document.body.classList.add("booted");
+      setTimeout(function () { el.remove(); }, 1000);
+    }
+    if (reduced) { if (num) num.textContent = "100"; done(); return; }
+ 
+    var n = 0;
+    var tick = setInterval(function () {
+      n += Math.ceil((100 - n) / 7) + 1;
+      if (n >= 100) { n = 100; clearInterval(tick); setTimeout(done, 320); }
+      if (num) num.textContent = String(n).padStart(3, "0");
+    }, 42);
+  }
+ 
+  /* ---------- 2. nav state ---------- */
+  function nav() {
+    var el = $(".nav");
+    if (!el) return;
+    var darkZones = $$("[data-nav-dark]");
+ 
+    function update() {
+      var y = window.scrollY;
+      el.classList.toggle("is-stuck", y > 24);
+      var probe = y + 34;
+      var dark = darkZones.some(function (z) {
+        var top = z.offsetTop, bot = top + z.offsetHeight;
+        return probe > top && probe < bot;
+      });
+      el.classList.toggle("on-dark", dark);
+    }
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+ 
+  /* ---------- 3. menu overlay ---------- */
+  function menu() {
+    var btn = $(".menu-btn");
+    var sheet = $(".sheet");
+    if (!btn || !sheet) return;
+    function set(open) {
+      document.body.classList.toggle("menu-open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      sheet.setAttribute("aria-hidden", open ? "false" : "true");
+    }
+    btn.addEventListener("click", function () {
+      set(!document.body.classList.contains("menu-open"));
+    });
+    $$("a", sheet).forEach(function (a) { a.addEventListener("click", function () { set(false); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
+  }
+ 
+  /* ---------- 4. scroll reveals ---------- */
+  function reveals() {
+    var items = $$(".up");
+    if (!items.length) return;
+    if (reduced || !("IntersectionObserver" in window)) {
+      items.forEach(function (i) { i.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var d = parseFloat(e.target.dataset.delay || 0);
+        setTimeout(function () { e.target.classList.add("in"); }, d * 1000);
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.05 });
+    items.forEach(function (i) { io.observe(i); });
+  }
+ 
+  /* ---------- 5. pace scale dots ---------- */
+  function scaleDots() {
+    var host = $(".scale__dots");
+    if (!host || reduced) return;
+    // Dots sit along the 4:30 -> 7:30 spectrum. Purely decorative.
+    var spots = [6, 14, 23, 31, 44, 52, 58, 67, 74, 81, 88, 94];
+    spots.forEach(function (p, i) {
+      var d = document.createElement("span");
+      d.className = "scale__dot";
+      d.style.left = p + "%";
+      d.style.animationDelay = (1.1 + i * 0.06) + "s";
+      host.appendChild(d);
+    });
+  }
+ 
+  /* ---------- 6. pace picker ---------- */
+  function picker() {
+    var wrap = $("[data-picker]");
+    if (!wrap) return;
+    var items = $$(".picker__item", wrap);
+    var big = $("[data-picker-pace]", wrap);
+    var name = $("[data-picker-name]", wrap);
+    var copy = $("[data-picker-copy]", wrap);
+    var media = $("[data-picker-media]", wrap);
+ 
+    function select(btn) {
+      items.forEach(function (i) { i.classList.toggle("is-on", i === btn); i.setAttribute("aria-selected", i === btn); });
+      if (big) big.textContent = btn.dataset.pace;
+      if (name) name.textContent = btn.dataset.name;
+      if (copy) copy.textContent = btn.dataset.copy;
+      if (media && btn.dataset.img) media.style.setProperty("--img", "url('" + btn.dataset.img + "')");
+      [big, name, copy].forEach(function (n) {
+        if (!n || reduced) return;
+        n.classList.remove("fade-swap");
+        void n.offsetWidth;
+        n.classList.add("fade-swap");
+      });
+    }
+    items.forEach(function (b) {
+      b.addEventListener("click", function () { select(b); });
+      if (fine) b.addEventListener("mouseenter", function () { select(b); });
+    });
+    if (items[0]) select(items[0]);
+  }
+ 
+  /* ---------- 7. horizontal scroll gallery ---------- */
+  function hscroll() {
+    var sec = $("[data-hscroll]");
+    if (!sec) return;
+    var track = $(".hscroll__track", sec);
+    if (!track) return;
+ 
+    var enabled = false, dist = 0;
+ 
+    function measure() {
+      enabled = window.matchMedia("(min-width: 901px)").matches && !reduced;
+      if (!enabled) { sec.style.height = ""; track.style.transform = ""; return; }
+      dist = Math.max(0, track.scrollWidth - window.innerWidth);
+      sec.style.height = (window.innerHeight + dist) + "px";
+      render();
+    }
+    function render() {
+      if (!enabled) return;
+      var r = sec.getBoundingClientRect();
+      var p = Math.min(1, Math.max(0, -r.top / (sec.offsetHeight - window.innerHeight || 1)));
+      track.style.transform = "translate3d(" + (-p * dist) + "px,0,0)";
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("scroll", function () {
+      window.requestAnimationFrame(render);
+    }, { passive: true });
+  }
+ 
+  /* ---------- 8. cursor + magnetic buttons ---------- */
+  function pointer() {
+    if (!fine || reduced) return;
+    var dot = document.createElement("div");
+    dot.className = "cursor";
+    document.body.appendChild(dot);
+ 
+    var x = 0, y = 0, cx = 0, cy = 0;
+    document.addEventListener("mousemove", function (e) { x = e.clientX; y = e.clientY; });
+    (function loop() {
+      cx += (x - cx) * 0.18; cy += (y - cy) * 0.18;
+      dot.style.transform = "translate3d(" + cx + "px," + cy + "px,0)";
+      requestAnimationFrame(loop);
+    })();
+ 
+    $$(".media, .partner").forEach(function (el) {
+      el.addEventListener("mouseenter", function () { dot.classList.add("is-wide"); });
+      el.addEventListener("mouseleave", function () { dot.classList.remove("is-wide"); });
+    });
+ 
+    $$("[data-magnet]").forEach(function (el) {
+      el.addEventListener("mousemove", function (e) {
+        var r = el.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) * 0.28;
+        var dy = (e.clientY - (r.top + r.height / 2)) * 0.34;
+        el.style.transform = "translate(" + dx + "px," + dy + "px)";
+      });
+      el.addEventListener("mouseleave", function () { el.style.transform = ""; });
+    });
+  }
+ 
+  /* ---------- 9. Stavanger clock ---------- */
+  function clock() {
+    var el = $("[data-clock]");
+    if (!el) return;
+    function tick() {
+      try {
+        el.textContent = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Europe/Oslo", hour: "2-digit", minute: "2-digit"
+        }).format(new Date());
+      } catch (err) { el.textContent = ""; }
+    }
+    tick();
+    setInterval(tick, 20000);
+  }
+ 
+  /* ---------- 10. year ---------- */
+  function year() {
+    $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
+  }
+ 
+  /* ---------- 11. mark current nav link ---------- */
+  function current() {
+    var here = location.pathname.split("/").pop() || "index.html";
+    $$(".nav__links a, .sheet__links a").forEach(function (a) {
+      var href = a.getAttribute("href");
+      if (href === here) a.setAttribute("aria-current", "page");
+    });
+  }
+ 
+  /* ---------- 12. newsletter / waitlist forms ---------- */
+  function forms() {
+    $$("[data-form]").forEach(function (f) {
+      f.addEventListener("submit", function (e) {
+        // No endpoint configured yet -> keep the user informed instead of failing silently.
+        if (!f.action || f.action.indexOf("YOUR_FORM_ID") > -1) {
+          e.preventDefault();
+          var note = f.parentElement.querySelector(".form-note");
+          if (note) note.textContent = "Form isn't connected yet. Add your Formspree ID in the HTML, or email club@lento.no.";
+        }
+      });
+    });
+  }
+ 
+  document.addEventListener("DOMContentLoaded", function () {
+    boot(); nav(); menu(); reveals(); scaleDots(); picker();
+    hscroll(); pointer(); clock(); year(); current(); forms();
+  });
+})();
+ 
+</script>
+</body>
+</html>
+ 
