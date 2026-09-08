@@ -374,9 +374,13 @@ body.booted .hero__word > span { transform: translateY(0); }
 .hero__scrim {
   position: absolute; inset: 0; z-index: 1;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 26%,
-                            rgba(0,0,0,.12) 74%, rgba(0,0,0,.48) 100%),
-    rgba(0,0,0,.30);
+    /* centre-weighted pool so the wordmark holds up over bright frames,
+       while the edges keep the footage alive */
+    radial-gradient(ellipse 80% 48% at 50% 46%,
+      rgba(0,0,0,.62) 0%, rgba(0,0,0,.30) 58%, rgba(0,0,0,0) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.10) 26%,
+                            rgba(0,0,0,.10) 74%, rgba(0,0,0,.52) 100%),
+    rgba(0,0,0,.26);
 }
 .hero__center {
   position: relative; z-index: 2;
@@ -693,6 +697,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   <div class="sheet__foot">
     <span>club@lento.no</span>
     <a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">@lentorunning</a>
+    <a href="https://www.strava.com/clubs/YOUR-CLUB" target="_blank" rel="noopener">Strava</a>
     <span>Stavanger <span data-clock></span></span>
   </div>
 </div>
@@ -847,9 +852,11 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
         <div class="row"><span class="row__k">01</span><span class="row__t">Download Spond</span><span class="row__d">Available on iOS and Android.</span></div>
         <div class="row"><span class="row__k">02</span><span class="row__t">Join with code PETIK</span><span class="row__d">Enter the invite code to find Lento Running Club.</span></div>
         <div class="row"><span class="row__k">03</span><span class="row__t">Accept the next run</span><span class="row__d">Choose your pace group and turn up.</span></div>
+        <div class="row"><span class="row__k">04</span><span class="row__t">Add us on Strava</span><span class="row__d">Every club run lands in the group feed. Kudos afterwards is compulsory.</span></div>
       </div>
       <div class="up" data-delay=".16" style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap">
         <a class="btn btn--signal" href="https://spond.com/landing/signup" target="_blank" rel="noopener" data-magnet>Open Spond</a>
+        <a class="btn btn--ghost" href="https://www.strava.com/clubs/YOUR-CLUB" target="_blank" rel="noopener">Join us on Strava</a>
         <a class="btn btn--ghost" href="mailto:club@lento.no">Ask us anything</a>
       </div>
     </div>
@@ -876,7 +883,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
       <div><h4>Club</h4><ul><li><a href="#club">Our story</a></li><li><a href="#join">Weekly runs</a></li></ul></div>
       <div><h4>Brands</h4><ul><li><a href="#collabs">Work with us</a></li><li><a href="mailto:club@lento.no">Request rate card</a></li></ul></div>
       <div><h4>Shop</h4><ul><li><a href="#shop">Drop 01</a></li></ul></div>
-      <div><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:club@lento.no">club@lento.no</a></li></ul></div>
+      <div><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.strava.com/clubs/YOUR-CLUB" target="_blank" rel="noopener">Strava</a></li><li><a href="mailto:club@lento.no">club@lento.no</a></li></ul></div>
     </div>
     <div class="wordmark foot__logo" aria-hidden="true"></div>
     <div class="foot__bar">
