@@ -36,6 +36,10 @@
   --haze:    #74787C;
   --accent-lt: #FFFF33;   /* same yellow — it sings on black */
   --on-signal: #17191B;   /* text that sits ON yellow, never white */
+  --strava: #FC4C02;      /* Strava brand orange, confirmed */
+  /* Spond's mark is a gradient, sampled from their press logo.
+     Stops stay in the saturated range so white text holds up. */
+  --spond: linear-gradient(118deg, #B26FDB 0%, #DA3C63 58%, #E8615F 100%);
 
   --fg: var(--ink);
   --bg: var(--paper);
@@ -140,6 +144,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   position: relative;
 }
 .band--tight { padding-block: clamp(2.5rem, 5vw, 4.5rem); }
+.band--top-tight { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
 .band--flush { padding-block: 0; }
 
 .split {
@@ -328,6 +333,10 @@ body.menu-open { overflow: hidden; }
 .btn--ghost:hover { background: var(--fg); color: var(--bg); box-shadow: none; }
 .btn--signal { background: var(--signal); color: var(--on-signal); }
 .btn--signal:hover { background: var(--ink); color: var(--paper); }
+.btn--strava { background: var(--strava); color: #fff; }
+.btn--strava:hover { background: var(--paper); color: var(--ink); }
+.btn--spond { background-image: var(--spond); background-color: #DA3C63; color: #fff; }
+.btn--spond:hover { background-image: none; background-color: var(--paper); color: var(--ink); }
 
 /* ---------- hero ---------- */
 .hero {
@@ -458,7 +467,7 @@ body.booted .scale__line::after { transform: scaleX(1); }
   padding-block: .7rem;
   background: #000; color: var(--paper);
 }
-.marquee__track { display: inline-flex; will-change: transform; animation: slide 30s linear infinite; }
+.marquee__track { display: inline-flex; will-change: transform; animation: slide 48s linear infinite; }
 .marquee span {
   padding-right: 2.5rem;
   font-variation-settings: "wdth" 118, "wght" 750;
@@ -555,9 +564,12 @@ body.booted .scale__line::after { transform: scaleX(1); }
 @keyframes fadeSwap { from { opacity: 0; transform: translateY(8px); } }
 
 /* ---------- horizontal gallery ---------- */
-.hscroll { position: relative; }
+/* --gh drives the frame height; the sticky pane hugs it so the pinned
+   section doesn't leave a lake of empty space above and below */
+.hscroll { position: relative; --gh: min(72svh, 700px); }
 .hscroll__sticky {
-  position: sticky; top: 0; height: 100svh;
+  position: sticky; top: 0; height: calc(var(--gh) + 5.5rem);
+  margin-block: calc((100svh - (var(--gh) + 5.5rem)) / 2) 0;
   display: flex; align-items: center; overflow: hidden;
 }
 .hscroll__track {
@@ -565,15 +577,15 @@ body.booted .scale__line::after { transform: scaleX(1); }
   padding-inline: var(--gutter);
   will-change: transform;
 }
-.hscroll__item { flex: 0 0 auto; width: clamp(240px, 34vw, 460px); }
-.hscroll__item .media { --ratio: 3 / 4; }
+.hscroll__item { flex: 0 0 auto; width: calc(var(--gh) * .75); }
+@media (max-width: 700px) { .hscroll { --gh: min(58svh, 480px); } }
+.hscroll__item .media { height: var(--gh); aspect-ratio: auto; }
 .hscroll__item p { margin-top: .7rem; font-size: var(--step--1); color: var(--dim); }
-@media (max-width: 900px) {
-  .hscroll { height: auto !important; }
-  .hscroll__sticky { position: static; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 1rem; }
-  .hscroll__track { transform: none !important; }
-  .hscroll__item { scroll-snap-align: start; width: 74vw; }
-}
+/* fallback when the pin is switched off (reduced motion) */
+.hscroll.is-free { height: auto !important; }
+.hscroll.is-free .hscroll__sticky { position: static; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 1rem; }
+.hscroll.is-free .hscroll__track { transform: none !important; }
+.hscroll.is-free .hscroll__item { scroll-snap-align: start; width: 74vw; }
 
 /* ---------- logo strip ---------- */
 .partners { display: flex; flex-wrap: wrap; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
@@ -697,7 +709,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   <div class="sheet__foot">
     <span>club@lento.no</span>
     <a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">@lentorunning</a>
-    <a href="https://www.strava.com/clubs/YOUR-CLUB" target="_blank" rel="noopener">Strava</a>
+    <a href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Strava</a>
     <span>Stavanger <span data-clock></span></span>
   </div>
 </div>
@@ -742,8 +754,40 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   </div>
 </section>
 
+<!-- ===== horizontal gallery ===== -->
+<section class="hscroll" data-hscroll aria-label="Photos from recent runs">
+  <div class="hscroll__sticky">
+    <div class="hscroll__track">
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('run-01.jpg')"><span class="media__label">Sunday long run</span></div>
+        <p>The whole club, one photo.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('run-02.jpg')"><span class="media__label">Breiavatnet loop</span></div>
+        <p>Round the lake and back into town.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('run-03.jpg')"><span class="media__label">Lento group</span></div>
+        <p>Whatever your pace, someone runs it with you.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('run-04.jpg')"><span class="media__label">Lento &#215; Saucony &#215; Anton Sport</span></div>
+        <p>Warming up together before the off.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('run-05.jpg')"><span class="media__label">Lento &#215; Oakberry</span></div>
+        <p>A&#231;a&#237; waiting at the finish.</p>
+      </figure>
+      <figure class="hscroll__item">
+        <div class="media" style="--img:url('run-06.jpg')"><span class="media__label">Lento vibe</span></div>
+        <p>Club kit, out in the wild.</p>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ===== club ===== -->
-<section class="band" id="club">
+<section class="band band--top-tight" id="club">
   <div class="rail split">
     <h2 class="headline up">Nobody gets<br>dropped here.</h2>
     <div>
@@ -751,6 +795,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
         <p>Lento means slow. We named the club after the thing most running clubs treat as a problem.</p>
         <p>If you have ever turned up to a group run, watched the pack disappear round the first corner and jogged home alone, you know exactly why this club exists. Being the slowest person there should not cost you the run.</p>
       </div>
+
       <div class="rows up" data-delay=".16" style="margin-top:2.5rem">
         <div class="row">
           <span class="row__k">Weekly</span>
@@ -763,38 +808,6 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
           <span class="row__d">Turn up, run, stay for the coffee.</span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== horizontal gallery ===== -->
-<section class="hscroll" data-hscroll aria-label="Photos from recent runs">
-  <div class="hscroll__sticky">
-    <div class="hscroll__track">
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('assets/img/run-01.jpg')"><span class="media__label">Sunday long run</span></div>
-        <p>Rain, again. Everyone came anyway.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('assets/img/run-02.jpg')"><span class="media__label">Lento &#215; Oakberry</span></div>
-        <p>A&#231;a&#237; at the finish. Round two was busier than round one.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('assets/img/run-03.jpg')"><span class="media__label">Lento &#215; Saucony &#215; Anton Sport</span></div>
-        <p>Two start times, one very full shop floor.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('assets/img/run-04.jpg')"><span class="media__label">Pace group five</span></div>
-        <p>Last in, loudest at the coffee.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('assets/img/run-05.jpg')"><span class="media__label">Harbour loop</span></div>
-        <p>The route everyone knows by heart.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('assets/img/run-06.jpg')"><span class="media__label">First timers</span></div>
-        <p>Four people ran their first 5k with us this month.</p>
-      </figure>
     </div>
   </div>
 </section>
@@ -833,9 +846,8 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
       </form>
       <p class="form-note">One email when the drop goes live. Nothing else.</p>
     </div>
-    <div class="grid up" data-delay=".1">
-      <div class="media media--tall" style="--img:url('assets/img/kit-01.jpg')"><span class="media__label">Club tee</span></div>
-      <div class="media media--tall" style="--img:url('assets/img/kit-02.jpg')"><span class="media__label">Pace cap</span></div>
+    <div class="up" data-delay=".1">
+      <div class="media media--tall" style="--img:url('kit-01.jpg')"><span class="media__label">Lento socks</span></div>
     </div>
   </div>
 </section>
@@ -855,8 +867,8 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
         <div class="row"><span class="row__k">04</span><span class="row__t">Add us on Strava</span><span class="row__d">Every club run lands in the group feed. Kudos afterwards is compulsory.</span></div>
       </div>
       <div class="up" data-delay=".16" style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap">
-        <a class="btn btn--signal" href="https://spond.com/landing/signup" target="_blank" rel="noopener" data-magnet>Open Spond</a>
-        <a class="btn btn--ghost" href="https://www.strava.com/clubs/YOUR-CLUB" target="_blank" rel="noopener">Join us on Strava</a>
+        <a class="btn btn--spond" href="https://spond.com/landing/signup" target="_blank" rel="noopener" data-magnet>Open Spond</a>
+        <a class="btn btn--strava" href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Join us on Strava</a>
         <a class="btn btn--ghost" href="mailto:club@lento.no">Ask us anything</a>
       </div>
     </div>
@@ -883,7 +895,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
       <div><h4>Club</h4><ul><li><a href="#club">Our story</a></li><li><a href="#join">Weekly runs</a></li></ul></div>
       <div><h4>Brands</h4><ul><li><a href="#collabs">Work with us</a></li><li><a href="mailto:club@lento.no">Request rate card</a></li></ul></div>
       <div><h4>Shop</h4><ul><li><a href="#shop">Drop 01</a></li></ul></div>
-      <div><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.strava.com/clubs/YOUR-CLUB" target="_blank" rel="noopener">Strava</a></li><li><a href="mailto:club@lento.no">club@lento.no</a></li></ul></div>
+      <div><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Strava</a></li><li><a href="mailto:club@lento.no">club@lento.no</a></li></ul></div>
     </div>
     <div class="wordmark foot__logo" aria-hidden="true"></div>
     <div class="foot__bar">
@@ -1043,19 +1055,28 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
     var track = $(".hscroll__track", sec);
     if (!track) return;
 
-    var enabled = false, dist = 0;
+    var sticky = $(".hscroll__sticky", sec);
+    var enabled = false, dist = 0, stickyH = 0;
 
     function measure() {
-      enabled = window.matchMedia("(min-width: 901px)").matches && !reduced;
-      if (!enabled) { sec.style.height = ""; track.style.transform = ""; return; }
+      // pinned on every screen size now; only reduced-motion falls back to swiping
+      enabled = !reduced;
+      if (!enabled) {
+        sec.classList.add("is-free");
+        sec.style.height = ""; track.style.transform = "";
+        return;
+      }
+      sec.classList.remove("is-free");
+      sec.style.height = "";                        // measure the sticky at its natural height
+      stickyH = sticky.offsetHeight;
       dist = Math.max(0, track.scrollWidth - window.innerWidth);
-      sec.style.height = (window.innerHeight + dist) + "px";
+      sec.style.height = (stickyH + dist) + "px";
       render();
     }
     function render() {
       if (!enabled) return;
-      var r = sec.getBoundingClientRect();
-      var p = Math.min(1, Math.max(0, -r.top / (sec.offsetHeight - window.innerHeight || 1)));
+      var span = sec.offsetHeight - stickyH || 1;
+      var p = Math.min(1, Math.max(0, -sec.getBoundingClientRect().top / span));
       track.style.transform = "translate3d(" + (-p * dist) + "px,0,0)";
     }
     measure();
@@ -1124,7 +1145,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
     var half = track.scrollWidth;
     track.innerHTML = track.innerHTML + track.innerHTML;  // two identical halves loop seamlessly
     // constant speed regardless of how long the message is
-    track.style.animationDuration = Math.max(18, half / 55) + "s";
+    track.style.animationDuration = Math.max(34, half / 30) + "s";
   }
 
   /* ---------- 9. Stavanger clock ---------- */
