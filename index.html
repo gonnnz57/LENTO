@@ -398,9 +398,9 @@ body.booted .hero__word > span { transform: translateY(0); }
   gap: clamp(1.1rem, 3.2vw, 2rem);
 }
 .hero__welcome {
-  font-size: var(--step--1);
-  font-variation-settings: "wdth" 88, "wght" 500;
-  letter-spacing: .04em; opacity: .85;
+  font-size: var(--step-1);
+  font-variation-settings: "wdth" 92, "wght" 600;
+  letter-spacing: .02em; opacity: .9;
 }
 /* one copy of the wordmark, used by the hero and the footer */
 .wordmark {
@@ -566,10 +566,17 @@ body.booted .scale__line::after { transform: scaleX(1); }
 /* ---------- horizontal gallery ---------- */
 /* --gh drives the frame height; the sticky pane hugs it so the pinned
    section doesn't leave a lake of empty space above and below */
-.hscroll { position: relative; --gh: min(72svh, 700px); }
+/* --gh is the photo height, --pane the whole pinned block, --pin where
+   it locks on screen. Pinning near the middle means the page catches you
+   as the photos arrive, instead of after they've scrolled to the top. */
+.hscroll {
+  position: relative;
+  --gh: min(72svh, 700px);
+  --pane: calc(var(--gh) + 5.5rem);
+  --pin: max(var(--nav-h), calc((100svh - var(--pane)) / 2));
+}
 .hscroll__sticky {
-  position: sticky; top: 0; height: calc(var(--gh) + 5.5rem);
-  margin-block: calc((100svh - (var(--gh) + 5.5rem)) / 2) 0;
+  position: sticky; top: var(--pin); height: var(--pane);
   display: flex; align-items: center; overflow: hidden;
 }
 .hscroll__track {
@@ -578,7 +585,7 @@ body.booted .scale__line::after { transform: scaleX(1); }
   will-change: transform;
 }
 .hscroll__item { flex: 0 0 auto; width: calc(var(--gh) * .75); }
-@media (max-width: 700px) { .hscroll { --gh: min(58svh, 480px); } }
+@media (max-width: 700px) { .hscroll { --gh: min(56svh, 440px); --pane: calc(var(--gh) + 3.5rem); } }
 .hscroll__item .media { height: var(--gh); aspect-ratio: auto; }
 .hscroll__item p { margin-top: .7rem; font-size: var(--step--1); color: var(--dim); }
 /* fallback when the pin is switched off (reduced motion) */
@@ -725,7 +732,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   <div class="hero__scrim" aria-hidden="true"></div>
 
   <div class="rail hero__center">
-    <p class="hero__welcome">Welcome</p>
+    <p class="hero__welcome">Welcome!</p>
     <div class="wordmark wordmark--stack hero__logo" role="img" aria-label="Lento Running Club"></div>
     <a class="btn btn--merch" href="#shop" data-magnet>Buy Merch &#128248;</a>
   </div>
@@ -759,15 +766,15 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   <div class="hscroll__sticky">
     <div class="hscroll__track">
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-01.jpg')"><span class="media__label">Sunday long run</span></div>
+        <div class="media" style="--img:url('run-01.jpg')"><span class="media__label">Sunday Long Run</span></div>
         <p>The whole club, one photo.</p>
       </figure>
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-02.jpg')"><span class="media__label">Breiavatnet loop</span></div>
+        <div class="media" style="--img:url('run-02.jpg')"><span class="media__label">Breiavatnet Loop</span></div>
         <p>Round the lake and back into town.</p>
       </figure>
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-03.jpg')"><span class="media__label">Lento group</span></div>
+        <div class="media" style="--img:url('run-03.jpg')"><span class="media__label">Lento Group</span></div>
         <p>Whatever your pace, someone runs it with you.</p>
       </figure>
       <figure class="hscroll__item">
@@ -779,7 +786,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
         <p>A&#231;a&#237; waiting at the finish.</p>
       </figure>
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-06.jpg')"><span class="media__label">Lento vibe</span></div>
+        <div class="media" style="--img:url('run-06.jpg')"><span class="media__label">Lento Vibe</span></div>
         <p>Club kit, out in the wild.</p>
       </figure>
     </div>
@@ -847,7 +854,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
       <p class="form-note">One email when the drop goes live. Nothing else.</p>
     </div>
     <div class="up" data-delay=".1">
-      <div class="media media--tall" style="--img:url('kit-01.jpg')"><span class="media__label">Lento socks</span></div>
+      <div class="media media--tall" style="--img:url('kit-01.jpg')"><span class="media__label">Lento Socks</span></div>
     </div>
   </div>
 </section>
@@ -867,7 +874,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
         <div class="row"><span class="row__k">04</span><span class="row__t">Add us on Strava</span><span class="row__d">Every club run lands in the group feed. Kudos afterwards is compulsory.</span></div>
       </div>
       <div class="up" data-delay=".16" style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap">
-        <a class="btn btn--spond" href="https://spond.com/landing/signup" target="_blank" rel="noopener" data-magnet>Open Spond</a>
+        <a class="btn btn--spond" href="https://spond.com/invite/PETIK" target="_blank" rel="noopener" data-magnet>Open Spond</a>
         <a class="btn btn--strava" href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Join us on Strava</a>
         <a class="btn btn--ghost" href="mailto:club@lento.no">Ask us anything</a>
       </div>
@@ -1056,7 +1063,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
     if (!track) return;
 
     var sticky = $(".hscroll__sticky", sec);
-    var enabled = false, dist = 0, stickyH = 0;
+    var enabled = false, dist = 0, stickyH = 0, pin = 0;
 
     function measure() {
       // pinned on every screen size now; only reduced-motion falls back to swiping
@@ -1069,14 +1076,15 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
       sec.classList.remove("is-free");
       sec.style.height = "";                        // measure the sticky at its natural height
       stickyH = sticky.offsetHeight;
+      // the pane locks partway down the screen, so progress must start there
+      pin = parseFloat(getComputedStyle(sticky).top) || 0;
       dist = Math.max(0, track.scrollWidth - window.innerWidth);
       sec.style.height = (stickyH + dist) + "px";
       render();
     }
     function render() {
       if (!enabled) return;
-      var span = sec.offsetHeight - stickyH || 1;
-      var p = Math.min(1, Math.max(0, -sec.getBoundingClientRect().top / span));
+      var p = Math.min(1, Math.max(0, (pin - sec.getBoundingClientRect().top) / (dist || 1)));
       track.style.transform = "translate3d(" + (-p * dist) + "px,0,0)";
     }
     measure();
