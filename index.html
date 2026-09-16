@@ -222,7 +222,7 @@ body.booting { overflow: hidden; }
 .nav {
   height: var(--nav-h);
   display: flex; align-items: center;
-  background: #000; color: var(--paper);
+  background: transparent; color: var(--paper);   /* hero video shows through */
   transition: background .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease);
 }
 /* once the notice has scrolled past, the bar turns to frosted glass —
@@ -241,9 +241,14 @@ body.booting { overflow: hidden; }
   .nav.is-scrolled { background: rgba(242, 242, 239, .95); }
 }
 .nav__inner {
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;   /* links | logo | button */
+  align-items: center;
   width: 100%;
 }
+.nav__links, .menu-btn { grid-column: 1; grid-row: 1; justify-self: start; }
+.brand { grid-column: 2; grid-row: 1; justify-self: center; }
+.nav__end { grid-column: 3; grid-row: 1; justify-self: end; display: none; align-items: center; }
 /* on black the CTA is yellow; on paper yellow dies, so it goes black */
 .nav .btn { background: var(--signal); color: var(--on-signal); }
 .nav .btn:hover { background: var(--paper); color: var(--ink); }
@@ -287,6 +292,10 @@ body.booting { overflow: hidden; }
 .menu-btn i::after { bottom: 0; }
 body.menu-open .menu-btn i::before { transform: translateY(3.75px) rotate(45deg); }
 body.menu-open .menu-btn i::after  { transform: translateY(-3.75px) rotate(-45deg); }
+@media (min-width: 860px) {
+  .menu-btn { display: none; }
+  .nav__end { display: flex; }
+}
 
 /* full screen menu */
 .sheet {
@@ -340,8 +349,10 @@ body.menu-open { overflow: hidden; }
 
 /* ---------- hero ---------- */
 .hero {
-  min-height: calc(100svh - var(--nav-h));
-  padding-block: clamp(2rem, 6vw, 4rem);
+  /* pulled up under the transparent nav so the video fills behind it */
+  margin-top: calc(-1 * var(--nav-h));
+  min-height: 100svh;
+  padding-block: calc(var(--nav-h) + clamp(2rem, 6vw, 4rem)) clamp(2rem, 6vw, 4rem);
   display: grid; place-items: center;
   position: relative; overflow: hidden;
 }
@@ -691,16 +702,18 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   </div>
   <header class="nav">
   <div class="rail nav__inner">
-    <a class="brand" href="#top" aria-label="Lento Running Club"><div class="wordmark brand__logo" role="img" aria-label="Lento Running Club"></div></a>
     <nav class="nav__links" aria-label="Main">
       <a href="#club">Club</a>
       <a href="#join">Runs</a>
       <a href="#collabs">Collabs</a>
       <a href="#shop">Shop</a>
-      <a class="btn" href="#join" data-magnet>Join a run</a>
     </nav>
     <button class="menu-btn" aria-expanded="false" aria-controls="sheet">Menu <i aria-hidden="true"></i></button>
+    <a class="brand" href="#top" aria-label="Lento Running Club"><div class="wordmark brand__logo" role="img" aria-label="Lento Running Club"></div></a>
+    <div class="nav__end">
+      <a class="btn" href="#join" data-magnet>Join a run</a>
     </div>
+  </div>
   </header>
 </div>
 
