@@ -800,7 +800,8 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
     <div>
       <h2 class="display up">First Lento<br>merch is<br>coming.</h2>
       <p class="lede up" data-delay=".08" style="margin-top:1.5rem;color:var(--dim)">A small first drop, made for Norwegian weather and worn by the people who actually show up. Put your name down and you will hear first.</p>
-      <form class="field up" data-delay=".12" data-form method="post" action="https://formspree.io/f/YOUR_FORM_ID" style="margin-top:2rem">
+      <form class="field up" data-delay=".12" data-form method="post" action="https://formspree.io/f/xjykvedr" style="margin-top:2rem">
+        <input type="hidden" name="_subject" value="New merch waitlist signup">
         <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
         <button class="btn btn--signal" type="submit">Notify me</button>
       </form>
@@ -1109,13 +1110,23 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   /* ---------- 12. newsletter / waitlist forms ---------- */
   function forms() {
     $$("[data-form]").forEach(function (f) {
+      var note = f.parentElement.querySelector(".form-note");
+      var btn = f.querySelector("button[type=submit]");
       f.addEventListener("submit", function (e) {
-        // No endpoint configured yet -> keep the user informed instead of failing silently.
-        if (!f.action || f.action.indexOf("YOUR_FORM_ID") > -1) {
-          e.preventDefault();
-          var note = f.parentElement.querySelector(".form-note");
-          if (note) note.textContent = "Form isn't connected yet. Add your Formspree ID in the HTML, or email club@lento.no.";
-        }
+        e.preventDefault();                       // stay on the page, no Formspree redirect
+        var label = btn ? btn.textContent : "";
+        if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+        fetch(f.action, { method: "POST", body: new FormData(f), headers: { Accept: "application/json" } })
+          .then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            f.reset();
+            if (note) note.textContent = "You're on the list. We'll email you when the drop goes live.";
+            if (btn) btn.textContent = "Done";
+          })
+          .catch(function () {
+            if (note) note.textContent = "Something went wrong. Try again, or email club@lento.no.";
+            if (btn) { btn.disabled = false; btn.textContent = label; }
+          });
       });
     });
   }
