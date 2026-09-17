@@ -659,8 +659,13 @@ body.booted .scale__line::after { transform: scaleX(1); }
 .tile__d { color: var(--dim); font-size: var(--step--1); margin-top: .3rem; }
 
 /* ---------- merch page ---------- */
-.hero--photo { min-height: 78svh; }
-.hero--photo .hero__vid { object-position: center 62%; }   /* keep the crowd in frame */
+.hero--photo { min-height: 58svh; }                        /* ~25% shorter than before */
+.hero--photo .hero__vid { object-position: center 66%; }   /* crowd sits in the middle */
+.hero__title {
+  position: relative; z-index: 2;
+  color: var(--paper); text-align: center;
+  text-shadow: 0 2px 30px rgba(0,0,0,.35);
+}
 .shop-page { min-height: calc(100svh - var(--nav-h)); display: flex; align-items: center; }
 .shop-page > .rail { width: 100%; }
 
@@ -773,6 +778,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 <section class="hero hero--photo invert" data-nav-dark aria-label="Lento Running Club group run">
   <img class="hero__vid" src="shop-hero.jpg" alt="" aria-hidden="true">
   <div class="hero__scrim" aria-hidden="true"></div>
+  <h1 class="display display--xl hero__title">Shop</h1>
 </section>
 
 <!-- ===== shop ===== -->
