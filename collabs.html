@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Merch &#8212; Lento Running Club</title>
+<title>Collabs &#8212; Lento Running Club</title>
 <meta name="description" content="A running club in Stavanger, Norway. Five pace groups from 4:30 to 7:30 per km. Slow is still moving. All paces, one community.">
 <meta property="og:title" content="Lento Running Club">
 <meta property="og:description" content="Stavanger. All paces, one community.">
@@ -658,6 +658,9 @@ body.booted .scale__line::after { transform: scaleX(1); }
 .tile__t { margin-top: .9rem; font-variation-settings: "wdth" 108, "wght" 650; font-size: var(--step-1); }
 .tile__d { color: var(--dim); font-size: var(--step--1); margin-top: .3rem; }
 
+/* ---------- collabs page ---------- */
+.hero--plain { background: var(--fjord); min-height: 46svh; }
+
 /* ---------- merch page ---------- */
 .hero--photo { min-height: 58svh; }                        /* ~25% shorter than before */
 .hero--photo .hero__vid { object-position: center 66%; }   /* crowd sits in the middle */
@@ -774,28 +777,29 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 
 <main id="top">
 
-<!-- ===== photo header ===== -->
-<section class="hero hero--photo invert" data-nav-dark aria-label="Lento Running Club group run">
-  <img class="hero__vid" src="shop-hero.jpg" alt="" aria-hidden="true">
-  <div class="hero__scrim" aria-hidden="true"></div>
-  <h1 class="display display--xl hero__title">Shop</h1>
+<!-- ===== header ===== -->
+<section class="hero hero--photo hero--plain invert" data-nav-dark aria-label="Collabs">
+  <h1 class="display display--xl hero__title">Collabs</h1>
 </section>
 
-<!-- ===== shop ===== -->
-<section class="band shop-page" id="shop">
-  <div class="rail split--even split">
-    <div>
-      <h2 class="display up">First Lento<br>merch is<br>coming.</h2>
-      <p class="lede up" data-delay=".08" style="margin-top:1.5rem;color:var(--dim)">A small first drop, made for Norwegian weather and worn by the people who actually show up. Put your name down and you will hear first.</p>
-      <form class="field up" data-delay=".12" data-form method="post" action="https://formspree.io/f/YOUR_FORM_ID" style="margin-top:2rem">
-        <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
-        <button class="btn btn--signal" type="submit">Notify me</button>
-      </form>
-      <p class="form-note">One email when the drop goes live. Nothing else.</p>
+<!-- ===== collabs ===== -->
+<section class="band" id="collabs">
+  <div class="rail">
+    <div class="split" style="margin-bottom:clamp(2rem,5vw,3.5rem)">
+      <h2 class="headline up">We build runs<br>with brands.</h2>
+      <p class="prose up" data-delay=".08">Product launches, store takeovers, post-run activations. We handle the route, the crowd, the photography and the film &#8212; and hand it back to you inside 48 hours.</p>
     </div>
-    <div class="kit up" data-delay=".1">
-      <div class="media" style="--img:url('kit-01.jpg')"><span class="media__label">Lento Socks, pink</span></div>
-      <div class="media" style="--img:url('kit-02.jpg')"><span class="media__label">Lento Socks, white</span></div>
+
+    <div class="partners up" data-delay=".12">
+      <div class="partner"><span class="plogo plogo--saucony" role="img" aria-label="Saucony"></span></div>
+      <div class="partner"><span class="plogo plogo--anton" role="img" aria-label="Anton Sport"></span></div>
+      <div class="partner"><span class="plogo plogo--oakberry" role="img" aria-label="Oakberry"></span></div>
+      <a class="partner" href="mailto:club@lento.no" style="background:var(--signal);color:var(--on-signal)">Your brand</a>
+    </div>
+
+    <div class="up" data-delay=".16" style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap">
+      <a class="btn" href="mailto:club@lento.no?subject=Collab%20with%20Lento" data-magnet>Get in touch</a>
+      <a class="btn btn--ghost" href="https://instagram.com/lentorunning" target="_blank" rel="noopener">DM @lentorunning</a>
     </div>
   </div>
 </section>
