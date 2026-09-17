@@ -229,6 +229,7 @@ body.booting { overflow: hidden; }
 }
 .notice .mark { filter: invert(1); }   /* the mark is white artwork; on yellow it needs to be black */
 .notice:hover .notice__track { animation-play-state: paused; }
+.notice a { text-decoration: underline; text-underline-offset: 2px; }
 .topbar {
   position: sticky; top: calc(-1 * var(--notice-h)); z-index: 800;
 }
@@ -752,7 +753,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 <!-- ===== notice + nav ===== -->
 <div class="topbar">
   <div class="notice" aria-label="Announcement">
-    <div class="notice__track"><span>Every order gets a Lento Running Club tote. While stock lasts.<i class="mark" aria-hidden="true"></i></span></div>
+    <div class="notice__track"><span><a href="/shop#shop">Lento socks are coming. Sign up on the waitlist and get them first &#8594;</a><i class="mark" aria-hidden="true"></i></span></div>
   </div>
   <header class="nav">
   <div class="rail nav__inner">
