@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Merch | Lento Running Club Stavanger</title>
-<meta name="description" content="Første Lento merch kommer snart. Lento Running Club socks and kit from Stavanger. Sign up to hear first when the drop goes live.">
-<link rel="canonical" href="https://clublento.no/shop">
+<meta name="description" content="Lento Socks &#8212; Pink, 199 kr. Lento Running Club running socks in pink, sizes S-M (38-42) and L-XL (42-45). Pay with Vipps or card.">
+<link rel="canonical" href="https://clublento.no/socks-pink">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#000000">
 <meta property="og:site_name" content="Lento Running Club">
-<meta property="og:title" content="Merch | Lento Running Club Stavanger">
-<meta property="og:description" content="Første Lento merch kommer snart. Lento Running Club socks and kit from Stavanger. Sign up to hear first when the drop goes live.">
+<meta property="og:title" content="Lento Socks &#8212; Pink | Lento Running Club">
+<meta property="og:description" content="Lento Socks &#8212; Pink, 199 kr. Lento Running Club running socks in pink, sizes S-M (38-42) and L-XL (42-45). Pay with Vipps or card.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://clublento.no/shop">
-<meta property="og:image" content="https://clublento.no/og-image.jpg">
+<meta property="og:url" content="https://clublento.no/socks-pink">
+<meta property="og:image" content="https://clublento.no/kit-01.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="nb_NO">
@@ -795,7 +795,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 
 </style>
 </head>
-<body>
+<body data-solid-nav>
 
 <!-- ===== boot ===== -->
 
@@ -842,39 +842,61 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 
 <main id="top">
 
-<!-- ===== photo header ===== -->
-<section class="hero hero--photo invert" data-nav-dark aria-label="Lento Running Club group run">
-  <img class="hero__vid" src="shop-hero.jpg" alt="Lento Running Club gathered before a group run in Stavanger">
-  <div class="hero__scrim" aria-hidden="true"></div>
-  <h1 class="display display--xl hero__title">Shop</h1>
-</section>
-
-<!-- ===== products ===== -->
-<section class="band" id="shop">
+<!-- ===== product ===== -->
+<section class="band" id="product">
   <div class="rail">
-    <div class="split" style="margin-bottom:clamp(2rem,5vw,3.5rem)">
-      <h2 class="headline up">Drop 01<br>is here.</h2>
-      <p class="prose up" data-delay=".08">Lento running socks, made for Norwegian weather and worn by the people who actually show up. Two colours, two sizes, 199 kr a pair. Tap a pair to pick your size.</p>
-    </div>
+    <a class="back" href="/shop">&#8592; All products</a>
+    <div class="product">
+      <div class="product__gallery up">
+        <div class="media" role="img" aria-label="Pink Lento Running Club running socks" style="--img:url('kit-01.jpg');background-color:#fff"></div>
+      </div>
 
-    <div class="products">
-      <a class="product-card up" href="/socks-pink">
-        <div class="media" role="img" aria-label="Pink Lento Running Club running socks" style="--img:url('kit-01.jpg')"><span class="media__label">Pink</span></div>
-        <div class="product-card__row">
-          <span class="product-card__name">Lento Socks &#8212; Pink</span>
-          <span class="product-card__price">199 kr</span>
+      <div class="up" data-delay=".06">
+        <h1 class="headline">Lento Socks &#8212; Pink</h1>
+        <p class="product__price">199 kr</p>
+        <div class="prose" style="margin-top:1.2rem">
+          <p>Ribbed crew socks in pink with the club name up the leg, the snail mark on the side and &#8220;Slow is still moving&#8221; across the foot. Cushioned heel and toe, made to be run in.</p>
         </div>
-        <p class="product-card__cta">Choose size &#8594;</p>
-      </a>
 
-      <a class="product-card up" data-delay=".08" href="/socks-white">
-        <div class="media" role="img" aria-label="White Lento Running Club running socks" style="--img:url('kit-02.jpg')"><span class="media__label">White</span></div>
-        <div class="product-card__row">
-          <span class="product-card__name">Lento Socks &#8212; White</span>
-          <span class="product-card__price">199 kr</span>
+        <div class="opt">
+          <span class="opt__label" id="size-label">Size</span>
+          <div class="sizes" role="group" aria-labelledby="size-label">
+            <button type="button" class="size" data-size="S&#8211;M (38&#8211;42)">S&#8211;M (38&#8211;42)</button>
+            <button type="button" class="size" data-size="L&#8211;XL (42&#8211;45)">L&#8211;XL (42&#8211;45)</button>
+          </div>
         </div>
-        <p class="product-card__cta">Choose size &#8594;</p>
-      </a>
+
+        <div class="opt">
+          <label class="opt__label" for="qty">Pairs</label>
+          <select class="qty" id="qty">
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+          </select>
+        </div>
+
+        <p class="total">Total: <span data-total>199</span> kr</p>
+
+        <form class="order" data-order method="post" action="https://formspree.io/f/xjykvedr">
+          <input type="hidden" name="_subject" value="New sock order &#8212; Lento Socks &#8212; Pink">
+          <input type="hidden" name="product" value="Lento Socks &#8212; Pink">
+          <input type="hidden" name="size" value="">
+          <input type="hidden" name="pairs" value="1">
+          <input type="hidden" name="total" value="199 kr">
+          <input type="text" name="name" placeholder="Your name" aria-label="Your name" required>
+          <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
+          <input type="tel" name="phone" placeholder="Phone (for Vipps)" aria-label="Phone number">
+          <button class="btn btn--signal" type="submit">Order &#8212; pay next</button>
+        </form>
+        <p class="note" data-note>Pick a size first. We hand the socks over at a club run, or post them if you are not local.</p>
+
+        <div class="pay" data-pay>
+          <h2 class="headline" style="font-size:var(--step-1)">Last step: pay <span data-total>199</span> kr</h2>
+          <div class="pay__buttons">
+            <a class="btn btn--vipps" href="VIPPS_LINK" target="_blank" rel="noopener">Pay with Vipps</a>
+            <a class="btn" href="MOLLIE_LINK" target="_blank" rel="noopener">Pay by card</a>
+          </div>
+          <p class="note">Your order is saved. Once the payment lands we confirm by email. Any trouble, write to club@lento.no.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1202,6 +1224,58 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   });
 })();
 
+</script>
+
+<script>
+/* product page: size, quantity, order + payment step */
+(function () {
+  var PRICE = 199;
+  var form = document.querySelector("[data-order]");
+  if (!form) return;
+  var sizes = Array.prototype.slice.call(document.querySelectorAll(".size"));
+  var qty = document.getElementById("qty");
+  var totals = Array.prototype.slice.call(document.querySelectorAll("[data-total]"));
+  var note = document.querySelector("[data-note]");
+  var pay = document.querySelector("[data-pay]");
+  var btn = form.querySelector("button[type=submit]");
+
+  function total() {
+    var n = parseInt(qty.value, 10) || 1;
+    totals.forEach(function (t) { t.textContent = PRICE * n; });
+    form.querySelector("[name=pairs]").value = n;
+    form.querySelector("[name=total]").value = (PRICE * n) + " kr";
+  }
+  sizes.forEach(function (b) {
+    b.addEventListener("click", function () {
+      sizes.forEach(function (o) { o.classList.toggle("is-on", o === b); });
+      form.querySelector("[name=size]").value = b.dataset.size;
+      if (note) note.textContent = "We hand the socks over at a club run, or post them if you are not local.";
+    });
+  });
+  qty.addEventListener("change", total);
+  total();
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!form.querySelector("[name=size]").value) {
+      if (note) note.textContent = "Pick a size first.";
+      return;
+    }
+    var label = btn.textContent;
+    btn.disabled = true; btn.textContent = "Sending...";
+    fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        form.style.display = "none";
+        if (note) note.style.display = "none";
+        if (pay) { pay.classList.add("is-on"); pay.scrollIntoView({ behavior: "smooth", block: "center" }); }
+      })
+      .catch(function () {
+        if (note) note.textContent = "Something went wrong. Try again, or email club@lento.no.";
+        btn.disabled = false; btn.textContent = label;
+      });
+  });
+})();
 </script>
 </body>
 </html>
