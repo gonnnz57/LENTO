@@ -673,7 +673,9 @@ body.booted .scale__line::after { transform: scaleX(1); }
 .tile__d { color: var(--dim); font-size: var(--step--1); margin-top: .3rem; }
 
 /* ---------- collabs page ---------- */
-.hero--plain { background: var(--fjord); min-height: 46svh; }
+.hero--join { min-height: 40svh; padding-block: calc(var(--nav-h) + 1.5rem) 1.5rem; }
+.hero--join .hero__vid { object-position: center 42%; }   /* keep the group in frame */
+.hero__title--line { white-space: nowrap; font-size: clamp(1.9rem, 7vw, 4.6rem); }
 
 /* ---------- merch page ---------- */
 .hero--photo { min-height: 58svh; }                        /* ~25% shorter than before */
@@ -789,8 +791,10 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 <main id="top">
 
 <!-- ===== header ===== -->
-<section class="hero hero--photo hero--plain invert" data-nav-dark aria-label="How to join">
-  <h1 class="display display--xl hero__title">How to join</h1>
+<section class="hero hero--photo hero--join invert" data-nav-dark aria-label="How to join">
+  <img class="hero__vid" src="join-hero.jpg" alt="Lento Running Club briefing before a Saturday run in Stavanger">
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <h1 class="display hero__title hero__title--line">How to join</h1>
 </section>
 
 <!-- ===== join ===== -->
