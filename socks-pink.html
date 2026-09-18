@@ -878,8 +878,8 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
         <div class="opt">
           <span class="opt__label" id="size-label">St&#248;rrelse</span>
           <div class="sizes" role="group" aria-labelledby="size-label">
-            <button type="button" class="size" data-size="S&#8211;M (38&#8211;42)">S&#8211;M (38&#8211;42)</button>
-            <button type="button" class="size" data-size="L&#8211;XL (42&#8211;45)">L&#8211;XL (42&#8211;45)</button>
+            <button type="button" class="size" data-size="S&#8211;M (38&#8211;42)" data-variant="55643262583083">S&#8211;M (38&#8211;42)</button>
+            <button type="button" class="size" data-size="L&#8211;XL (42&#8211;45)" data-variant="55643262615851">L&#8211;XL (42&#8211;45)</button>
           </div>
         </div>
 
@@ -890,7 +890,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
           </select>
         </div>
 
-        <button class="btn btn--gold" type="button" data-add style="margin-top:2rem">Add to cart</button>
+        <button class="btn btn--gold" type="button" data-add style="margin-top:2rem">Proceed to checkout</button>
         <p class="note" data-note>Velg st&#248;rrelse f&#248;rst.</p>
             </div>
     </div>
@@ -1244,33 +1244,35 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 </script>
 
 <script>
-/* product page: size, quantity, add to cart */
+/* product page: size + quantity -> straight to Shopify checkout (Vipps, card, etc.) */
 (function () {
-  var ITEM = { slug: "socks-pink", name: "Lento Socks \u2014 Pink", img: "kit-01.jpg", price: 199 };
-  var sizes = Array.prototype.slice.call(document.querySelectorAll(".size[data-size]"));
+  var STORE = "https://0v0qtw-z7.myshopify.com";
+  var sizes = Array.prototype.slice.call(document.querySelectorAll(".size[data-variant]"));
   var qty = document.getElementById("qty");
-  var addBtn = document.querySelector("[data-add]");
+  var btn = document.querySelector("[data-add]");
   var note = document.querySelector("[data-note]");
-  var size = "";
+  var variant = "";
 
   sizes.forEach(function (b) {
     b.addEventListener("click", function () {
       sizes.forEach(function (o) { o.classList.toggle("is-on", o === b); });
-      size = b.dataset.size;
+      variant = b.dataset.variant;
       if (note) note.textContent = "";
     });
   });
 
-  addBtn.addEventListener("click", function () {
-    if (!size) { if (note) note.textContent = "Velg st\u00f8rrelse f\u00f8rst."; return; }
-    var cart = [];
-    try { cart = JSON.parse(localStorage.getItem("lento_cart") || "[]"); } catch (e) { cart = []; }
+  btn.addEventListener("click", function () {
+    if (!variant) { if (note) note.textContent = "Velg st\u00f8rrelse f\u00f8rst."; return; }
     var n = parseInt(qty.value, 10) || 1;
-    var found = cart.filter(function (i) { return i.slug === ITEM.slug && i.size === size; })[0];
-    if (found) { found.qty += n; }
-    else { cart.push({ slug: ITEM.slug, name: ITEM.name, img: ITEM.img, price: ITEM.price, size: size, qty: n }); }
-    try { localStorage.setItem("lento_cart", JSON.stringify(cart)); } catch (e) {}
-    location.href = "/cart";
+    btn.disabled = true;
+    btn.textContent = "Opening checkout...";
+    location.href = STORE + "/cart/" + variant + ":" + n;
+  });
+
+  // if they come back with the browser's back button, reset the button
+  window.addEventListener("pageshow", function () {
+    btn.disabled = false;
+    btn.textContent = "Proceed to checkout";
   });
 })();
 </script>
