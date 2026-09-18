@@ -285,7 +285,21 @@ body.booting { overflow: hidden; }
 }
 .nav__links, .menu-btn { grid-column: 1; grid-row: 1; justify-self: start; }
 .brand { grid-column: 2; grid-row: 1; justify-self: center; }
-.nav__end { grid-column: 3; grid-row: 1; justify-self: end; display: none; align-items: center; }
+.nav__end { grid-column: 3; grid-row: 1; justify-self: end; display: flex; align-items: center; }
+.nav__end .btn { display: none; }
+@media (min-width: 860px) { .nav__end .btn { display: inline-flex; } }
+.cart-link {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: var(--step--1); font-variation-settings: "wdth" 92, "wght" 600;
+  margin-right: .9rem;
+}
+.cart-link span {
+  display: inline-grid; place-items: center; min-width: 1.5em; height: 1.5em; padding: 0 .35em;
+  border-radius: 999px; background: var(--signal); color: var(--on-signal);
+  font-size: .72em; font-variant-numeric: tabular-nums;
+}
+.cart-link[hidden] { display: none; }
+
 /* on black the CTA is yellow; on paper yellow dies, so it goes black */
 .nav .btn { background: var(--signal); color: var(--on-signal); }
 .nav .btn:hover { background: var(--paper); color: var(--ink); }
@@ -331,7 +345,6 @@ body.menu-open .menu-btn i::before { transform: translateY(3.75px) rotate(45deg)
 body.menu-open .menu-btn i::after  { transform: translateY(-3.75px) rotate(-45deg); }
 @media (min-width: 860px) {
   .menu-btn { display: none; }
-  .nav__end { display: flex; }
 }
 
 /* full screen menu */
@@ -789,6 +802,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
     <button class="menu-btn" aria-expanded="false" aria-controls="sheet">Menu <i aria-hidden="true"></i></button>
     <a class="brand" href="/" aria-label="Lento Running Club"><div class="wordmark brand__logo" aria-hidden="true"></div><svg class="brand__mark" viewBox="0 0 229 332" aria-hidden="true"><path pathLength="1" d="M98.8 17.8 L103.2 17.2 L107.0 17.0 L111.0 17.0 L115.0 17.0 L119.0 17.0 L123.0 17.3 L127.0 17.9 L131.0 18.5 L135.0 19.3 L139.0 20.4 L143.0 22.3 L146.9 25.3 L150.3 29.0 L152.7 33.0 L154.1 37.0 L155.0 41.0 L155.7 45.0 L155.8 49.0 L155.4 53.0 L154.7 57.0 L153.7 61.0 L152.0 65.0 L149.8 69.0 L146.8 72.9 L143.0 76.3 L139.0 79.2 L135.0 81.8 L131.0 83.8 L127.0 85.5 L123.0 87.0 L119.0 88.1 L115.0 89.0 L111.0 90.0 L107.0 91.1 L103.0 92.0 L99.0 92.9 L95.0 93.8 L91.0 94.7 L87.0 95.9 L83.0 97.0 L79.0 98.4 L75.0 100.0 L71.0 101.6 L67.0 103.4 L63.0 105.4 L59.0 107.8 L55.0 110.5 L51.0 113.5 L47.0 117.1 L43.0 121.0 L39.1 125.0 L35.8 129.0 L33.1 133.0 L30.7 137.0 L28.8 141.0 L27.2 145.0 L25.8 149.0 L24.7 153.0 L23.9 157.0 L23.3 161.0 L22.7 165.0 L22.2 169.0 L22.0 173.0 L22.1 177.0 L22.6 181.0 L23.1 185.0 L23.8 189.0 L24.8 193.0 L26.3 197.0 L28.0 201.0 L30.0 205.0 L32.6 209.0 L35.6 213.0 L39.1 216.9 L43.0 220.5 L47.0 223.7 L51.0 226.5 L55.0 228.7 L59.0 230.7 L63.0 232.3 L67.0 233.7 L71.0 234.9 L75.0 236.0 L79.0 236.7 L83.0 237.0 L87.0 237.2 L91.0 237.7 L95.0 238.0 L99.0 238.0 L103.0 238.0 L107.0 237.9 L111.0 237.4 L115.0 237.0 L119.0 236.7 L123.0 236.1 L127.0 235.4 L131.0 234.1 L135.0 232.5 L138.8 230.2 L142.0 226.9 L144.1 223.0 L145.4 219.0 L146.2 215.0 L146.3 211.0 L145.8 207.0 L144.7 203.0 L142.9 199.0 L139.8 195.3 L136.0 192.5 L132.0 190.6 L128.0 189.1 L124.0 187.7 L120.0 186.4 L116.0 185.2 L112.0 183.8 L108.0 181.8 L104.1 178.8 L101.1 175.0 L99.4 171.0 L98.5 167.0 L98.1 163.0 L98.1 159.0 L98.7 155.0 L99.8 151.0 L101.6 147.1 L104.4 143.6 L108.0 140.9 L112.0 138.8 L116.0 137.1 L120.0 136.0 L124.0 135.3 L128.0 134.8 L132.0 134.3 L136.0 134.0 L140.0 134.0 L144.0 134.0 L148.0 134.2 L152.0 134.7 L156.0 135.2 L160.0 136.1 L164.0 137.4 L168.0 139.1 L172.0 141.0 L176.0 143.3 L180.0 146.4 L184.0 150.0 L187.8 154.0 L191.1 158.0 L193.9 162.0 L196.2 166.0 L198.1 170.0 L199.8 174.0 L201.2 178.0 L202.2 182.0 L203.2 186.0 L204.1 190.0 L204.7 194.0 L205.1 198.0 L205.6 202.0 L205.9 206.0 L206.0 210.0 L205.7 214.0 L205.2 218.0 L204.7 222.0 L204.0 226.0 L203.1 230.0 L202.0 234.0 L200.7 238.0 L198.9 242.0 L197.1 246.0 L194.8 250.0 L192.1 254.0 L189.2 258.0 L185.8 262.0 L182.0 265.8 L178.0 268.9 L174.0 271.6 L170.0 274.1 L166.0 276.1 L162.0 277.8 L158.0 279.3 L154.0 280.8 L150.0 282.1 L146.0 283.1 L142.0 283.8 L138.0 284.3 L134.0 284.9 L130.0 285.6 L126.0 285.9 L122.0 286.0 L118.0 286.0 L114.0 286.3 L110.0 286.5 L106.0 286.2 L102.0 286.0 L98.0 286.0 L94.0 286.0 L90.0 286.0 L86.0 286.2 L82.0 286.8 L78.0 287.4 L74.0 287.9 L70.0 288.4 L66.0 289.1 L62.0 290.1 L58.0 291.4 L54.0 293.2 L50.0 295.7 L46.3 299.1 L43.3 303.0 L40.8 307.0 L38.6 310.6 L36.6 313.8"/></svg></a>
     <div class="nav__end">
+      <a class="cart-link" href="/cart" aria-label="Handlekurv">Cart <span data-cart-count>0</span></a>
       <a class="btn" href="/join" data-magnet>Join a run</a>
     </div>
   </div>
@@ -801,6 +815,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
     <a href="/join">How to join</a>
     <a href="/shop">Shop</a>
     <a href="/club">Lento Club</a>
+    <a href="/cart">Cart</a>
   </nav>
   <div class="sheet__foot">
     <span>hello@clublento.no</span>
@@ -1193,9 +1208,30 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
     });
   }
 
+
+  /* ---------- 13. cart count in the bar ---------- */
+  function cartCount() {
+    var els = $$("[data-cart-count]");
+    if (!els.length) return;
+    function paint() {
+      var n = 0;
+      try {
+        JSON.parse(localStorage.getItem("lento_cart") || "[]").forEach(function (i) { n += i.qty; });
+      } catch (e) {}
+      els.forEach(function (el) {
+        el.textContent = n;
+        var link = el.closest(".cart-link");
+        if (link) link.hidden = n === 0;
+      });
+    }
+    paint();
+    window.addEventListener("storage", paint);
+    window.addEventListener("pageshow", paint);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     boot(); nav(); menu(); reveals(); scaleDots(); picker();
-    hscroll(); pointer(); heroVideo(); ticker(); clock(); year(); current(); forms();
+    hscroll(); pointer(); heroVideo(); ticker(); clock(); year(); current(); forms(); cartCount();
   });
 })();
 

@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Merch | Lento Running Club Stavanger</title>
-<meta name="description" content="Lento Socks &#8212; Pink, 199 kr. Lento Running Club running socks in pink, sizes S-M (38-42) and L-XL (42-45). Pay with Vipps or card.">
-<link rel="canonical" href="https://clublento.no/socks-pink">
-<meta name="robots" content="index, follow">
+<meta name="description" content="Handlekurv &#8212; Lento Running Club. Betal med Vipps, hent p&#229; neste run eller f&#229; sendt hjem.">
+<link rel="canonical" href="https://clublento.no/cart">
+<meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#000000">
 <meta property="og:site_name" content="Lento Running Club">
 <meta property="og:title" content="Lento Socks &#8212; Pink | Lento Running Club">
 <meta property="og:description" content="Lento Socks &#8212; Pink, 199 kr. Lento Running Club running socks in pink, sizes S-M (38-42) and L-XL (42-45). Pay with Vipps or card.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://clublento.no/socks-pink">
+<meta property="og:url" content="https://clublento.no/cart">
 <meta property="og:image" content="https://clublento.no/kit-01.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -699,6 +699,54 @@ body.booted .scale__line::after { transform: scaleX(1); }
 .product-card__price { font-variation-settings: "wdth" 68, "wght" 700; font-variant-numeric: tabular-nums; font-size: var(--step-1); }
 .product-card__cta { margin-top: .25rem; font-size: var(--step--1); color: var(--dim); }
 
+/* ---------- cart / checkout ---------- */
+.cart { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 900px) { .cart { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); } }
+.panel { border: 1px solid var(--rule); border-radius: 18px; padding: clamp(1.2rem, 3vw, 2rem); }
+.panel + .panel { margin-top: 1rem; }
+.panel h2 { font-size: var(--step-1); font-variation-settings: "wdth" 105, "wght" 650; margin-bottom: 1rem; }
+.fields { display: grid; gap: .6rem; }
+@media (min-width: 620px) { .fields--2 { grid-template-columns: 1fr 1fr; } }
+.fields input {
+  padding: .95em 1.1em; border: 1px solid var(--rule); border-radius: 12px;
+  background: transparent; color: var(--fg); font: inherit; font-size: var(--step--1); width: 100%;
+}
+.fields input::placeholder { color: var(--dim); }
+.fields input:focus { outline: none; border-color: currentColor; }
+.opts { display: grid; gap: .6rem; }
+.optrow {
+  display: flex; align-items: center; gap: .8rem; cursor: pointer;
+  padding: .9em 1.1em; border: 1px solid var(--rule); border-radius: 12px;
+  font-size: var(--step--1); transition: border-color .25s, background .25s;
+}
+.optrow:hover { border-color: currentColor; }
+.optrow.is-on { border-color: var(--fg); background: rgba(23,25,27,.04); }
+.optrow input { accent-color: var(--ink); }
+.optrow .right { margin-left: auto; font-variation-settings: "wdth" 70, "wght" 700; font-variant-numeric: tabular-nums; }
+.coupon { display: flex; gap: .5rem; }
+.coupon input { flex: 1; }
+.btn--plain { box-shadow: inset 0 0 0 1px var(--rule); background: transparent; color: var(--fg); }
+.btn--plain:hover { background: var(--fg); color: var(--bg); box-shadow: none; }
+.btn--pay { background: var(--signal); color: var(--on-signal); width: 100%; padding: 1.15em 1.6em; font-size: var(--step-0); }
+.btn--pay:hover { background: var(--ink); color: var(--paper); }
+.sum { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
+.line { display: grid; grid-template-columns: 72px 1fr auto; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--rule); align-items: center; }
+.line__img { width: 72px; aspect-ratio: 1; border-radius: 10px; background: #fff center / contain no-repeat; }
+.line__n { font-variation-settings: "wdth" 105, "wght" 620; }
+.line__m { font-size: var(--step--1); color: var(--dim); }
+.line__p { font-variation-settings: "wdth" 70, "wght" 700; font-variant-numeric: tabular-nums; }
+.step { display: inline-flex; align-items: center; gap: .5rem; margin-top: .4rem; }
+.step button { width: 26px; height: 26px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--rule); line-height: 1; }
+.step button:hover { background: var(--fg); color: var(--bg); }
+.step span { font-variant-numeric: tabular-nums; min-width: 1.4em; text-align: center; }
+.rm { font-size: var(--step--1); color: var(--dim); text-decoration: underline; margin-top: .45rem; display: block; }
+.rm:hover { color: var(--fg); }
+.sumrow { display: flex; justify-content: space-between; padding-block: .5rem; font-size: var(--step--1); }
+.sumrow--total { font-size: var(--step-1); font-variation-settings: "wdth" 88, "wght" 700; border-top: 1px solid var(--rule); margin-top: .6rem; padding-top: .9rem; }
+.empty { padding-block: 2rem; color: var(--dim); }
+.done { display: none; }
+.done.is-on { display: block; }
+
 /* ---------- product page ---------- */
 .product { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); grid-template-columns: 1fr; align-items: start; }
 @media (min-width: 900px) { .product { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
@@ -859,40 +907,88 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 
 <main id="top">
 
-<!-- ===== product ===== -->
-<section class="band" id="product">
+<section class="band" id="cart" style="padding-top:clamp(2rem,5vw,3.5rem)">
   <div class="rail">
-    <a class="back" href="/shop">&#8592; Alle produkter</a>
-    <div class="product">
-      <div class="product__gallery up">
-        <div class="media" role="img" aria-label="Pink Lento Running Club running socks" style="--img:url('kit-01.jpg');background-color:#fff"></div>
-      </div>
+    <h1 class="display" style="font-size:clamp(2.2rem,7vw,4.5rem);margin-bottom:clamp(1.5rem,4vw,2.5rem)">Cart</h1>
 
-      <div class="up" data-delay=".06">
-        <h1 class="headline">Lento Socks &#8212; Pink</h1>
-        <p class="product__price">199 kr</p>
-        <div class="prose" style="margin-top:1.2rem">
-          <p>Ribbed crew socks in pink with the club name up the leg, the snail mark on the side and &#8220;Slow is still moving&#8221; across the foot. Cushioned heel and toe, made to be run in.</p>
-        </div>
+    <div data-checkout>
+      <div class="cart">
+        <!-- left: details -->
+        <div>
+          <div class="panel">
+            <h2>Kontakt</h2>
+            <div class="fields fields--2">
+              <input type="text" id="fornavn" placeholder="Fornavn" aria-label="Fornavn" required>
+              <input type="text" id="etternavn" placeholder="Etternavn" aria-label="Etternavn" required>
+            </div>
+            <div class="fields" style="margin-top:.6rem">
+              <input type="email" id="epost" placeholder="E-post" aria-label="E-post" required>
+              <input type="tel" id="telefon" placeholder="Telefon" aria-label="Telefon">
+            </div>
+          </div>
 
-        <div class="opt">
-          <span class="opt__label" id="size-label">St&#248;rrelse</span>
-          <div class="sizes" role="group" aria-labelledby="size-label">
-            <button type="button" class="size" data-size="S&#8211;M (38&#8211;42)">S&#8211;M (38&#8211;42)</button>
-            <button type="button" class="size" data-size="L&#8211;XL (42&#8211;45)">L&#8211;XL (42&#8211;45)</button>
+          <div class="panel">
+            <h2>Levering</h2>
+            <div class="opts">
+              <label class="optrow is-on"><input type="radio" name="lev" value="P&#229; neste run" data-fee="0" checked> Hent p&#229; neste run <span class="right">Gratis</span></label>
+              <label class="optrow"><input type="radio" name="lev" value="Sendt hjem" data-fee="79"> Sendt hjem <span class="right">79 kr</span></label>
+            </div>
+            <div class="fields" data-ship style="display:none;margin-top:.8rem">
+              <input type="text" id="adresse" placeholder="Adresse" aria-label="Adresse">
+              <div class="fields fields--2">
+                <input type="text" id="postnr" placeholder="Postnummer" aria-label="Postnummer">
+                <input type="text" id="sted" placeholder="Sted" aria-label="Sted">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>Betaling</h2>
+            <div class="opts">
+              <label class="optrow is-on"><input type="radio" name="pay" value="Vipps" checked> Vipps <span class="right">#63361</span></label>
+            </div>
+            <p class="note" style="margin-top:.8rem">Du f&#229;r Vipps-nummeret og bel&#248;pet p&#229; neste steg.</p>
           </div>
         </div>
 
-        <div class="opt">
-          <label class="opt__label" for="qty">Antall par</label>
-          <select class="qty" id="qty">
-            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-          </select>
-        </div>
+        <!-- right: summary -->
+        <div class="sum">
+          <div class="panel">
+            <h2>Bestillingen din</h2>
+            <div data-lines></div>
 
-        <button class="btn btn--gold" type="button" data-add style="margin-top:2rem">Add to cart</button>
-        <p class="note" data-note>Velg st&#248;rrelse f&#248;rst.</p>
+            <div class="coupon" style="margin-top:1.2rem">
+              <input type="text" id="kupong" placeholder="Rabattkode" aria-label="Rabattkode">
+              <button class="btn btn--plain" type="button" data-coupon>Bruk</button>
             </div>
+            <p class="note" data-coupon-note style="margin-top:.5rem"></p>
+
+            <div style="margin-top:1.2rem">
+              <div class="sumrow"><span>Delsum</span><span data-sub>0 kr</span></div>
+              <div class="sumrow" data-disc-row style="display:none"><span data-disc-label>Rabatt</span><span data-disc>0 kr</span></div>
+              <div class="sumrow"><span>Frakt</span><span data-shipping>0 kr</span></div>
+              <div class="sumrow sumrow--total"><span>Totalt</span><span data-total>0 kr</span></div>
+            </div>
+
+            <button class="btn btn--pay" type="button" data-pay-now style="margin-top:1.2rem">Pay now</button>
+            <p class="note" data-err></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- after payment step -->
+    <div class="done" data-done>
+      <div class="panel" style="max-width:640px">
+        <h2>Siste steg: Vipps <span data-total-done>0</span> kr</h2>
+        <p class="vipps-no">#63361</p>
+        <p class="note" style="margin-top:.4rem">&#197;pne Vipps, s&#248;k opp nummer <strong>63361</strong> og send <span data-total-done>0</span> kr. Skriv navnet ditt i meldingsfeltet.</p>
+        <div class="pay__buttons">
+          <button class="btn btn--vipps" type="button" data-copy="63361">Kopier Vipps-nummer</button>
+        </div>
+        <p class="note">Bestillingen er registrert og sendt til oss. N&#229;r betalingen er inne bekrefter vi p&#229; e-post. Sp&#248;rsm&#229;l? Skriv til hello@clublento.no.</p>
+        <a class="btn btn--plain" href="/shop" style="margin-top:1rem">Tilbake til butikken</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1243,35 +1339,145 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 
 </script>
 
-<script>
-/* product page: size, quantity, add to cart */
-(function () {
-  var ITEM = { slug: "socks-pink", name: "Lento Socks \u2014 Pink", img: "kit-01.jpg", price: 199 };
-  var sizes = Array.prototype.slice.call(document.querySelectorAll(".size[data-size]"));
-  var qty = document.getElementById("qty");
-  var addBtn = document.querySelector("[data-add]");
-  var note = document.querySelector("[data-note]");
-  var size = "";
 
-  sizes.forEach(function (b) {
-    b.addEventListener("click", function () {
-      sizes.forEach(function (o) { o.classList.toggle("is-on", o === b); });
-      size = b.dataset.size;
-      if (note) note.textContent = "";
+
+<script>
+/* cart + checkout */
+(function () {
+  var KEY = "lento_cart";
+  var SHIP = 79;
+  var CODES = { LENTO10: { type: "percent", value: 10 }, GRATISFRAKT: { type: "freeship" } };
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { cart = []; }
+  var coupon = null;
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(cart)); } catch (e) {} }
+  function fee() {
+    var picked = $("input[name=lev]:checked");
+    var f = picked ? parseInt(picked.dataset.fee, 10) || 0 : 0;
+    if (coupon && coupon.type === "freeship") f = 0;
+    return f;
+  }
+  function sub() { return cart.reduce(function (t, i) { return t + i.price * i.qty; }, 0); }
+  function discount() {
+    if (!coupon || coupon.type !== "percent") return 0;
+    return Math.round(sub() * coupon.value / 100);
+  }
+  function kr(n) { return n + " kr"; }
+
+  function render() {
+    var box = $("[data-lines]");
+    box.innerHTML = "";
+    if (!cart.length) {
+      box.innerHTML = '<p class="empty">Handlekurven er tom. <a href="/shop" style="text-decoration:underline">Se sokkene</a>.</p>';
+    }
+    cart.forEach(function (item, idx) {
+      var el = document.createElement("div");
+      el.className = "line";
+      el.innerHTML =
+        '<div class="line__img" style="background-image:url(\'' + item.img + '\')"></div>' +
+        '<div><div class="line__n">' + item.name + '</div>' +
+        '<div class="line__m">' + item.size + '</div>' +
+        '<div class="step"><button type="button" data-minus="' + idx + '" aria-label="F\u00e6rre">&#8722;</button>' +
+        '<span>' + item.qty + '</span>' +
+        '<button type="button" data-plus="' + idx + '" aria-label="Flere">+</button></div>' +
+        '<a class="rm" href="#" data-rm="' + idx + '">Fjern</a></div>' +
+        '<div class="line__p">' + kr(item.price * item.qty) + '</div>';
+      box.appendChild(el);
+    });
+
+    var d = discount();
+    $("[data-sub]").textContent = kr(sub());
+    $("[data-shipping]").textContent = fee() === 0 ? "Gratis" : kr(fee());
+    $("[data-disc-row]").style.display = (d || (coupon && coupon.type === "freeship")) ? "flex" : "none";
+    $("[data-disc]").textContent = d ? "\u2212" + kr(d) : "\u2212" + kr(SHIP);
+    var total = Math.max(0, sub() - d) + fee();
+    $("[data-total]").textContent = kr(total);
+    $$("[data-total-done]").forEach(function (e) { e.textContent = total; });
+  }
+
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    if (t.dataset.plus !== undefined) { cart[t.dataset.plus].qty++; save(); render(); }
+    else if (t.dataset.minus !== undefined) {
+      var i = t.dataset.minus;
+      cart[i].qty--; if (cart[i].qty < 1) cart.splice(i, 1);
+      save(); render();
+    } else if (t.dataset.rm !== undefined) {
+      e.preventDefault(); cart.splice(t.dataset.rm, 1); save(); render();
+    }
+  });
+
+  $$("input[name=lev], input[name=pay]").forEach(function (r) {
+    r.addEventListener("change", function () {
+      $$("input[name=" + r.name + "]").forEach(function (o) { o.closest(".optrow").classList.toggle("is-on", o.checked); });
+      if (r.name === "lev") $("[data-ship]").style.display = (parseInt(r.dataset.fee, 10) > 0) ? "grid" : "none";
+      render();
     });
   });
 
-  addBtn.addEventListener("click", function () {
-    if (!size) { if (note) note.textContent = "Velg st\u00f8rrelse f\u00f8rst."; return; }
-    var cart = [];
-    try { cart = JSON.parse(localStorage.getItem("lento_cart") || "[]"); } catch (e) { cart = []; }
-    var n = parseInt(qty.value, 10) || 1;
-    var found = cart.filter(function (i) { return i.slug === ITEM.slug && i.size === size; })[0];
-    if (found) { found.qty += n; }
-    else { cart.push({ slug: ITEM.slug, name: ITEM.name, img: ITEM.img, price: ITEM.price, size: size, qty: n }); }
-    try { localStorage.setItem("lento_cart", JSON.stringify(cart)); } catch (e) {}
-    location.href = "/cart";
+  $("[data-coupon]").addEventListener("click", function () {
+    var code = ($("#kupong").value || "").trim().toUpperCase();
+    var note = $("[data-coupon-note]");
+    if (CODES[code]) {
+      coupon = CODES[code]; coupon.code = code;
+      note.textContent = "Koden " + code + " er lagt til.";
+    } else {
+      coupon = null;
+      note.textContent = code ? "Ugyldig kode." : "";
+    }
+    render();
   });
+
+  $("[data-pay-now]").addEventListener("click", function () {
+    var err = $("[data-err]");
+    if (!cart.length) { err.textContent = "Handlekurven er tom."; return; }
+    var need = [$("#fornavn"), $("#etternavn"), $("#epost")];
+    var home = $("input[name=lev]:checked").dataset.fee > 0;
+    if (home) need = need.concat([$("#adresse"), $("#postnr"), $("#sted")]);
+    var missing = need.filter(function (i) { return !i.value.trim(); });
+    if (missing.length) { err.textContent = "Fyll ut alle feltene."; missing[0].focus(); return; }
+
+    var btn = this;
+    btn.disabled = true; btn.textContent = "Sender...";
+    var lines = cart.map(function (i) { return i.qty + " x " + i.name + " (" + i.size + ") = " + kr(i.price * i.qty); }).join("\n");
+    var body = new FormData();
+    body.append("_subject", "Ny bestilling \u2014 clublento.no");
+    body.append("navn", $("#fornavn").value + " " + $("#etternavn").value);
+    body.append("epost", $("#epost").value);
+    body.append("telefon", $("#telefon").value);
+    body.append("ordre", lines);
+    body.append("levering", $("input[name=lev]:checked").value);
+    body.append("adresse", home ? ($("#adresse").value + ", " + $("#postnr").value + " " + $("#sted").value) : "");
+    body.append("rabattkode", coupon ? coupon.code : "");
+    body.append("total", $("[data-total]").textContent);
+
+    fetch("https://formspree.io/f/xjykvedr", { method: "POST", body: body, headers: { Accept: "application/json" } })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        $("[data-checkout]").style.display = "none";
+        $("[data-done]").classList.add("is-on");
+        cart = []; save();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      })
+      .catch(function () {
+        err.textContent = "Noe gikk galt. Pr\u00f8v igjen, eller send e-post til hello@clublento.no.";
+        btn.disabled = false; btn.textContent = "Pay now";
+      });
+  });
+
+  var copyBtn = $("[data-copy]");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function () {
+      var done = function () { copyBtn.textContent = "Kopiert \u2713"; setTimeout(function () { copyBtn.textContent = "Kopier Vipps-nummer"; }, 2500); };
+      if (navigator.clipboard) navigator.clipboard.writeText("63361").then(done, function () {});
+    });
+  }
+
+  render();
 })();
 </script>
 </body>
