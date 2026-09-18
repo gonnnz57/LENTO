@@ -1,0 +1,108 @@
+<!-- ===== LENTO KJØP START ===== -->
+<style>
+  .lb { --lb-yellow: #FFE14D; --lb-ink: #000; --lb-paper: #fff;
+        font: inherit; color: inherit; max-width: 440px; margin: 0 auto; padding: 24px 0; }
+  .lb-row { margin-bottom: 20px; }
+  .lb-label { display: block; font-size: 0.9rem; margin-bottom: 8px; opacity: .7; }
+  .lb-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .lb-opt { font: inherit; cursor: pointer; padding: 10px 18px; border-radius: 999px;
+            border: 1.5px solid currentColor; background: transparent; color: inherit; }
+  .lb-opt[aria-pressed="true"] { background: currentColor; }
+  .lb-opt[aria-pressed="true"] span { color: var(--lb-paper); mix-blend-mode: difference; }
+  .lb-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+            margin-right: 8px; vertical-align: -1px; border: 1px solid rgba(0,0,0,.25); }
+  .lb-qty { display: inline-flex; align-items: center; border: 1.5px solid currentColor; border-radius: 999px; }
+  .lb-qty button { font: inherit; background: none; border: 0; color: inherit; cursor: pointer;
+                   width: 40px; height: 40px; font-size: 1.1rem; }
+  .lb-qty output { min-width: 28px; text-align: center; }
+  .lb-buy { display: block; width: 100%; font: inherit; font-weight: 700; font-size: 1.05rem;
+            text-align: center; text-decoration: none; padding: 16px; border-radius: 999px;
+            background: var(--lb-yellow); color: var(--lb-ink); border: 0; cursor: pointer; }
+  .lb-buy:hover { filter: brightness(.95); }
+  .lb-opt:focus-visible, .lb-qty button:focus-visible, .lb-buy:focus-visible { outline: 2px solid var(--lb-yellow); outline-offset: 3px; }
+  .lb-note { font-size: 0.85rem; opacity: .7; margin-top: 12px; text-align: center; }
+</style>
+
+<div class="lb" id="lentoBuy">
+  <div class="lb-row">
+    <span class="lb-label">Farge</span>
+    <div class="lb-opts" data-group="color">
+      <button type="button" class="lb-opt" data-value="white" aria-pressed="true"><span><i class="lb-dot" style="background:#fff"></i>Hvit</span></button>
+      <button type="button" class="lb-opt" data-value="pink" aria-pressed="false"><span><i class="lb-dot" style="background:#F2A7C3"></i>Rosa</span></button>
+    </div>
+  </div>
+
+  <div class="lb-row">
+    <span class="lb-label">Størrelse</span>
+    <div class="lb-opts" data-group="size">
+      <button type="button" class="lb-opt" data-value="sm" aria-pressed="true"><span>S–M (38–42)</span></button>
+      <button type="button" class="lb-opt" data-value="lxl" aria-pressed="false"><span>L–XL (42–45)</span></button>
+    </div>
+  </div>
+
+  <div class="lb-row">
+    <span class="lb-label">Antall</span>
+    <div class="lb-qty">
+      <button type="button" data-q="-1" aria-label="Færre">−</button>
+      <output id="lbQty">1</output>
+      <button type="button" data-q="1" aria-label="Flere">+</button>
+    </div>
+  </div>
+
+  <a class="lb-buy" id="lbBuy" href="#">Kjøp for 199 kr</a>
+  <p class="lb-note">Du betaler trygt i Shopify-kassa med Vipps eller kort.</p>
+</div>
+
+<script>
+(function () {
+  var STORE = "https://0v0qtw-z7.myshopify.com";
+  var PRICE = 199;
+  var VARIANTS = {
+    "white-sm":  "55643266089259",
+    "white-lxl": "55643266122027",
+    "pink-sm":   "55643262583083",
+    "pink-lxl":  "55643262615851"
+  };
+  var state = { color: "white", size: "sm", qty: 1 };
+  var root = document.getElementById("lentoBuy");
+  var buy = document.getElementById("lbBuy");
+  var qtyEl = document.getElementById("lbQty");
+
+  function update() {
+    var id = VARIANTS[state.color + "-" + state.size];
+    buy.href = STORE + "/cart/" + id + ":" + state.qty;
+    buy.textContent = "Kjøp for " + (PRICE * state.qty) + " kr";
+    qtyEl.textContent = state.qty;
+  }
+
+  root.querySelectorAll(".lb-opts").forEach(function (group) {
+    group.addEventListener("click", function (e) {
+      var btn = e.target.closest(".lb-opt");
+      if (!btn) return;
+      group.querySelectorAll(".lb-opt").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      btn.setAttribute("aria-pressed", "true");
+      state[group.dataset.group] = btn.dataset.value;
+      update();
+    });
+  });
+
+  root.querySelectorAll("[data-q]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.qty = Math.min(10, Math.max(1, state.qty + Number(b.dataset.q)));
+      update();
+    });
+  });
+
+  // Lets the product photos pick the colour: <img data-lento-color="pink">
+  document.querySelectorAll("[data-lento-color]").forEach(function (img) {
+    img.style.cursor = "pointer";
+    img.addEventListener("click", function () {
+      var btn = root.querySelector('[data-group="color"] [data-value="' + img.dataset.lentoColor + '"]');
+      if (btn) btn.click();
+    });
+  });
+
+  update();
+})();
+</script>
+<!-- ===== LENTO KJØP SLUTT ===== -->
