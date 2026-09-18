@@ -674,6 +674,8 @@ body.booted .scale__line::after { transform: scaleX(1); }
 
 /* ---------- shop grid ---------- */
 .products { display: grid; gap: clamp(1rem, 3vw, 2.5rem); grid-template-columns: 1fr; }
+.products .media { width: 85%; margin-inline: auto; }   /* photos 15% smaller */
+.products .product-card__row, .products .product-card__cta { width: 85%; margin-inline: auto; }
 @media (min-width: 720px) { .products { grid-template-columns: 1fr 1fr; } }
 .product-card { display: block; }
 .product-card .media { transition: transform .5s var(--ease); }
@@ -852,10 +854,7 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 <!-- ===== products ===== -->
 <section class="band" id="shop">
   <div class="rail">
-    <div class="split" style="margin-bottom:clamp(2rem,5vw,3.5rem)">
-      <h2 class="headline up">Drop 01<br>is here.</h2>
-      <p class="prose up" data-delay=".08">Lento running socks, made for Norwegian weather and worn by the people who actually show up. Two colours, two sizes, 199 kr a pair. Tap a pair to pick your size.</p>
-    </div>
+    <h2 class="headline up" style="margin-bottom:clamp(2rem,5vw,3.5rem)">Drop 01 is here.</h2>
 
     <div class="products">
       <a class="product-card up" href="/socks-pink">
