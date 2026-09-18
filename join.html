@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Merch | Lento Running Club Stavanger</title>
-<meta name="description" content="Første Lento merch kommer snart. Lento Running Club socks and kit from Stavanger. Sign up to hear first when the drop goes live.">
-<link rel="canonical" href="https://clublento.no/shop">
+<title>Collabs | Løpeevents med merkevarer | Lento Running Club</title>
+<meta name="description" content="Slik blir du med i Lento Running Club i Stavanger: meld deg p&#229; via Spond, m&#248;t opp l&#248;rdag og l&#248;p. How to join our free weekly runs.">
+<link rel="canonical" href="https://clublento.no/join">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#000000">
 <meta property="og:site_name" content="Lento Running Club">
-<meta property="og:title" content="Merch | Lento Running Club Stavanger">
-<meta property="og:description" content="Første Lento merch kommer snart. Lento Running Club socks and kit from Stavanger. Sign up to hear first when the drop goes live.">
+<meta property="og:title" content="How to join | Lento Running Club Stavanger">
+<meta property="og:description" content="Slik blir du med i Lento Running Club i Stavanger: meld deg p&#229; via Spond, m&#248;t opp l&#248;rdag og l&#248;p. How to join our free weekly runs.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://clublento.no/shop">
+<meta property="og:url" content="https://clublento.no/join">
 <meta property="og:image" content="https://clublento.no/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -672,61 +672,8 @@ body.booted .scale__line::after { transform: scaleX(1); }
 .tile__t { margin-top: .9rem; font-variation-settings: "wdth" 108, "wght" 650; font-size: var(--step-1); }
 .tile__d { color: var(--dim); font-size: var(--step--1); margin-top: .3rem; }
 
-/* ---------- shop grid ---------- */
-.products { display: grid; gap: clamp(1rem, 3vw, 2.5rem); grid-template-columns: 1fr; }
-.products .media { width: 85%; margin-inline: auto; }   /* photos 15% smaller */
-.products .product-card__row, .products .product-card__cta { width: 85%; margin-inline: auto; }
-@media (min-width: 720px) { .products { grid-template-columns: 1fr 1fr; } }
-.product-card { display: block; }
-.product-card .media { transition: transform .5s var(--ease); }
-.product-card:hover .media { transform: scale(1.015); }
-.product-card__row {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 1rem; margin-top: .9rem;
-}
-.product-card__name { font-variation-settings: "wdth" 108, "wght" 650; font-size: var(--step-1); }
-.product-card__price { font-variation-settings: "wdth" 68, "wght" 700; font-variant-numeric: tabular-nums; font-size: var(--step-1); }
-.product-card__cta { margin-top: .25rem; font-size: var(--step--1); color: var(--dim); }
-
-/* ---------- product page ---------- */
-.product { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); grid-template-columns: 1fr; align-items: start; }
-@media (min-width: 900px) { .product { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
-.product__gallery { display: grid; gap: .8rem; grid-template-columns: 1fr; }
-.product__price {
-  font-variation-settings: "wdth" 68, "wght" 700; font-variant-numeric: tabular-nums;
-  font-size: var(--step-2); margin-top: .6rem;
-}
-.back { display: inline-flex; gap: .5rem; font-size: var(--step--1); color: var(--dim); margin-bottom: 1.2rem; }
-.back:hover { color: var(--fg); }
-.opt { margin-top: 2rem; }
-.opt__label { font-size: var(--step--1); font-variation-settings: "wdth" 88, "wght" 600; color: var(--dim); display: block; margin-bottom: .6rem; }
-.sizes { display: flex; flex-wrap: wrap; gap: .6rem; }
-.size {
-  padding: .8em 1.3em; border-radius: 999px;
-  box-shadow: inset 0 0 0 1px var(--rule);
-  font-size: var(--step--1); font-variation-settings: "wdth" 95, "wght" 600;
-  transition: background .25s, color .25s, box-shadow .25s;
-}
-.size:hover { box-shadow: inset 0 0 0 1px var(--fg); }
-.size.is-on { background: var(--ink); color: var(--paper); box-shadow: none; }
-.qty {
-  padding: .8em 1.1em; border-radius: 999px; border: 1px solid var(--rule);
-  background: transparent; color: var(--fg); font: inherit; font-size: var(--step--1);
-}
-.order { display: grid; gap: .6rem; max-width: 460px; margin-top: 2rem; }
-.order input {
-  padding: .95em 1.1em; border: 1px solid var(--rule); border-radius: 999px;
-  background: transparent; color: var(--fg); font: inherit; font-size: var(--step--1);
-}
-.order input::placeholder { color: var(--dim); }
-.order input:focus { outline: none; border-color: currentColor; }
-.total { font-size: var(--step-1); font-variation-settings: "wdth" 88, "wght" 650; margin-top: 1.2rem; }
-.pay { display: none; margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid var(--rule); }
-.pay.is-on { display: block; }
-.pay__buttons { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
-.btn--vipps { background: #FF5B24; color: #fff; }
-.btn--vipps:hover { background: var(--ink); color: var(--paper); }
-.note { font-size: var(--step--1); color: var(--dim); margin-top: 1rem; max-width: 46ch; }
+/* ---------- collabs page ---------- */
+.hero--plain { background: var(--fjord); min-height: 46svh; }
 
 /* ---------- merch page ---------- */
 .hero--photo { min-height: 58svh; }                        /* ~25% shorter than before */
@@ -841,36 +788,42 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 
 <main id="top">
 
-<!-- ===== photo header ===== -->
-<section class="hero hero--photo invert" data-nav-dark aria-label="Lento Running Club group run">
-  <img class="hero__vid" src="shop-hero.jpg" alt="Lento Running Club gathered before a group run in Stavanger">
-  <div class="hero__scrim" aria-hidden="true"></div>
-  <h1 class="display display--xl hero__title">Shop</h1>
+<!-- ===== header ===== -->
+<section class="hero hero--photo hero--plain invert" data-nav-dark aria-label="How to join">
+  <h1 class="display display--xl hero__title">How to join</h1>
 </section>
 
-<!-- ===== products ===== -->
-<section class="band" id="shop">
-  <div class="rail">
-    <h2 class="headline up" style="margin-bottom:clamp(2rem,5vw,3.5rem)">Drop 01 is here.</h2>
+<!-- ===== join ===== -->
+<section class="band invert" data-nav-dark id="join">
+  <div class="rail split">
+    <h2 class="headline up">Sign up</h2>
+    <div>
+      <div class="prose up" data-delay=".08">
+        <p>We run sign-ups through Spond so we know how many leaders and sweepers to bring. It is free and takes about a minute.</p>
+      </div>
+      <div class="rows up" data-delay=".12" style="margin-top:2rem">
+        <div class="row"><span class="row__k">01</span><span class="row__t">Download Spond</span><span class="row__d">Available on iOS and Android.</span></div>
+        <div class="row"><span class="row__k">02</span><span class="row__t">Join with code PETIK</span><span class="row__d">Enter the invite code to find Lento Running Club.</span></div>
+        <div class="row"><span class="row__k">03</span><span class="row__t">Accept the next run</span><span class="row__d">Choose your pace group and turn up.</span></div>
+        <div class="row"><span class="row__k">04</span><span class="row__t">Add us on Strava</span><span class="row__d">Every club run lands in the group feed. Kudos afterwards is compulsory.</span></div>
+      </div>
+      <div class="up" data-delay=".16" style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap">
+        <a class="btn btn--spond" href="https://spond.com/invite/PETIK" target="_blank" rel="noopener" data-magnet>Open Spond</a>
+        <a class="btn btn--strava" href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Join us on Strava</a>
+        <a class="btn btn--ghost" href="mailto:hello@clublento.no">Ask us anything</a>
+      </div>
+    </div>
+  </div>
 
-    <div class="products">
-      <a class="product-card up" href="/socks-pink">
-        <div class="media" role="img" aria-label="Pink Lento Running Club running socks" style="--img:url('kit-01.jpg')"><span class="media__label">Pink</span></div>
-        <div class="product-card__row">
-          <span class="product-card__name">Lento Socks &#8212; Pink</span>
-          <span class="product-card__price">199 kr</span>
-        </div>
-        <p class="product-card__cta">Choose size &#8594;</p>
-      </a>
-
-      <a class="product-card up" data-delay=".08" href="/socks-white">
-        <div class="media" role="img" aria-label="White Lento Running Club running socks" style="--img:url('kit-02.jpg')"><span class="media__label">White</span></div>
-        <div class="product-card__row">
-          <span class="product-card__name">Lento Socks &#8212; White</span>
-          <span class="product-card__price">199 kr</span>
-        </div>
-        <p class="product-card__cta">Choose size &#8594;</p>
-      </a>
+  <div class="rail" style="margin-top:clamp(3rem,7vw,5.5rem)">
+    <h3 class="headline up">How a run works</h3>
+    <p class="tag up" data-delay=".04" style="margin:.6rem 0 clamp(1.5rem,4vw,2.5rem)">This is an example of a typical run. Times and routes can change, so always check the Spond event.</p>
+    <div class="rows up" data-delay=".06">
+      <div class="row"><span class="row__k">Saturday</span><span class="row__t">Every week, all year</span><span class="row__d">Winter runs stick to lit routes.</span></div>
+      <div class="row"><span class="row__k">10:30</span><span class="row__t">Meet 10:15</span><span class="row__d">Fifteen minutes for introductions and splitting into groups.</span></div>
+      <div class="row"><span class="row__k">Start</span><span class="row__t">Stavanger sentrum</span><span class="row__d">Exact meeting point is posted with each Spond event.</span></div>
+      <div class="row"><span class="row__k">6&#8211;8 km</span><span class="row__t">Short and long loops</span><span class="row__d">Same start, same finish, whichever you pick.</span></div>
+      <div class="row"><span class="row__k">After</span><span class="row__t">Stay for the hangout</span><span class="row__d">Coffee, stretching and time to connect with the people you just ran with.</span></div>
     </div>
   </div>
 </section>
@@ -1171,23 +1124,13 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   /* ---------- 12. newsletter / waitlist forms ---------- */
   function forms() {
     $$("[data-form]").forEach(function (f) {
-      var note = f.parentElement.querySelector(".form-note");
-      var btn = f.querySelector("button[type=submit]");
       f.addEventListener("submit", function (e) {
-        e.preventDefault();                       // stay on the page, no Formspree redirect
-        var label = btn ? btn.textContent : "";
-        if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
-        fetch(f.action, { method: "POST", body: new FormData(f), headers: { Accept: "application/json" } })
-          .then(function (r) {
-            if (!r.ok) throw new Error(r.status);
-            f.reset();
-            if (note) note.textContent = "You're on the list. We'll email you when the drop goes live.";
-            if (btn) btn.textContent = "Done";
-          })
-          .catch(function () {
-            if (note) note.textContent = "Something went wrong. Try again, or email hello@clublento.no.";
-            if (btn) { btn.disabled = false; btn.textContent = label; }
-          });
+        // No endpoint configured yet -> keep the user informed instead of failing silently.
+        if (!f.action || f.action.indexOf("YOUR_FORM_ID") > -1) {
+          e.preventDefault();
+          var note = f.parentElement.querySelector(".form-note");
+          if (note) note.textContent = "Form isn't connected yet. Add your Formspree ID in the HTML, or email hello@clublento.no.";
+        }
       });
     });
   }
