@@ -796,26 +796,18 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   </div>
 </section>
 
-<!-- ===== marquee ===== -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>Slow is still moving <i class="mark" aria-hidden="true"></i> All paces, one community <i class="mark" aria-hidden="true"></i> Stavanger, Norway <i class="mark" aria-hidden="true"></i></span>
-    <span>Slow is still moving <i class="mark" aria-hidden="true"></i> All paces, one community <i class="mark" aria-hidden="true"></i> Stavanger, Norway <i class="mark" aria-hidden="true"></i></span>
-  </div>
-</div>
-
 <!-- ===== tagline + pace scale ===== -->
-<section class="band band--tight invert" data-nav-dark>
+<section class="band band--tight invert" style="padding-block:clamp(2rem,4vw,3rem)" data-nav-dark>
   <div class="rail">
-    <p class="lede lede--mid">Slow is still moving.</p>
-    <div class="scale scale--mid">
+    <p class="lede lede--mid" style="font-size:var(--step-0)">Slow is still moving.</p>
+    <div class="scale scale--mid" style="margin-block:clamp(1rem,2.4vw,1.6rem)">
       <div class="scale__line"></div>
       <div class="scale__dots" aria-hidden="true"></div>
       <div class="scale__ticks">
         <span>4:30</span><span>5:00</span><span>5:30</span><span>6:00</span><span>6:45</span><span>7:30</span>
       </div>
     </div>
-    <p class="lede lede--mid">All paces, one community.</p>
+    <p class="lede lede--mid" style="font-size:var(--step-0)">All paces, one community.</p>
   </div>
 </section>
 
@@ -850,6 +842,14 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
     </div>
   </div>
 </section>
+
+<!-- ===== marquee ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Slow is still moving <i class="mark" aria-hidden="true"></i> All paces, one community <i class="mark" aria-hidden="true"></i> Stavanger, Norway <i class="mark" aria-hidden="true"></i></span>
+    <span>Slow is still moving <i class="mark" aria-hidden="true"></i> All paces, one community <i class="mark" aria-hidden="true"></i> Stavanger, Norway <i class="mark" aria-hidden="true"></i></span>
+  </div>
+</div>
 
 <!-- ===== club ===== -->
 <section class="band band--top-tight" id="club">
