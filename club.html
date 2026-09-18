@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Collabs | Løpeevents med merkevarer | Lento Running Club</title>
-<meta name="description" content="Lento Running Club lager løpeevents med merkevarer i Stavanger: lanseringer, butikkevents og aktiveringer. Partners include Saucony, Anton Sport and Oakberry.">
-<link rel="canonical" href="https://clublento.no/collabs">
+<meta name="description" content="How Lento Running Club started in Stavanger, why nobody gets dropped, and the 280 km charity run from Stavanger to Kristiansand.">
+<link rel="canonical" href="https://clublento.no/club">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#000000">
 <meta property="og:site_name" content="Lento Running Club">
-<meta property="og:title" content="Collabs | Løpeevents med merkevarer | Lento Running Club">
-<meta property="og:description" content="Lento Running Club lager løpeevents med merkevarer i Stavanger: lanseringer, butikkevents og aktiveringer. Partners include Saucony, Anton Sport and Oakberry.">
+<meta property="og:title" content="Lento Club | Our story">
+<meta property="og:description" content="How Lento Running Club started in Stavanger, why nobody gets dropped, and the 280 km charity run from Stavanger to Kristiansand.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://clublento.no/collabs">
+<meta property="og:url" content="https://clublento.no/club">
 <meta property="og:image" content="https://clublento.no/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -672,6 +672,30 @@ body.booted .scale__line::after { transform: scaleX(1); }
 .tile__t { margin-top: .9rem; font-variation-settings: "wdth" 108, "wght" 650; font-size: var(--step-1); }
 .tile__d { color: var(--dim); font-size: var(--step--1); margin-top: .3rem; }
 
+/* ---------- club story page ---------- */
+.hero--club { min-height: 62svh; padding-block: calc(var(--nav-h) + 1rem) 1rem; }
+.hero--club .hero__vid { object-position: center 45%; }
+.big-line { font-size: clamp(2.2rem, 8.5vw, 6rem); line-height: .95; letter-spacing: -.03em;
+  font-variation-settings: "wdth" 118, "wght" 800; text-transform: uppercase; }
+.word { display: inline-block; opacity: 0; transform: translateY(.5em);
+  transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.word.in { opacity: 1; transform: none; }
+.stats { display: grid; gap: clamp(1.2rem, 3vw, 2.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); margin-top: clamp(2rem, 5vw, 3.5rem); }
+.stat__n { font-variation-settings: "wdth" 70, "wght" 800; font-variant-numeric: tabular-nums;
+  font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1; }
+.stat__l { font-size: var(--step--1); color: var(--dim); margin-top: .4rem; }
+.tl { border-top: 1px solid var(--rule); margin-top: clamp(2rem, 5vw, 3rem); }
+.tl__row { display: grid; gap: .3rem 2rem; grid-template-columns: 1fr; padding-block: 1.5rem; border-bottom: 1px solid var(--rule); }
+@media (min-width: 760px) { .tl__row { grid-template-columns: 9rem minmax(0,1fr) minmax(0,1.2fr); align-items: baseline; } }
+.tl__k { font-variation-settings: "wdth" 68, "wght" 700; font-variant-numeric: tabular-nums; font-size: var(--step-1); }
+.tl__t { font-variation-settings: "wdth" 105, "wght" 650; font-size: var(--step-1); }
+.tl__d { color: var(--dim); font-size: var(--step--1); }
+/* the road to Kristiansand fills as you scroll past it */
+.road { position: relative; height: 3px; background: var(--rule); margin: clamp(2rem,5vw,3rem) 0 1rem; }
+.road__fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--signal); transition: width 2.2s var(--ease); }
+.road.in .road__fill { width: 100%; }
+.road__ends { display: flex; justify-content: space-between; font-size: var(--step--1); color: var(--dim); }
+
 /* ---------- collabs page ---------- */
 .hero--plain { background: var(--fjord); min-height: 46svh; }
 
@@ -789,28 +813,82 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
 <main id="top">
 
 <!-- ===== header ===== -->
-<section class="hero hero--photo hero--plain invert" data-nav-dark aria-label="Collabs">
-  <h1 class="display display--xl hero__title">Collabs</h1>
+<section class="hero hero--photo hero--club invert" data-nav-dark aria-label="Lento Club">
+  <img class="hero__vid" src="run-01.jpg" alt="Lento Running Club members on a Saturday run in Stavanger">
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <h1 class="display hero__title hero__title--line" style="white-space:nowrap;font-size:clamp(2rem,7.5vw,5rem)">Lento Club</h1>
 </section>
 
-<!-- ===== collabs ===== -->
-<section class="band" id="collabs">
+<!-- ===== opening line ===== -->
+<section class="band band--tight invert" data-nav-dark>
   <div class="rail">
-    <div class="split" style="margin-bottom:clamp(2rem,5vw,3.5rem)">
-      <h2 class="headline up">We build runs<br>with brands.</h2>
-      <p class="prose up" data-delay=".08">Product launches, store takeovers, post-run activations. We handle the route, the crowd, the photography and the film &#8212; and hand it back to you inside 48 hours.</p>
+    <p class="big-line" data-words>Lento means slow. We named the club after the thing most running clubs treat as a problem.</p>
+  </div>
+</section>
+
+<!-- ===== why ===== -->
+<section class="band">
+  <div class="rail split">
+    <h2 class="headline up">Why we<br>started.</h2>
+    <div class="prose up" data-delay=".08">
+      <p>It started with a simple thing that keeps happening to people. You turn up to a group run, the pack goes off the front, and three minutes later you are running alone, wondering why you came.</p>
+      <p>We wanted the opposite. A run where the slowest person is the reason the group waits, not the reason it splits. Where someone runs next to you the whole way, and where the bit afterwards matters as much as the run.</p>
+      <p>So in November 2025 we put out a post, picked a meeting point in Stavanger sentrum, and hoped a few people would show up. They did. Then they came back the week after, and brought friends.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== numbers ===== -->
+<section class="band band--tight invert" data-nav-dark>
+  <div class="rail">
+    <h2 class="headline up">Where we are now.</h2>
+    <div class="stats">
+      <div class="up"><div class="stat__n" data-count="2025">2025</div><div class="stat__l">Started in Stavanger</div></div>
+      <div class="up" data-delay=".06"><div class="stat__n"><span data-count="52">52</span></div><div class="stat__l">Runs a year, every Saturday</div></div>
+      <div class="up" data-delay=".12"><div class="stat__n"><span data-count="280">280</span> km</div><div class="stat__l">Run for charity to Kristiansand</div></div>
+      <div class="up" data-delay=".18"><div class="stat__n">0 kr</div><div class="stat__l">Membership fee, forever</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== charity run ===== -->
+<section class="band">
+  <div class="rail">
+    <div class="split">
+      <h2 class="headline up">280 km<br>for charity.</h2>
+      <div class="prose up" data-delay=".08">
+        <p>Then we did something that sounded stupid out loud: run all the way from Stavanger to Kristiansand. 280 kilometres of coast road, handed over between runners, through the night and into the next day.</p>
+        <p>Nobody in the club is a professional. That was the point. Some legs were fast, some were very slow, and every single kilometre counted the same.</p>
+        <p>It is the clearest thing we have ever done to explain what Lento is. Slow is still moving, and a group of ordinary runners can cover an absurd distance if nobody gets left behind.</p>
+      </div>
     </div>
 
-    <div class="partners up" data-delay=".12">
-      <div class="partner"><span class="plogo plogo--saucony" role="img" aria-label="Saucony"></span></div>
-      <div class="partner"><span class="plogo plogo--anton" role="img" aria-label="Anton Sport"></span></div>
-      <div class="partner"><span class="plogo plogo--oakberry" role="img" aria-label="Oakberry"></span></div>
-      <a class="partner" href="mailto:hello@clublento.no" style="background:var(--signal);color:var(--on-signal)">Your brand</a>
-    </div>
+    <div class="road up" data-road><div class="road__fill"></div></div>
+    <div class="road__ends"><span>Stavanger &#8212; 0 km</span><span>Kristiansand &#8212; 280 km</span></div>
+  </div>
+</section>
 
-    <div class="up" data-delay=".16" style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap">
-      <a class="btn" href="mailto:hello@clublento.no?subject=Collab%20with%20Lento" data-magnet>Get in touch</a>
-      <a class="btn btn--ghost" href="https://instagram.com/lentorunning" target="_blank" rel="noopener">DM @lentorunning</a>
+<!-- ===== timeline ===== -->
+<section class="band band--tight">
+  <div class="rail">
+    <h2 class="headline up">How it went.</h2>
+    <div class="tl up" data-delay=".06">
+      <div class="tl__row"><span class="tl__k">Nov 2025</span><span class="tl__t">First run</span><span class="tl__d">A post, a meeting point in sentrum, and whoever turned up.</span></div>
+      <div class="tl__row"><span class="tl__k">Winter</span><span class="tl__t">We kept going</span><span class="tl__d">Rain, wind and dark. The group got bigger anyway.</span></div>
+      <div class="tl__row"><span class="tl__k">2026</span><span class="tl__t">Brands joined in</span><span class="tl__d">Saucony, Anton Sport and Oakberry started building runs with us.</span></div>
+      <div class="tl__row"><span class="tl__k">280 km</span><span class="tl__t">Stavanger to Kristiansand</span><span class="tl__d">Our charity run, handed between club runners the whole way.</span></div>
+      <div class="tl__row"><span class="tl__k">Today</span><span class="tl__t">The biggest club in Stavanger</span><span class="tl__d">Free, every Saturday, every pace. Same rule as day one.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== close ===== -->
+<section class="band band--tight invert" data-nav-dark>
+  <div class="rail" style="text-align:center">
+    <p class="big-line" data-words>Nobody gets dropped here.</p>
+    <div class="up" style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center">
+      <a class="btn btn--signal" href="/join" data-magnet>How to join</a>
+      <a class="btn btn--ghost" href="/shop">Lento Socks</a>
     </div>
   </div>
 </section>
@@ -1128,6 +1206,57 @@ section[id], main[id] { scroll-margin-top: var(--nav-h); }
   });
 })();
 
+</script>
+
+<script>
+/* club page: word-by-word lines, counting numbers, the road fill */
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  // split the big lines into words so they rise one after another
+  $$("[data-words]").forEach(function (el) {
+    var words = el.textContent.trim().split(/\s+/);
+    el.textContent = "";
+    words.forEach(function (w, i) {
+      var span = document.createElement("span");
+      span.className = "word";
+      span.textContent = w;
+      span.style.transitionDelay = (i * 0.045) + "s";
+      el.appendChild(span);
+      el.appendChild(document.createTextNode(" "));
+    });
+  });
+
+  if (reduced || !("IntersectionObserver" in window)) {
+    $$(".word").forEach(function (w) { w.classList.add("in"); });
+    $$("[data-road]").forEach(function (r) { r.classList.add("in"); });
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      if (el.hasAttribute("data-words")) {
+        Array.prototype.forEach.call(el.children, function (w) { w.classList.add("in"); });
+      } else if (el.hasAttribute("data-road")) {
+        el.classList.add("in");
+      } else if (el.hasAttribute("data-count")) {
+        var target = parseInt(el.dataset.count, 10), start = null;
+        requestAnimationFrame(function step(t) {
+          if (!start) start = t;
+          var p = Math.min(1, (t - start) / 1400);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step);
+        });
+      }
+      io.unobserve(el);
+    });
+  }, { threshold: 0.25 });
+
+  $$("[data-words], [data-road], [data-count]").forEach(function (el) { io.observe(el); });
+})();
 </script>
 </body>
 </html>
