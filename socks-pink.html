@@ -1033,6 +1033,19 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
   -webkit-user-drag: none; pointer-events: none;
 }
+
+/* sock pages on phones: a smaller photo, kept on its own GPU layer so it
+   never flashes while you scroll with a finger on it, and the Buy now glow
+   without the endless shine sweep (that repaint was what slowed scrolling) */
+.product__img img { transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+@media (max-width: 899px) {
+  .product__gallery { width: min(78%, 340px); margin-inline: auto; }
+}
+@media (hover: none), (pointer: coarse) {
+  .btn--neon::before, .btn--pearl::before { animation: none; display: none; }
+  .btn--neon { box-shadow: 0 0 0 1px rgba(255,79,176,.6), 0 6px 18px rgba(255,31,142,.4); }
+  .up { transition-duration: .5s; }
+}
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1089,7 +1102,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     <a class="back" href="/shop">&#8592; Alle produkter</a>
     <div class="product">
       <div class="product__gallery up">
-        <div class="media product__img"><img src="kit-01.jpg" alt="Pink Lento Running Club running socks" decoding="async" fetchpriority="high" draggable="false"></div>
+        <div class="media product__img"><img src="kit-01.jpg" alt="Pink Lento Running Club running socks" width="1080" height="1350" decoding="sync" fetchpriority="high" draggable="false"></div>
       </div>
 
       <div class="up" data-delay=".06">
