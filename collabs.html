@@ -924,6 +924,16 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 .foot__social a:hover { background: var(--signal); color: var(--on-signal); }
 .foot__social svg { width: 19px; height: 19px; }
 .foot__bar:has(.foot__social) { opacity: 1; color: rgba(239,239,236,.6); }
+
+/* phones: drop the two effects that make scrolling heavy on mobile GPUs —
+   the full-screen grain blend and the live blur behind the bar */
+@media (hover: none), (pointer: coarse) {
+  .grain { display: none; }
+  .nav.is-scrolled {
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    background: rgba(242, 242, 239, .97);
+  }
+}
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1188,8 +1198,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
         return;
       }
       sec.classList.remove("is-free");
-      sec.style.height = "";                        // measure the sticky at its natural height
-      stickyH = sticky.offsetHeight;
+      stickyH = sticky.offsetHeight;                // fixed height from CSS; no need to collapse the section first
       // the pane locks partway down the screen, so progress must start there
       pin = parseFloat(getComputedStyle(sticky).top) || 0;
       dist = Math.max(0, track.scrollWidth - window.innerWidth);
@@ -1202,7 +1211,15 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
       track.style.transform = "translate3d(" + (-p * dist) + "px,0,0)";
     }
     measure();
-    window.addEventListener("resize", measure);
+    /* phones fire "resize" every time the address bar slides in or out while
+       scrolling. Re-measuring then made the page jump, so only a real width
+       change (rotation, window resize) triggers it. */
+    var lastW = window.innerWidth;
+    window.addEventListener("resize", function () {
+      if (window.innerWidth === lastW) return;
+      lastW = window.innerWidth; measure();
+    });
+    window.addEventListener("load", measure);
     window.addEventListener("scroll", function () {
       window.requestAnimationFrame(render);
     }, { passive: true });
