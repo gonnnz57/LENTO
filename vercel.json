@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "buildCommand": "node build-pictures.js",
+  "outputDirectory": "public",
   "images": {
     "sizes": [640, 1600],
     "formats": ["image/webp"],
