@@ -1,4 +1,10 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "buildCommand": "node build-pictures.js",
+  "images": {
+    "sizes": [640, 1600],
+    "formats": ["image/webp"],
+    "minimumCacheTTL": 2678400
+  }
 }

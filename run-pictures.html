@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lento Running Club | Løpeklubb i Stavanger for alle tempo</title>
-<meta name="description" content="Lento er en gratis løpeklubb i Stavanger for alle tempo. Ukentlige fellesløp, ingen blir hengende igjen. Free running club in Stavanger, all paces welcome.">
-<link rel="canonical" href="https://clublento.no/">
+<title>Run Pictures | Lento Running Club Stavanger</title>
+<meta name="description" content="Photos from the latest Lento Running Club runs in Stavanger. Find yourself and download your picture in full quality.">
+<link rel="canonical" href="https://clublento.no/run-pictures">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#000000">
 <meta property="og:site_name" content="Lento Running Club">
-<meta property="og:title" content="Lento Running Club | Løpeklubb i Stavanger for alle tempo">
-<meta property="og:description" content="Lento er en gratis løpeklubb i Stavanger for alle tempo. Ukentlige fellesløp, ingen blir hengende igjen. Free running club in Stavanger, all paces welcome.">
+<meta property="og:title" content="Run Pictures | Lento Running Club Stavanger">
+<meta property="og:description" content="Photos from the latest Lento Running Club runs in Stavanger. Find yourself and download your picture in full quality.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://clublento.no/">
+<meta property="og:url" content="https://clublento.no/run-pictures">
 <meta property="og:image" content="https://clublento.no/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,7 +20,6 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SportsClub", "name": "Lento Running Club", "alternateName": ["Lento", "Lento løpeklubb"], "url": "https://clublento.no/", "logo": "https://clublento.no/favicon.svg", "image": "https://clublento.no/og-image.jpg", "description": "Gratis løpeklubb i Stavanger for alle tempo. Free running club in Stavanger for every pace.", "email": "hello@clublento.no", "sport": "Running", "address": {"@type": "PostalAddress", "addressLocality": "Stavanger", "addressRegion": "Rogaland", "addressCountry": "NO"}, "sameAs": ["https://instagram.com/lentorunning", "https://www.strava.com/clubs/1809288"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
@@ -201,20 +200,15 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .boot {
   position: fixed; inset: 0; z-index: 1000;
   background: var(--fjord); color: var(--paper);
-  display: grid; place-items: center;
+  display: grid; place-items: end start;
   padding: var(--gutter);
   transition: transform .9s var(--ease);
 }
-/* the mark draws itself in one stroke while the page loads */
-.boot__mark { width: min(38vw, 190px); height: auto; overflow: visible; }
-.boot__mark path {
-  fill: none; stroke: var(--paper); stroke-width: 30;
-  stroke-linecap: round; stroke-linejoin: round;
-  stroke-dasharray: 1 1.2; stroke-dashoffset: 1.001;
-}
-.boot.is-drawing path {
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 1.15s cubic-bezier(.65, 0, .35, 1);
+.boot__num {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  font-size: clamp(4rem, 22vw, 16rem);
+  line-height: .82; letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
 }
 body.booted .boot { transform: translateY(-101%); }
 body.booting { overflow: hidden; }
@@ -691,6 +685,73 @@ body.booted .scale__line::after { transform: scaleX(1); }
 .tile__t { margin-top: .9rem; font-variation-settings: "wdth" 108, "wght" 650; font-size: var(--step-1); }
 .tile__d { color: var(--dim); font-size: var(--step--1); margin-top: .3rem; }
 
+/* ---------- shop grid ---------- */
+.products { display: grid; gap: clamp(1rem, 3vw, 2.5rem); grid-template-columns: 1fr; }
+.products .media { width: 85%; margin-inline: auto; }   /* photos 15% smaller */
+.products .product-card__row, .products .product-card__cta { width: 85%; margin-inline: auto; }
+@media (min-width: 720px) { .products { grid-template-columns: 1fr 1fr; } }
+.product-card { display: block; }
+.product-card .media { transition: transform .5s var(--ease); }
+.product-card:hover .media { transform: scale(1.015); }
+.product-card__row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; margin-top: .9rem;
+}
+.product-card__name { font-variation-settings: "wdth" 108, "wght" 650; font-size: var(--step-1); }
+.product-card__price { font-variation-settings: "wdth" 68, "wght" 700; font-variant-numeric: tabular-nums; font-size: var(--step-1); }
+.product-card__cta { margin-top: .25rem; font-size: var(--step--1); color: var(--dim); }
+
+/* ---------- product page ---------- */
+.product { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 900px) { .product { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+.product__gallery { display: grid; gap: .8rem; grid-template-columns: 1fr; }
+.product__price {
+  font-variation-settings: "wdth" 68, "wght" 700; font-variant-numeric: tabular-nums;
+  font-size: var(--step-2); margin-top: .6rem;
+}
+.back { display: inline-flex; gap: .5rem; font-size: var(--step--1); color: var(--dim); margin-bottom: 1.2rem; }
+.back:hover { color: var(--fg); }
+.opt { margin-top: 2rem; }
+.opt__label { font-size: var(--step--1); font-variation-settings: "wdth" 88, "wght" 600; color: var(--dim); display: block; margin-bottom: .6rem; }
+.sizes { display: flex; flex-wrap: wrap; gap: .6rem; }
+.size {
+  padding: .8em 1.3em; border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: var(--step--1); font-variation-settings: "wdth" 95, "wght" 600;
+  transition: background .25s, color .25s, box-shadow .25s;
+}
+.size:hover { box-shadow: inset 0 0 0 1px var(--fg); }
+.size.is-on { background: var(--ink); color: var(--paper); box-shadow: none; }
+.qty {
+  padding: .8em 1.1em; border-radius: 999px; border: 1px solid var(--rule);
+  background: transparent; color: var(--fg); font: inherit; font-size: var(--step--1);
+}
+.order { display: grid; gap: .6rem; max-width: 460px; margin-top: 2rem; }
+.order input {
+  padding: .95em 1.1em; border: 1px solid var(--rule); border-radius: 999px;
+  background: transparent; color: var(--fg); font: inherit; font-size: var(--step--1);
+}
+.order input::placeholder { color: var(--dim); }
+.order input:focus { outline: none; border-color: currentColor; }
+.total { font-size: var(--step-1); font-variation-settings: "wdth" 88, "wght" 650; margin-top: 1.2rem; }
+.pay { display: none; margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid var(--rule); }
+.pay.is-on { display: block; }
+.pay__buttons { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.btn--vipps { background: #FF5B24; color: #fff; }
+.btn--vipps:hover { background: var(--ink); color: var(--paper); }
+.note { font-size: var(--step--1); color: var(--dim); margin-top: 1rem; max-width: 46ch; }
+
+/* ---------- merch page ---------- */
+.hero--photo { min-height: 58svh; }                        /* ~25% shorter than before */
+.hero--photo .hero__vid { object-position: center 66%; }   /* crowd sits in the middle */
+.hero__title {
+  position: relative; z-index: 2;
+  color: var(--paper); text-align: center;
+  text-shadow: 0 2px 30px rgba(0,0,0,.35);
+}
+.shop-page { min-height: calc(100svh - var(--nav-h)); display: flex; align-items: center; }
+.shop-page > .rail { width: 100%; }
+
 /* ---------- kit photos ---------- */
 .kit { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.6rem, 1.5vw, 1.2rem); align-self: center; }
 .kit .media { background-color: #fff; }
@@ -926,6 +987,110 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     background: rgba(242, 242, 239, .97);
   }
 }
+
+/* product photos as real images (steadier on phones) */
+.product__img { background-image: none !important; background-color: #fff; }
+.product__img img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; pointer-events: none;
+}
+.product__img .media__label, .product-card__badge { z-index: 1; }
+.product-card__badge { display: none; }
+
+/* phones: two socks side by side, edge to edge, shop-style */
+@media (max-width: 719px) {
+  .products {
+    grid-template-columns: 1fr 1fr; gap: 4px;
+    margin-inline: calc(-1 * var(--gutter));
+  }
+  .products .media, .products .product-card__row, .products .product-card__cta { width: 100%; }
+  .product-card:hover .media { transform: none; }
+  .products .media__label { display: none; }
+  .product-card__badge {
+    display: block; position: absolute; top: 6px; left: 6px;
+    background: var(--ink); color: var(--paper);
+    padding: .4rem .6rem; font-size: .66rem; letter-spacing: .06em;
+    font-variation-settings: "wdth" 100, "wght" 750;
+  }
+  .product-card__row { display: block; padding: .8rem .8rem 0; margin-top: 0; }
+  .product-card__name {
+    display: block; text-transform: uppercase; letter-spacing: .02em;
+    font-size: .8rem; font-variation-settings: "wdth" 100, "wght" 700; line-height: 1.25;
+  }
+  .product-card__price { display: block; margin-top: .2rem; font-size: .8rem; font-variation-settings: "wdth" 100, "wght" 500; }
+  .products .product-card__cta { display: none; }
+}
+
+/* ================= RUN PICTURES ================= */
+.runs__tabs {
+  position: sticky; top: calc(var(--nav-h) + 10px); z-index: 20;
+  display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px;
+  background: var(--ink); margin-bottom: 1.4rem;
+}
+.runs__tab {
+  display: inline-flex; align-items: baseline; gap: .45rem;
+  padding: .7em 1.2em; border: 0; border-radius: 999px; cursor: pointer;
+  background: transparent; color: var(--paper); font: inherit;
+  font-size: var(--step--1); font-variation-settings: "wdth" 95, "wght" 700;
+  transition: background .25s, color .25s;
+}
+.runs__tab span { opacity: .6; font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 90, "wght" 600; }
+.runs__tab[aria-selected="true"] { background: var(--signal); color: var(--on-signal); }
+.runs__tab[aria-selected="true"] span { opacity: .75; }
+.runs__meta { color: var(--dim); font-size: var(--step--1); margin: 0 0 1.2rem; min-height: 1.4em; }
+
+.pics { display: grid; gap: 6px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 720px)  { .pics { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1100px) { .pics { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 719px)  { .pics { gap: 4px; margin-inline: calc(-1 * var(--gutter)); } }
+.pic {
+  position: relative; display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in;
+  aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper-2);
+}
+.pic img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: 0; transition: opacity .4s var(--ease), transform .6s var(--ease);
+  -webkit-touch-callout: none; user-select: none;
+}
+.pic img.is-loaded { opacity: 1; }
+@media (hover: hover) { .pic:hover img { transform: scale(1.03); } }
+.pic:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.runs__empty { padding: 3rem 0; color: var(--dim); max-width: 36ch; }
+.runs__empty strong { display: block; color: var(--ink); font-size: var(--step-1); margin-bottom: .4rem; }
+
+/* lightbox */
+.lb {
+  position: fixed; inset: 0; z-index: 1200;
+  background: #000; color: var(--paper);
+  display: grid; grid-template-rows: auto 1fr auto;
+  opacity: 0; visibility: hidden; transition: opacity .3s var(--ease), visibility 0s .3s;
+  padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+}
+body.lb-open { overflow: hidden; }
+body.lb-open .lb { opacity: 1; visibility: visible; transition: opacity .3s var(--ease); }
+.lb__top { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1rem; }
+.lb__count { font-size: var(--step--1); opacity: .7; font-variant-numeric: tabular-nums; }
+.lb__btn {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  background: none; border: 0; color: inherit; cursor: pointer; border-radius: 999px;
+}
+.lb__btn:hover { background: rgba(255,255,255,.1); }
+.lb__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.lb__stage { position: relative; min-height: 0; overflow: hidden; touch-action: pan-y pinch-zoom; }
+.lb__img { position: absolute; inset: 0 .5rem; width: calc(100% - 1rem); height: 100%; object-fit: contain; display: block; user-select: none; -webkit-touch-callout: default; }
+.lb__prev, .lb__next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.35); }
+.lb__prev { left: .6rem; } .lb__next { right: .6rem; }
+@media (hover: none) { .lb__prev, .lb__next { display: none; } }
+.lb__bottom { display: flex; justify-content: center; padding: 1rem; }
+.lb__dl {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: var(--signal); color: var(--on-signal);
+  padding: .95em 1.6em; border-radius: 999px;
+  font-variation-settings: "wdth" 95, "wght" 750; font-size: var(--step-0);
+}
+.lb__dl:hover { background: var(--paper); }
+.lb__dl svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -934,7 +1099,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 <body>
 
 <!-- ===== boot ===== -->
-<div class="boot"><svg class="boot__mark" viewBox="-20 -20 269 372" aria-hidden="true"><path pathLength="1" d="M98.8 17.8 L103.2 17.2 L107.0 17.0 L111.0 17.0 L115.0 17.0 L119.0 17.0 L123.0 17.3 L127.0 17.9 L131.0 18.5 L135.0 19.3 L139.0 20.4 L143.0 22.3 L146.9 25.3 L150.3 29.0 L152.7 33.0 L154.1 37.0 L155.0 41.0 L155.7 45.0 L155.8 49.0 L155.4 53.0 L154.7 57.0 L153.7 61.0 L152.0 65.0 L149.8 69.0 L146.8 72.9 L143.0 76.3 L139.0 79.2 L135.0 81.8 L131.0 83.8 L127.0 85.5 L123.0 87.0 L119.0 88.1 L115.0 89.0 L111.0 90.0 L107.0 91.1 L103.0 92.0 L99.0 92.9 L95.0 93.8 L91.0 94.7 L87.0 95.9 L83.0 97.0 L79.0 98.4 L75.0 100.0 L71.0 101.6 L67.0 103.4 L63.0 105.4 L59.0 107.8 L55.0 110.5 L51.0 113.5 L47.0 117.1 L43.0 121.0 L39.1 125.0 L35.8 129.0 L33.1 133.0 L30.7 137.0 L28.8 141.0 L27.2 145.0 L25.8 149.0 L24.7 153.0 L23.9 157.0 L23.3 161.0 L22.7 165.0 L22.2 169.0 L22.0 173.0 L22.1 177.0 L22.6 181.0 L23.1 185.0 L23.8 189.0 L24.8 193.0 L26.3 197.0 L28.0 201.0 L30.0 205.0 L32.6 209.0 L35.6 213.0 L39.1 216.9 L43.0 220.5 L47.0 223.7 L51.0 226.5 L55.0 228.7 L59.0 230.7 L63.0 232.3 L67.0 233.7 L71.0 234.9 L75.0 236.0 L79.0 236.7 L83.0 237.0 L87.0 237.2 L91.0 237.7 L95.0 238.0 L99.0 238.0 L103.0 238.0 L107.0 237.9 L111.0 237.4 L115.0 237.0 L119.0 236.7 L123.0 236.1 L127.0 235.4 L131.0 234.1 L135.0 232.5 L138.8 230.2 L142.0 226.9 L144.1 223.0 L145.4 219.0 L146.2 215.0 L146.3 211.0 L145.8 207.0 L144.7 203.0 L142.9 199.0 L139.8 195.3 L136.0 192.5 L132.0 190.6 L128.0 189.1 L124.0 187.7 L120.0 186.4 L116.0 185.2 L112.0 183.8 L108.0 181.8 L104.1 178.8 L101.1 175.0 L99.4 171.0 L98.5 167.0 L98.1 163.0 L98.1 159.0 L98.7 155.0 L99.8 151.0 L101.6 147.1 L104.4 143.6 L108.0 140.9 L112.0 138.8 L116.0 137.1 L120.0 136.0 L124.0 135.3 L128.0 134.8 L132.0 134.3 L136.0 134.0 L140.0 134.0 L144.0 134.0 L148.0 134.2 L152.0 134.7 L156.0 135.2 L160.0 136.1 L164.0 137.4 L168.0 139.1 L172.0 141.0 L176.0 143.3 L180.0 146.4 L184.0 150.0 L187.8 154.0 L191.1 158.0 L193.9 162.0 L196.2 166.0 L198.1 170.0 L199.8 174.0 L201.2 178.0 L202.2 182.0 L203.2 186.0 L204.1 190.0 L204.7 194.0 L205.1 198.0 L205.6 202.0 L205.9 206.0 L206.0 210.0 L205.7 214.0 L205.2 218.0 L204.7 222.0 L204.0 226.0 L203.1 230.0 L202.0 234.0 L200.7 238.0 L198.9 242.0 L197.1 246.0 L194.8 250.0 L192.1 254.0 L189.2 258.0 L185.8 262.0 L182.0 265.8 L178.0 268.9 L174.0 271.6 L170.0 274.1 L166.0 276.1 L162.0 277.8 L158.0 279.3 L154.0 280.8 L150.0 282.1 L146.0 283.1 L142.0 283.8 L138.0 284.3 L134.0 284.9 L130.0 285.6 L126.0 285.9 L122.0 286.0 L118.0 286.0 L114.0 286.3 L110.0 286.5 L106.0 286.2 L102.0 286.0 L98.0 286.0 L94.0 286.0 L90.0 286.0 L86.0 286.2 L82.0 286.8 L78.0 287.4 L74.0 287.9 L70.0 288.4 L66.0 289.1 L62.0 290.1 L58.0 291.4 L54.0 293.2 L50.0 295.7 L46.3 299.1 L43.3 303.0 L40.8 307.0 L38.6 310.6 L36.6 313.8"/></svg></div>
+
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ===== notice + nav ===== -->
@@ -978,110 +1143,55 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 
 <main id="top">
 
-<!-- ===== hero ===== -->
-<section class="hero invert" data-nav-dark>
-  <video class="hero__vid" autoplay muted loop playsinline preload="metadata"
-         poster="hero-poster.jpg" aria-hidden="true">
-    <source src="hero.mp4" type="video/mp4">
-  </video>
+<!-- ===== photo header ===== -->
+<section class="hero hero--photo invert" data-nav-dark aria-label="Lento Running Club group run">
+  <img class="hero__vid" src="shop-hero.jpg" alt="Lento Running Club gathered before a group run in Stavanger">
   <div class="hero__scrim" aria-hidden="true"></div>
-
-  <div class="rail hero__center">
-    <p class="hero__welcome">Welcome!</p>
-    <h1 class="sr-only">Lento Running Club, løpeklubb i Stavanger</h1>
-    <div class="wordmark wordmark--stack hero__logo" role="img" aria-label="Lento Running Club"></div>
-    <a class="btn btn--merch" href="/shop" data-magnet>SHOP</a>
-  </div>
+  <h1 class="display display--xl hero__title">Run Pictures</h1>
 </section>
 
-<!-- ===== tagline + pace scale ===== -->
-<section class="band band--tight invert" style="padding-block:clamp(2rem,4vw,3rem)" data-nav-dark>
+<!-- ===== galleries ===== -->
+<section class="band" id="pictures">
   <div class="rail">
-    <p class="lede lede--mid" style="font-size:var(--step-0)">Slow is still moving.</p>
-    <div class="scale scale--mid" style="margin-block:clamp(1rem,2.4vw,1.6rem)">
-      <div class="scale__line"></div>
-      <div class="scale__dots" aria-hidden="true"></div>
-      <div class="scale__ticks">
-        <span>4:30</span><span>5:00</span><span>5:30</span><span>6:00</span><span>6:45</span><span>7:30</span>
-      </div>
+    <h2 class="headline up">Find yourself.</h2>
+    <p class="up" style="max-width:44ch;margin:1rem 0 clamp(2rem,5vw,3rem);color:var(--dim)">We shoot every run. Tap a photo to see it big and download it in full quality. The next run's photos replace these, so save yours while they're here.</p>
+
+    <div class="runs__tabs" role="tablist" aria-label="Choose run">
+      <button class="runs__tab" role="tab" id="tab-saturday" aria-controls="panel" aria-selected="true" data-run="saturday">Saturday run <span data-count="saturday"></span></button>
+      <button class="runs__tab" role="tab" id="tab-wednesday" aria-controls="panel" aria-selected="false" data-run="wednesday">Wednesday run <span data-count="wednesday"></span></button>
     </div>
-    <p class="lede lede--mid" style="font-size:var(--step-0)">All paces, one community.</p>
-  </div>
-</section>
 
-<!-- ===== horizontal gallery ===== -->
-<section class="hscroll" data-hscroll aria-label="Photos from recent runs">
-  <div class="hscroll__sticky">
-    <div class="hscroll__track">
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-01.jpg')"><span class="media__label">Sunday Long Run</span></div>
-        <p>The whole club, one photo.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-02.jpg')"><span class="media__label">Breiavatnet Loop</span></div>
-        <p>Round the lake and back into town.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-03.jpg')"><span class="media__label">Lento Group</span></div>
-        <p>Whatever your pace, someone runs it with you.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-04.jpg')"><span class="media__label">Lento &#215; Saucony &#215; Anton Sport</span></div>
-        <p>Warming up together before the off.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-05.jpg')"><span class="media__label">Lento &#215; Oakberry</span></div>
-        <p>A&#231;a&#237; waiting at the finish.</p>
-      </figure>
-      <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-06.jpg')"><span class="media__label">Lento Vibe</span></div>
-        <p>Club kit, out in the wild.</p>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ===== marquee ===== -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>Slow is still moving <i class="mark" aria-hidden="true"></i> All paces, one community <i class="mark" aria-hidden="true"></i> Stavanger, Norway <i class="mark" aria-hidden="true"></i></span>
-    <span>Slow is still moving <i class="mark" aria-hidden="true"></i> All paces, one community <i class="mark" aria-hidden="true"></i> Stavanger, Norway <i class="mark" aria-hidden="true"></i></span>
-  </div>
-</div>
-
-<!-- ===== club ===== -->
-<section class="band band--top-tight" id="club">
-  <div class="rail split">
-    <h2 class="headline up">Nobody gets<br>dropped here.</h2>
-    <div>
-      <div class="prose up" data-delay=".08">
-        <p>Lento means slow. We named the club after the thing most running clubs treat as a problem.</p>
-        <p>If you have ever turned up to a group run, watched the pack disappear round the first corner and jogged home alone, you know exactly why this club exists. Being the slowest person there should not cost you the run.</p>
-      </div>
-
-      <div class="rows up" data-delay=".16" style="margin-top:2.5rem">
-        <div class="row">
-          <span class="row__k">Weekly</span>
-          <span class="row__t">One club run</span>
-          <span class="row__d">Sign-ups open on Spond a few days before.</span>
-        </div>
-        <div class="row">
-          <span class="row__k">Free</span>
-          <span class="row__t">No membership fee</span>
-          <span class="row__d">Turn up, run, stay for the coffee.</span>
-        </div>
-      </div>
+    <div id="panel" role="tabpanel" aria-labelledby="tab-saturday">
+      <p class="runs__meta" data-runs-meta></p>
+      <div class="pics" data-pics></div>
+      <div class="runs__empty" data-runs-empty hidden></div>
     </div>
   </div>
 </section>
 
 </main>
 
+<!-- ===== lightbox ===== -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+  <div class="lb__top">
+    <span class="lb__count" data-lb-count></span>
+    <button class="lb__btn" type="button" data-lb-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="lb__stage" data-lb-stage>
+    <img class="lb__img" data-lb-img alt="">
+    <button class="lb__btn lb__prev" type="button" data-lb-prev aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="lb__btn lb__next" type="button" data-lb-next aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+  <div class="lb__bottom">
+    <a class="lb__dl" data-lb-dl href="#" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download full quality</a>
+  </div>
+</div>
+
 <!-- ===== footer ===== -->
 <footer class="foot" data-nav-dark>
   <div class="rail">
     <div class="foot__cols">
-      <div><h4>Club</h4><ul><li><a href="#club">Our story</a></li><li><a href="/join">Weekly runs</a></li><li><a href="/run-pictures">Run Pictures</a></li></ul></div>
+      <div><h4>Club</h4><ul><li><a href="/club">Our story</a></li><li><a href="/join">How to join</a></li><li><a href="/run-pictures">Run Pictures</a></li></ul></div>
       <div><h4>Collab</h4><ul><li><a href="/collabs">Work with us</a></li><li><a href="mailto:hello@clublento.no">Request rate card</a></li><li><a href="mailto:hello@clublento.no">hello@clublento.no</a></li></ul></div>
       <div><h4>Shop</h4><ul><li><a href="/shop">Our socks</a></li></ul></div>
       <div><h4>Social</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Strava</a></li><li><a href="https://www.tiktok.com/@lentorunning" target="_blank" rel="noopener">TikTok</a></li></ul></div>
@@ -1117,6 +1227,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   function boot() {
     var el = $(".boot");
     if (!el) { document.body.classList.add("booted"); return; }
+    var num = $(".boot__num", el);
     document.body.classList.add("booting");
 
     function done() {
@@ -1124,11 +1235,14 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
       document.body.classList.add("booted");
       setTimeout(function () { el.remove(); }, 1000);
     }
-    if (reduced) { done(); return; }
+    if (reduced) { if (num) num.textContent = "100"; done(); return; }
 
-    // let the stroke draw, then lift the curtain
-    requestAnimationFrame(function () { el.classList.add("is-drawing"); });
-    setTimeout(done, 1450);
+    var n = 0;
+    var tick = setInterval(function () {
+      n += Math.ceil((100 - n) / 7) + 1;
+      if (n >= 100) { n = 100; clearInterval(tick); setTimeout(done, 320); }
+      if (num) num.textContent = String(n).padStart(3, "0");
+    }, 42);
   }
 
   /* ---------- 2. nav state ---------- */
@@ -1381,13 +1495,23 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   /* ---------- 12. newsletter / waitlist forms ---------- */
   function forms() {
     $$("[data-form]").forEach(function (f) {
+      var note = f.parentElement.querySelector(".form-note");
+      var btn = f.querySelector("button[type=submit]");
       f.addEventListener("submit", function (e) {
-        // No endpoint configured yet -> keep the user informed instead of failing silently.
-        if (!f.action || f.action.indexOf("YOUR_FORM_ID") > -1) {
-          e.preventDefault();
-          var note = f.parentElement.querySelector(".form-note");
-          if (note) note.textContent = "Form isn't connected yet. Add your Formspree ID in the HTML, or email hello@clublento.no.";
-        }
+        e.preventDefault();                       // stay on the page, no Formspree redirect
+        var label = btn ? btn.textContent : "";
+        if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+        fetch(f.action, { method: "POST", body: new FormData(f), headers: { Accept: "application/json" } })
+          .then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            f.reset();
+            if (note) note.textContent = "You're on the list. We'll email you when the drop goes live.";
+            if (btn) btn.textContent = "Done";
+          })
+          .catch(function () {
+            if (note) note.textContent = "Something went wrong. Try again, or email hello@clublento.no.";
+            if (btn) { btn.disabled = false; btn.textContent = label; }
+          });
       });
     });
   }
@@ -1620,6 +1744,133 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 
   render();
   if (location.hash === "#cart") { open(); history.replaceState(null, "", location.pathname + location.search); }
+})();
+</script>
+<script>
+/* run pictures: reads pictures/manifest.json (written on every Vercel deploy
+   by build-pictures.js), shows the grid, opens a viewer with a download link */
+(function () {
+  var RUNS = { saturday: "Saturday run", wednesday: "Wednesday run" };
+  var grid = document.querySelector("[data-pics]");
+  if (!grid) return;
+  var meta = document.querySelector("[data-runs-meta]");
+  var empty = document.querySelector("[data-runs-empty]");
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".runs__tab"));
+  var panel = document.getElementById("panel");
+  var data = { saturday: { photos: [] }, wednesday: { photos: [] } };
+  var current = "saturday";
+
+  /* Vercel resizes on the fly; if that is ever unavailable we fall back to the original */
+  function sized(src, w) { return "/_vercel/image?url=" + encodeURIComponent(src) + "&w=" + w + "&q=75"; }
+  function fallback(img, src) {
+    img.addEventListener("error", function once() { img.removeEventListener("error", once); img.src = src; });
+  }
+  function fmtDate(iso) {
+    try { return new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long" }).format(new Date(iso)); }
+    catch (e) { return ""; }
+  }
+
+  function show(run) {
+    current = run;
+    tabs.forEach(function (t) { t.setAttribute("aria-selected", t.dataset.run === run ? "true" : "false"); });
+    var tab = document.getElementById("tab-" + run);
+    if (tab) panel.setAttribute("aria-labelledby", tab.id);
+    var r = data[run] || { photos: [] };
+    grid.innerHTML = "";
+    if (!r.photos.length) {
+      empty.hidden = false; meta.textContent = "";
+      empty.innerHTML = "<strong>No photos yet.</strong>Pictures from the " + RUNS[run].toLowerCase() + " land here after the run.";
+      return;
+    }
+    empty.hidden = true;
+    meta.textContent = (r.date ? fmtDate(r.date) + " \u00b7 " : "") + r.photos.length + " photos";
+    r.photos.forEach(function (p, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "pic";
+      b.setAttribute("aria-label", "Open photo " + (i + 1) + " of " + r.photos.length);
+      var img = document.createElement("img");
+      img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+      img.addEventListener("load", function () { img.classList.add("is-loaded"); });
+      fallback(img, p.src);
+      img.src = sized(p.src, 640);
+      b.appendChild(img);
+      b.addEventListener("click", function () { open(i); });
+      grid.appendChild(b);
+    });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () { show(t.dataset.run); });
+    t.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      var n = tabs[(tabs.indexOf(t) + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+      n.focus(); show(n.dataset.run);
+    });
+  });
+
+  /* ---------- viewer ---------- */
+  var lb = document.getElementById("lb");
+  var lbImg = document.querySelector("[data-lb-img]");
+  var lbCount = document.querySelector("[data-lb-count]");
+  var lbDl = document.querySelector("[data-lb-dl]");
+  var idx = 0, lastFocus = null;
+  function paint() {
+    var list = data[current].photos, p = list[idx];
+    lbImg.removeAttribute("src");
+    fallback(lbImg, p.src);
+    lbImg.src = sized(p.src, 1600);
+    lbImg.alt = RUNS[current] + ", photo " + (idx + 1);
+    lbCount.textContent = (idx + 1) + " / " + list.length;
+    lbDl.href = p.src;
+    lbDl.setAttribute("download", "lento-" + current + "-" + p.name);
+    /* warm up the next one */
+    var nx = list[(idx + 1) % list.length]; if (nx) { var pre = new Image(); pre.src = sized(nx.src, 1600); }
+  }
+  function open(i) {
+    idx = i; lastFocus = document.activeElement; paint();
+    document.body.classList.add("lb-open"); lb.setAttribute("aria-hidden", "false");
+    setTimeout(function () { lb.querySelector("[data-lb-close]").focus(); }, 50);
+  }
+  function close() {
+    document.body.classList.remove("lb-open"); lb.setAttribute("aria-hidden", "true");
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function step(d) { var n = data[current].photos.length; idx = (idx + d + n) % n; paint(); }
+  lb.querySelector("[data-lb-close]").addEventListener("click", close);
+  lb.querySelector("[data-lb-prev]").addEventListener("click", function () { step(-1); });
+  lb.querySelector("[data-lb-next]").addEventListener("click", function () { step(1); });
+  lb.querySelector("[data-lb-stage]").addEventListener("click", function (e) { if (e.target === e.currentTarget) close(); });
+  document.addEventListener("keydown", function (e) {
+    if (!document.body.classList.contains("lb-open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowRight") step(1);
+    if (e.key === "ArrowLeft") step(-1);
+  });
+  /* swipe left/right on phones */
+  var sx = null, sy = null;
+  lb.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener("touchend", function (e) {
+    if (sx === null || e.touches.length) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+    sx = sy = null;
+  }, { passive: true });
+
+  /* ---------- load ---------- */
+  fetch("/pictures/manifest.json", { cache: "no-cache" })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (m) {
+      Object.keys(RUNS).forEach(function (k) { if (m.runs && m.runs[k]) data[k] = m.runs[k]; });
+      Object.keys(RUNS).forEach(function (k) {
+        var c = document.querySelector('[data-count="' + k + '"]');
+        if (c) c.textContent = data[k].photos.length || "";
+      });
+      /* open on the run with the newest upload */
+      var sat = data.saturday.date || "", wed = data.wednesday.date || "";
+      show(!data.saturday.photos.length && data.wednesday.photos.length ? "wednesday"
+        : (wed > sat && data.wednesday.photos.length ? "wednesday" : "saturday"));
+    })
+    .catch(function () { show("saturday"); });
 })();
 </script>
 </body>
