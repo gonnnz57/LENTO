@@ -992,6 +992,16 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 @media (prefers-reduced-motion: reduce) {
   .sizes.is-shake, .opt.is-missing .size, .opt.is-missing .size-hint { animation: none; }
 }
+
+/* mobile: Join a run stays in the bar, compact */
+@media (max-width: 859px) {
+  .nav__end .btn { display: inline-flex; padding: .6em .9em; font-size: .72rem; white-space: nowrap; }
+  .nav__end .bag-btn { width: 36px; margin-right: .15rem; }
+  .menu-btn { font-size: 0; gap: 0; min-height: 44px; min-width: 36px; }   /* hamburger only; "Menu" stays for screen readers */
+  .brand__logo { height: 20px; }
+  .nav__inner { grid-template-columns: auto 1fr auto; column-gap: .5rem; }
+}
+@media (max-width: 374px) { .nav__end .btn { padding: .55em .75em; font-size: .68rem; } .brand__logo { height: 17px; } }
 </style>
 </head>
 <body data-solid-nav>
@@ -1088,7 +1098,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     <div class="foot__cols">
       <div><h4>Club</h4><ul><li><a href="/club">Our story</a></li><li><a href="/join">How to join</a></li></ul></div>
       <div><h4>Brands</h4><ul><li><a href="/collabs">Work with us</a></li><li><a href="mailto:hello@clublento.no">Request rate card</a></li></ul></div>
-      <div><h4>Shop</h4><ul><li><a href="/shop">Drop 01</a></li></ul></div>
+      <div><h4>Shop</h4><ul><li><a href="/shop">Our socks</a></li></ul></div>
       <div><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Strava</a></li><li><a href="mailto:hello@clublento.no">hello@clublento.no</a></li></ul></div>
     </div>
     <div class="wordmark foot__logo" aria-hidden="true"></div>
@@ -1436,7 +1446,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   </div>
   <div class="bag__body">
     <ul class="bag__list" data-bag-list></ul>
-    <p class="bag__empty" data-bag-empty hidden>Your cart is empty. <a href="/shop">See Drop 01</a></p>
+    <p class="bag__empty" data-bag-empty hidden>Your cart is empty. <a href="/shop">See our socks</a></p>
     <div class="bag__more" data-bag-more>
       <p class="bag__more-t">Other colours</p>
       <div class="bag__more-row" data-bag-more-row></div>
