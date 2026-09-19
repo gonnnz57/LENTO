@@ -987,6 +987,40 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     background: rgba(242, 242, 239, .97);
   }
 }
+
+/* product photos as real images (steadier on phones) */
+.product__img { background-image: none !important; background-color: #fff; }
+.product__img img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; pointer-events: none;
+}
+.product__img .media__label, .product-card__badge { z-index: 1; }
+.product-card__badge { display: none; }
+
+/* phones: two socks side by side, edge to edge, shop-style */
+@media (max-width: 719px) {
+  .products {
+    grid-template-columns: 1fr 1fr; gap: 4px;
+    margin-inline: calc(-1 * var(--gutter));
+  }
+  .products .media, .products .product-card__row, .products .product-card__cta { width: 100%; }
+  .product-card:hover .media { transform: none; }
+  .products .media__label { display: none; }
+  .product-card__badge {
+    display: block; position: absolute; top: 6px; left: 6px;
+    background: var(--ink); color: var(--paper);
+    padding: .4rem .6rem; font-size: .66rem; letter-spacing: .06em;
+    font-variation-settings: "wdth" 100, "wght" 750;
+  }
+  .product-card__row { display: block; padding: .8rem .8rem 0; margin-top: 0; }
+  .product-card__name {
+    display: block; text-transform: uppercase; letter-spacing: .02em;
+    font-size: .8rem; font-variation-settings: "wdth" 100, "wght" 700; line-height: 1.25;
+  }
+  .product-card__price { display: block; margin-top: .2rem; font-size: .8rem; font-variation-settings: "wdth" 100, "wght" 500; }
+  .products .product-card__cta { display: none; }
+}
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1051,7 +1085,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 
     <div class="products">
       <a class="product-card up" href="/socks-pink">
-        <div class="media" role="img" aria-label="Pink Lento Running Club running socks" style="--img:url('kit-01.jpg')"><span class="media__label">Pink</span></div>
+        <div class="media product__img"><img src="kit-01.jpg" alt="Pink Lento Running Club running socks" width="1080" height="1350" decoding="async" draggable="false"><span class="media__label">Pink</span><span class="product-card__badge">NEW</span></div>
         <div class="product-card__row">
           <span class="product-card__name">Pink Lento Socks</span>
           <span class="product-card__price">199 kr</span>
@@ -1060,7 +1094,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
       </a>
 
       <a class="product-card up" data-delay=".08" href="/socks-white">
-        <div class="media" role="img" aria-label="White Lento Running Club running socks" style="--img:url('kit-02.jpg')"><span class="media__label">White</span></div>
+        <div class="media product__img"><img src="kit-02.jpg" alt="White Lento Running Club running socks" width="1080" height="1350" decoding="async" draggable="false"><span class="media__label">White</span><span class="product-card__badge">NEW</span></div>
         <div class="product-card__row">
           <span class="product-card__name">White Lento Socks</span>
           <span class="product-card__price">199 kr</span>
