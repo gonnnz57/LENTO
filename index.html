@@ -353,29 +353,46 @@ body.menu-open .menu-btn i::after  { transform: translateY(-3.75px) rotate(-45de
   .menu-btn { display: none; }
 }
 
-/* full screen menu */
-.sheet {
-  position: fixed; inset: 0; z-index: 790;
-  background: var(--fjord); color: var(--paper);
-  padding: calc(var(--nav-h) + 2rem) var(--gutter) var(--gutter);
-  display: flex; flex-direction: column; justify-content: space-between;
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path .6s var(--ease);
-  visibility: hidden;
-}
-body.menu-open .sheet { clip-path: inset(0 0 0 0); visibility: visible; }
+/* mobile menu: white panel from the left, page dimmed behind */
+.sheet { position: fixed; inset: 0; z-index: 1050; visibility: hidden; transition: visibility 0s .45s; }
+body.menu-open .sheet { visibility: visible; transition: none; }
 body.menu-open { overflow: hidden; }
-.sheet__links a {
-  display: block;
-  font-variation-settings: "wdth" 120, "wght" 800;
-  font-size: clamp(2.2rem, 11vw, 5.5rem);
-  line-height: 1.02; text-transform: uppercase; letter-spacing: -.03em;
-  padding-block: .1em;
-  border-bottom: 1px solid rgba(239,239,236,.15);
-  transition: color .3s, padding-left .4s var(--ease);
+.sheet__veil { position: absolute; inset: 0; background: rgba(0,0,0,.45); opacity: 0; transition: opacity .4s var(--ease); }
+body.menu-open .sheet__veil { opacity: 1; }
+.sheet__panel {
+  position: absolute; top: 0; bottom: 0; left: 0; width: min(88vw, 420px);
+  background: #fff; color: var(--ink);
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: calc(env(safe-area-inset-top, 0px) + 1rem) 1.6rem calc(env(safe-area-inset-bottom, 0px) + 1.6rem);
+  transform: translateX(-100%); transition: transform .45s var(--ease);
 }
-.sheet__links a:hover { color: var(--accent-lt); padding-left: .12em; }
-.sheet__foot { display: flex; flex-wrap: wrap; gap: 1rem 2rem; font-size: var(--step--1); opacity: .75; }
+body.menu-open .sheet__panel { transform: none; }
+@media (prefers-reduced-motion: reduce) { .sheet__panel, .sheet__veil { transition: none; } }
+.sheet__close {
+  display: grid; place-items: center; width: 44px; height: 44px; margin: 0 -10px 0 auto;
+  background: none; border: 0; color: inherit; cursor: pointer;
+}
+.sheet__close svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 1.6; fill: none; }
+.sheet__h {
+  margin: 1.8rem 0 .7rem; color: #8a8a88;
+  font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; font-weight: 650;
+  font-variation-settings: "wdth" 100, "wght" 650;
+}
+.sheet__h:first-of-type { margin-top: .6rem; }
+.sheet__links a {
+  display: block; padding: .38rem 0; color: var(--ink);
+  font-size: 1.05rem; font-variation-settings: "wdth" 100, "wght" 450;
+}
+.sheet__links a.sheet__big { font-size: 1.65rem; line-height: 1.15; padding: .3rem 0; font-weight: 750; font-variation-settings: "wdth" 100, "wght" 750; letter-spacing: -.01em; }
+.sheet__links a.sheet__dim { color: #6f6f6d; }
+.sheet__links a[aria-current="page"] { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; }
+.sheet__img { display: block; position: relative; margin-top: 2rem; aspect-ratio: 4 / 3; overflow: hidden; background: #111; }
+.sheet__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.sheet__img span {
+  position: absolute; left: .9rem; bottom: .8rem; color: #fff;
+  font-size: .85rem; font-variation-settings: "wdth" 100, "wght" 700; letter-spacing: .02em;
+  text-shadow: 0 1px 8px rgba(0,0,0,.5);
+}
 
 /* ---------- buttons ---------- */
 .btn {
@@ -962,18 +979,26 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 
 <!-- ===== menu overlay ===== -->
 <div class="sheet" id="sheet" aria-hidden="true">
-  <nav class="sheet__links" aria-label="Menu">
-    <a href="/join">How to join</a>
-    <a href="/shop">Shop</a>
-    <a href="/club">Lento Club</a>
-    <a href="/run-pictures">Run Pictures</a>
-  </nav>
-  <div class="sheet__foot">
-    <span>hello@clublento.no</span>
-    <a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">@lentorunning</a>
-    <a href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Strava</a>
-    <span>Stavanger <span data-clock></span></span>
-  </div>
+  <div class="sheet__veil" data-sheet-close></div>
+  <aside class="sheet__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <button class="sheet__close" type="button" data-sheet-close aria-label="Close menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <nav class="sheet__links" aria-label="Menu">
+      <p class="sheet__h">Club</p>
+      <a class="sheet__big" href="/club">Lento Club</a>
+      <a class="sheet__big" href="/run-pictures">Run Pictures</a>
+      <a class="sheet__big" href="/join">How to join</a>
+      <p class="sheet__h">Shop</p>
+      <a href="/shop">Shop all</a>
+      <a href="/socks-pink">Pink Lento Socks</a>
+      <a href="/socks-white">White Lento Socks</a>
+      <p class="sheet__h">Explore</p>
+      <a class="sheet__dim" href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a>
+      <a class="sheet__dim" href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Strava</a>
+      <a class="sheet__dim" href="https://www.tiktok.com/@lentorunning" target="_blank" rel="noopener">TikTok</a>
+      <a class="sheet__dim" href="/collabs">Collabs</a>
+    </nav>
+    <a class="sheet__img" href="/join"><img src="run-01.jpg" alt="" loading="lazy" decoding="async"><span>Saturdays 10:15 · Stavanger sentrum</span></a>
+  </aside>
 </div>
 
 <main id="top">
@@ -1014,7 +1039,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   <div class="hscroll__sticky">
     <div class="hscroll__track">
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-01.jpg')"><span class="media__label">Sunday Long Run</span></div>
+        <div class="media" style="--img:url('run-01.jpg')"><span class="media__label">Saturday Long Run</span></div>
         <p>The whole club, one photo.</p>
       </figure>
       <figure class="hscroll__item">
@@ -1172,6 +1197,10 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
       set(!document.body.classList.contains("menu-open"));
     });
     $$("a", sheet).forEach(function (a) { a.addEventListener("click", function () { set(false); }); });
+    $$("[data-sheet-close]", sheet).forEach(function (b) { b.addEventListener("click", function () { set(false); btn.focus(); }); });
+    btn.addEventListener("click", function () {
+      if (document.body.classList.contains("menu-open")) setTimeout(function () { var c = sheet.querySelector(".sheet__close"); if (c) c.focus(); }, 60);
+    });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
   }
 
