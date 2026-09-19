@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Merch | Lento Running Club Stavanger</title>
-<meta name="description" content="Lento Socks &#8212; Pink, 199 kr. Lento Running Club running socks in pink, sizes S-M (38-42) and L-XL (42-45). Pay with Vipps or card.">
+<title>Pink Lento Socks | Lento Running Club Stavanger</title>
+<meta name="description" content="Pink Lento Socks, 199 kr. Lento Running Club running socks in pink, sizes S-M (38-42) and L-XL (42-45). Pay with card, Apple Pay or Google Pay.">
 <link rel="canonical" href="https://clublento.no/socks-pink">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#000000">
 <meta property="og:site_name" content="Lento Running Club">
-<meta property="og:title" content="Lento Socks &#8212; Pink | Lento Running Club">
-<meta property="og:description" content="Lento Socks &#8212; Pink, 199 kr. Lento Running Club running socks in pink, sizes S-M (38-42) and L-XL (42-45). Pay with Vipps or card.">
+<meta property="og:title" content="Pink Lento Socks | Lento Running Club">
+<meta property="og:description" content="Pink Lento Socks, 199 kr. Lento Running Club running socks in pink, sizes S-M (38-42) and L-XL (42-45). Pay with card, Apple Pay or Google Pay.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://clublento.no/socks-pink">
 <meta property="og:image" content="https://clublento.no/kit-01.jpg">
@@ -1002,12 +1002,23 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   .nav__inner { grid-template-columns: auto 1fr auto; column-gap: .5rem; }
 }
 @media (max-width: 374px) { .nav__end .btn { padding: .55em .75em; font-size: .68rem; } .brand__logo { height: 17px; } }
+
+.foot__bar { align-items: center; }
+.foot__social { display: inline-flex; gap: .35rem; margin: -.5rem 0; }
+.foot__social a { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 999px; color: inherit; transition: background .25s, color .25s; }
+.foot__social a:hover { background: var(--signal); color: var(--on-signal); }
+.foot__social svg { width: 19px; height: 19px; }
+.foot__bar:has(.foot__social) { opacity: 1; color: rgba(239,239,236,.6); }
+
+/* product pages: the bar starts black with the wordmark, like the front page,
+   and turns to frosted glass with the snail once you scroll */
+.nav:not(.is-scrolled) { background: #000; color: var(--paper); }
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
-<body data-solid-nav>
+<body>
 
 <!-- ===== boot ===== -->
 
@@ -1062,7 +1073,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
       </div>
 
       <div class="up" data-delay=".06">
-        <h1 class="headline">Lento Socks &#8212; Pink</h1>
+        <h1 class="headline">Pink Lento Socks</h1>
         <p class="product__price">199 kr</p>
         <div class="prose" style="margin-top:1.2rem">
           <p>Ribbed crew socks in pink with the club name up the leg, the snail mark on the side and &#8220;Slow is still moving&#8221; across the foot. Cushioned heel and toe, made to be run in.</p>
@@ -1100,15 +1111,20 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   <div class="rail">
     <div class="foot__cols">
       <div><h4>Club</h4><ul><li><a href="/club">Our story</a></li><li><a href="/join">How to join</a></li></ul></div>
-      <div><h4>Brands</h4><ul><li><a href="/collabs">Work with us</a></li><li><a href="mailto:hello@clublento.no">Request rate card</a></li></ul></div>
+      <div><h4>Collab</h4><ul><li><a href="/collabs">Work with us</a></li><li><a href="mailto:hello@clublento.no">Request rate card</a></li><li><a href="mailto:hello@clublento.no">hello@clublento.no</a></li></ul></div>
       <div><h4>Shop</h4><ul><li><a href="/shop">Our socks</a></li></ul></div>
-      <div><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Strava</a></li><li><a href="mailto:hello@clublento.no">hello@clublento.no</a></li></ul></div>
+      <div><h4>Social</h4><ul><li><a href="https://instagram.com/lentorunning" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener">Strava</a></li><li><a href="https://www.tiktok.com/@lentorunning" target="_blank" rel="noopener">TikTok</a></li></ul></div>
     </div>
     <div class="wordmark foot__logo" aria-hidden="true"></div>
     <div class="foot__bar">
-      <span>Stavanger, Norway &#8212; <span data-clock></span> local</span>
+      <span>Stavanger, Norway &#8212; <span data-clock></span></span>
       <span>Slow is still moving</span>
       <span>&#169; <span data-year></span> Lento Running Club</span>
+      <span class="foot__social">
+        <a href="https://www.tiktok.com/@lentorunning" target="_blank" rel="noopener" aria-label="Lento on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        <a href="https://instagram.com/lentorunning" target="_blank" rel="noopener" aria-label="Lento on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.strava.com/clubs/1809288" target="_blank" rel="noopener" aria-label="Lento on Strava"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.39 17.94l-2.09-4.12h-3.07l5.16 10.18 5.15-10.18h-3.07M10.24 0L3.3 13.82h4.09l2.85-5.63 2.83 5.63h4.06z"/></svg></a>
+      </span>
     </div>
   </div>
 </footer>
@@ -1359,14 +1375,16 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 
   /* ---------- 9. Stavanger clock ---------- */
   function clock() {
-    var el = $("[data-clock]");
-    if (!el) return;
+    var els = $$("[data-clock]");
+    if (!els.length) return;
     function tick() {
+      var t = "";
       try {
-        el.textContent = new Intl.DateTimeFormat("en-GB", {
+        t = new Intl.DateTimeFormat("en-GB", {
           timeZone: "Europe/Oslo", hour: "2-digit", minute: "2-digit"
         }).format(new Date());
-      } catch (err) { el.textContent = ""; }
+      } catch (err) {}
+      els.forEach(function (el) { el.textContent = t; });
     }
     tick();
     setInterval(tick, 20000);
@@ -1472,9 +1490,9 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   var PRICE = 199;
   var MAX = 10;
   var PRODUCTS = {
-    pink:  { name: "Lento Socks \u2014 Pink",  img: "kit-01.jpg", url: "/socks-pink",
+    pink:  { name: "Pink Lento Socks",  img: "kit-01.jpg", url: "/socks-pink",
              sizes: { "55643262583083": "S\u2013M (38\u201342)", "55643262615851": "L\u2013XL (42\u201345)" } },
-    white: { name: "Lento Socks \u2014 White", img: "kit-02.jpg", url: "/socks-white",
+    white: { name: "White Lento Socks", img: "kit-02.jpg", url: "/socks-white",
              sizes: { "55643266089259": "S\u2013M (38\u201342)", "55643266122027": "L\u2013XL (42\u201345)" } }
   };
   function find(v) {
