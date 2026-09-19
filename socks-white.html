@@ -1034,6 +1034,16 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     background: rgba(242, 242, 239, .97);
   }
 }
+
+/* product photo as a real <img>: phones keep it decoded while you touch and
+   scroll, instead of briefly dropping back to the placeholder pattern */
+.product__img { background-image: none !important; background-color: #fff; }
+.product__img img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+  -webkit-user-drag: none; pointer-events: none;
+}
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1090,7 +1100,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     <a class="back" href="/shop">&#8592; Alle produkter</a>
     <div class="product">
       <div class="product__gallery up">
-        <div class="media" role="img" aria-label="White Lento Running Club running socks" style="--img:url('kit-02.jpg');background-color:#fff"></div>
+        <div class="media product__img"><img src="kit-02.jpg" alt="White Lento Running Club running socks" decoding="async" fetchpriority="high" draggable="false"></div>
       </div>
 
       <div class="up" data-delay=".06">
