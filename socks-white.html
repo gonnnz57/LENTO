@@ -974,6 +974,35 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   background: repeating-linear-gradient(125deg, transparent 0 10px, rgba(255,31,142,.46) 10px 12.5px);
 }
 .btn--pearl::before { display: none; }
+
+/* size missing: the picker shakes, the pills light up pink, a hint drops in */
+.size-hint {
+  display: none; align-items: center; gap: .5rem;
+  margin-top: .8rem; color: #E0007A;
+  font-size: var(--step--1); font-variation-settings: "wdth" 95, "wght" 700;
+}
+.size-hint::before {
+  content: "!"; display: inline-grid; place-items: center; width: 1.35rem; height: 1.35rem;
+  border-radius: 999px; background: #E0007A; color: #fff; font-size: .75rem;
+}
+.opt.is-missing .size-hint { display: flex; animation: hintIn .35s var(--ease); }
+.opt.is-missing .opt__label { color: #E0007A; }
+.opt.is-missing .size { box-shadow: inset 0 0 0 1.5px #E0007A; animation: ring 1s ease-out 2; }
+.sizes.is-shake { animation: shake .5s cubic-bezier(.36,.07,.19,.97); }
+@keyframes shake {
+  15%, 85% { transform: translateX(-2px); }
+  30%, 70% { transform: translateX(5px); }
+  45%, 55% { transform: translateX(-7px); }
+  50% { transform: translateX(7px); }
+}
+@keyframes ring {
+  0% { box-shadow: inset 0 0 0 1.5px #E0007A, 0 0 0 0 rgba(224,0,122,.45); }
+  100% { box-shadow: inset 0 0 0 1.5px #E0007A, 0 0 0 10px rgba(224,0,122,0); }
+}
+@keyframes hintIn { from { opacity: 0; transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) {
+  .sizes.is-shake, .opt.is-missing .size, .opt.is-missing .size-hint { animation: none; }
+}
 </style>
 </head>
 <body data-solid-nav>
@@ -1043,6 +1072,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
             <button type="button" class="size" data-size="S&#8211;M (38&#8211;42)" data-variant="55643266089259">S&#8211;M (38&#8211;42)</button>
             <button type="button" class="size" data-size="L&#8211;XL (42&#8211;45)" data-variant="55643266122027">L&#8211;XL (42&#8211;45)</button>
           </div>
+          <p class="size-hint" role="alert">Velg en st&#248;rrelse f&#248;rst</p>
         </div>
 
         <div class="opt">
@@ -1056,7 +1086,6 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
           <button class="btn btn--line" type="button" data-add-bag>Add to cart</button>
           <button class="btn btn--pearl" type="button" data-buy-now>Buy now</button>
         </div>
-        <p class="note" data-note>Velg st&#248;rrelse f&#248;rst.</p>
             </div>
     </div>
   </div>
@@ -1578,10 +1607,17 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   var note = $("[data-note]");
   var addBtn = $("[data-add-bag]"), buyBtn = $("[data-buy-now]");
   var variant = "";
+  var sizeOpt = sizes[0] ? sizes[0].closest(".opt") : null;
+  var sizeRow = sizes[0] ? sizes[0].parentNode : null;
   function need() {
     if (variant) return false;
-    if (note) note.textContent = "Velg st\u00f8rrelse f\u00f8rst.";
-    if (sizes[0]) sizes[0].focus();
+    if (!sizeOpt) return true;
+    sizeOpt.classList.remove("is-missing"); sizeRow.classList.remove("is-shake");
+    void sizeOpt.offsetWidth;   /* restart the animation on every tap */
+    sizeOpt.classList.add("is-missing"); sizeRow.classList.add("is-shake");
+    var r = sizeOpt.getBoundingClientRect();
+    if (r.top < 90 || r.bottom > window.innerHeight) sizeOpt.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (navigator.vibrate) navigator.vibrate(40);
     return true;
   }
   sizes.forEach(function (b) {
@@ -1589,7 +1625,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     b.addEventListener("click", function () {
       sizes.forEach(function (o) { o.classList.toggle("is-on", o === b); o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
       variant = b.dataset.variant;
-      if (note) note.textContent = "";
+      if (sizeOpt) sizeOpt.classList.remove("is-missing");
     });
   });
   function n() { return (qty && parseInt(qty.value, 10)) || 1; }
