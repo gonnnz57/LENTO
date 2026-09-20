@@ -955,7 +955,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 .range__img { position: relative; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; background: #fff; }
 .range__img img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
-  transform: translateZ(0); transition: transform .6s var(--ease);
+  transition: transform .6s var(--ease);
   -webkit-touch-callout: none; user-select: none; pointer-events: none;
 }
 @media (hover: hover) { .range__card:hover .range__img img { transform: scale(1.03); } }
@@ -1022,6 +1022,15 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   .picbtn__txt small { font-size: .68rem; }
 }
 @media (max-width: 350px) { .picbtn__txt small { display: none; } }
+
+/* gallery photos as real <img> so phones don't drop and repaint them while the strip moves */
+.hs__media { background-image: none !important; }
+.hs__media img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  -webkit-touch-callout: none; user-select: none; pointer-events: none;
+}
+.hs__media .media__label { z-index: 1; }
+.hscroll__track { will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1161,27 +1170,27 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   <div class="hscroll__sticky">
     <div class="hscroll__track">
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-01.jpg')"><span class="media__label">Saturday Long Run</span></div>
+        <div class="media hs__media"><img src="run-01.jpg" alt="" width="900" height="1200" decoding="async" draggable="false"><span class="media__label">Saturday Long Run</span></div>
         <p>The whole club, one photo.</p>
       </figure>
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-02.jpg')"><span class="media__label">Breiavatnet Loop</span></div>
+        <div class="media hs__media"><img src="run-02.jpg" alt="" width="900" height="1200" decoding="async" draggable="false"><span class="media__label">Breiavatnet Loop</span></div>
         <p>Round the lake and back into town.</p>
       </figure>
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-03.jpg')"><span class="media__label">Lento Group</span></div>
+        <div class="media hs__media"><img src="run-03.jpg" alt="" width="900" height="1200" decoding="async" draggable="false"><span class="media__label">Lento Group</span></div>
         <p>Whatever your pace, someone runs it with you.</p>
       </figure>
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-04.jpg')"><span class="media__label">Lento &#215; Saucony &#215; Anton Sport</span></div>
+        <div class="media hs__media"><img src="run-04.jpg" alt="" width="900" height="1200" decoding="async" draggable="false"><span class="media__label">Lento &#215; Saucony &#215; Anton Sport</span></div>
         <p>Warming up together before the off.</p>
       </figure>
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-05.jpg')"><span class="media__label">Lento &#215; Oakberry</span></div>
+        <div class="media hs__media"><img src="run-05.jpg" alt="" width="900" height="1200" decoding="async" draggable="false"><span class="media__label">Lento &#215; Oakberry</span></div>
         <p>A&#231;a&#237; waiting at the finish.</p>
       </figure>
       <figure class="hscroll__item">
-        <div class="media" style="--img:url('run-06.jpg')"><span class="media__label">Lento Vibe</span></div>
+        <div class="media hs__media"><img src="run-06.jpg" alt="" width="900" height="1200" decoding="async" draggable="false"><span class="media__label">Lento Vibe</span></div>
         <p>Club kit, out in the wild.</p>
       </figure>
     </div>
