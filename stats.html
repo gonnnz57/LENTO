@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Stats · Lento</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root { --paper:#FFFFFF; --ink:#17191B; --dim:#6f6f6d; --rule:rgba(23,25,27,.12); --signal:#FFFF33; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Archivo", system-ui, sans-serif; }
+body { padding: calc(env(safe-area-inset-top,0px) + 1.4rem) 1.2rem calc(env(safe-area-inset-bottom,0px) + 3rem); }
+.wrap { max-width: 900px; margin: 0 auto; }
+h1 { font-size: clamp(2rem, 7vw, 3.2rem); font-weight: 800; font-variation-settings: "wdth" 110; margin: 0 0 .3rem; letter-spacing: -.02em; }
+.sub { color: var(--dim); margin: 0 0 2rem; }
+.login { display: flex; gap: .5rem; flex-wrap: wrap; max-width: 420px; }
+.login input { flex: 1; min-width: 180px; padding: .9em 1.1em; border: 1px solid var(--rule); border-radius: 999px; font: inherit; background: #fff; }
+button { padding: .9em 1.4em; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); font: inherit; font-weight: 700; cursor: pointer; }
+.err { color: #c2003f; margin-top: .8rem; min-height: 1.2em; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; margin-bottom: 2rem; }
+@media (min-width: 700px) { .cards { grid-template-columns: repeat(4, 1fr); } }
+.card { background: #F4F4F4; border-radius: 14px; padding: 1rem 1.1rem; }
+.card b { display: block; font-size: 2.2rem; font-weight: 800; font-variation-settings: "wdth" 100; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.card span { color: var(--dim); font-size: .85rem; }
+.card.hi { background: var(--signal); }
+.card.hi span { color: var(--ink); }
+h2 { font-size: 1.2rem; margin: 2.2rem 0 .8rem; font-weight: 750; }
+.bars { display: flex; align-items: flex-end; gap: 4px; height: 140px; padding: .6rem; background: #F4F4F4; border-radius: 14px; }
+.bar { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px; min-width: 0; }
+.bar i { display: block; width: 100%; background: var(--ink); border-radius: 4px 4px 0 0; min-height: 2px; }
+.bar small { font-size: .62rem; color: var(--dim); white-space: nowrap; }
+.bar em { font-style: normal; font-size: .7rem; font-variant-numeric: tabular-nums; }
+table { width: 100%; border-collapse: collapse; background: #F4F4F4; border-radius: 14px; overflow: hidden; }
+th, td { text-align: left; padding: .7rem .9rem; border-bottom: 1px solid var(--rule); font-size: .92rem; }
+th { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); font-weight: 650; }
+td.n { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+th.n { text-align: right; }
+td img { width: 44px; height: 44px; object-fit: cover; border-radius: 6px; vertical-align: middle; background: var(--paper); }
+.tag { display: inline-block; font-size: .72rem; padding: .15em .6em; border-radius: 999px; background: var(--paper); margin-left: .4rem; }
+.row { display: flex; gap: .6rem; align-items: center; }
+.muted { color: var(--dim); }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.link { background: none; color: var(--dim); padding: 0; text-decoration: underline; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>Run Pictures stats</h1>
+    <button class="link" id="logout" hidden>Log out</button>
+  </div>
+  <p class="sub">How many people open and download the photos. Only you can see this page.</p>
+
+  <form class="login" id="login">
+    <input type="password" id="key" placeholder="Password" autocomplete="current-password" required>
+    <button type="submit">Show stats</button>
+  </form>
+  <p class="err" id="err"></p>
+
+  <div id="out" hidden>
+    <div class="cards">
+      <div class="card hi"><b id="c-dl">0</b><span>Downloads total</span></div>
+      <div class="card"><b id="c-view">0</b><span>Photos opened</span></div>
+      <div class="card"><b id="c-sat">0</b><span>Saturday downloads</span></div>
+      <div class="card"><b id="c-wed">0</b><span>Wednesday downloads</span></div>
+    </div>
+
+    <h2>Downloads, last 14 days</h2>
+    <div class="bars" id="bars"></div>
+
+    <h2>Most downloaded photos</h2>
+    <table>
+      <thead><tr><th>Photo</th><th class="n">Opened</th><th class="n">Downloads</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="muted" style="font-size:.8rem;margin-top:.8rem">Photos you have deleted from GitHub show without a picture, but their numbers are kept.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = "lento_stats_key";
+  function saved() { try { return localStorage.getItem(KEY) || ""; } catch (e) { return ""; } }
+  function save(k) { try { k ? localStorage.setItem(KEY, k) : localStorage.removeItem(KEY); } catch (e) {} }
+  function sum(o) { return Object.keys(o).reduce(function (n, k) { return n + o[k]; }, 0); }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function load(key) {
+    $("err").textContent = "Loading…";
+    fetch("/api/stats", { headers: { "x-stats-key": key }, cache: "no-store" })
+      .then(function (r) {
+        if (r.status === 401) throw new Error("Wrong password.");
+        if (!r.ok) throw new Error("Couldn't load stats (" + r.status + "). Is the database connected in Vercel?");
+        return r.json();
+      })
+      .then(function (d) { save(key); render(d); })
+      .catch(function (e) { $("err").textContent = e.message; $("out").hidden = true; $("login").hidden = false; $("logout").hidden = true; });
+  }
+
+  function render(d) {
+    $("err").textContent = ""; $("login").hidden = true; $("out").hidden = false; $("logout").hidden = false;
+    $("c-dl").textContent = sum(d.downloads.runs);
+    $("c-view").textContent = sum(d.views.runs);
+    $("c-sat").textContent = d.downloads.runs.saturday || 0;
+    $("c-wed").textContent = d.downloads.runs.wednesday || 0;
+
+    /* last 14 days */
+    var bars = $("bars"); bars.innerHTML = "";
+    var days = [], max = 1;
+    for (var i = 13; i >= 0; i--) {
+      var dt = new Date(Date.now() - i * 864e5);
+      var k = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Oslo" }).format(dt);
+      var v = d.downloads.days[k] || 0; if (v > max) max = v;
+      days.push({ k: k, v: v, label: new Intl.DateTimeFormat("en-GB", { day: "numeric", timeZone: "Europe/Oslo" }).format(dt) });
+    }
+    days.forEach(function (x) {
+      var b = document.createElement("div"); b.className = "bar";
+      b.innerHTML = "<em>" + (x.v || "") + "</em><i style='height:" + Math.max(2, x.v / max * 100) + "%'></i><small>" + x.label + "</small>";
+      bars.appendChild(b);
+    });
+
+    /* photos table */
+    var keys = {};
+    Object.keys(d.downloads.photos).forEach(function (k) { keys[k] = 1; });
+    Object.keys(d.views.photos).forEach(function (k) { keys[k] = 1; });
+    var list = Object.keys(keys).map(function (k) {
+      return { k: k, dl: d.downloads.photos[k] || 0, view: d.views.photos[k] || 0 };
+    }).sort(function (a, b) { return b.dl - a.dl || b.view - a.view; });
+    var rows = $("rows"); rows.innerHTML = "";
+    if (!list.length) { rows.innerHTML = "<tr><td colspan='3' class='muted'>No data yet. Numbers appear when people open or download photos.</td></tr>"; return; }
+    list.slice(0, 100).forEach(function (x) {
+      var parts = x.k.split("/"), run = parts[0], name = parts.slice(1).join("/");
+      var src = "/pictures/" + encodeURIComponent(run) + "/" + encodeURIComponent(name);
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td><div class='row'><img src='" + esc(src) + "' alt='' loading='lazy' onerror=\"this.style.visibility='hidden'\"><span>" + esc(name) + "<span class='tag'>" + esc(run) + "</span></span></div></td>" +
+        "<td class='n'>" + x.view + "</td><td class='n'>" + x.dl + "</td>";
+      rows.appendChild(tr);
+    });
+  }
+
+  $("login").addEventListener("submit", function (e) { e.preventDefault(); load($("key").value.trim()); });
+  $("logout").addEventListener("click", function () { save(""); location.reload(); });
+  var k = saved(); if (k) load(k);
+})();
+</script>
+</body>
+</html>

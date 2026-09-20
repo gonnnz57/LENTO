@@ -38,9 +38,9 @@
 
 /* ---------- tokens ---------- */
 :root {
-  --paper:   #EFEFEC;
-  --paper-2: #E3E3DE;
-  --stone:   #CFCFC8;
+  --paper:   #FFFFFF;
+  --paper-2: #F4F4F4;
+  --stone:   #E6E6E6;
   --ink:     #17191B;
   --fjord:   #000000;
   --fjord-2: #121212;
@@ -77,8 +77,8 @@
 .invert {
   --fg: var(--paper);
   --bg: var(--fjord);
-  --rule: rgba(239, 239, 236, .2);
-  --dim: rgba(239, 239, 236, .6);
+  --rule: rgba(255, 255, 255, .2);
+  --dim: rgba(255, 255, 255, .6);
   background: var(--bg);
   color: var(--fg);
 }
@@ -249,7 +249,7 @@ body.booting { overflow: hidden; }
    the page keeps moving behind it, blurred, and the contents stay legible
    over anything */
 .nav.is-scrolled {
-  background: rgba(242, 242, 239, .62);
+  background: rgba(255, 255, 255, .62);
   -webkit-backdrop-filter: blur(20px) saturate(150%);
   backdrop-filter: blur(20px) saturate(150%);
   color: var(--ink);
@@ -281,7 +281,7 @@ body.booting { overflow: hidden; }
 .nav.is-scrolled .brand__mark { opacity: 1; }
 /* Firefox and older browsers get a near-solid panel instead of blur */
 @supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
-  .nav.is-scrolled { background: rgba(242, 242, 239, .95); }
+  .nav.is-scrolled { background: rgba(255, 255, 255, .95); }
 }
 .nav__inner {
   display: grid;
@@ -547,7 +547,7 @@ body.booted .scale__line::after { transform: scaleX(1); }
 /* ---------- marquee ---------- */
 .marquee {
   overflow: hidden; white-space: nowrap;
-  border-block: 1px solid rgba(239, 239, 236, .18);
+  border-block: 1px solid rgba(255, 255, 255, .18);
   padding-block: .7rem;
   background: #000; color: var(--paper);
 }
@@ -740,7 +740,7 @@ body.booted .scale__line::after { transform: scaleX(1); }
 .foot__bar {
   display: flex; flex-wrap: wrap; gap: .8rem 2rem; justify-content: space-between;
   font-size: var(--step--1); opacity: .6;
-  border-top: 1px solid rgba(239,239,236,.18);
+  border-top: 1px solid rgba(255, 255, 255,.18);
   margin-top: 2.5rem; padding-top: 1.2rem;
 }
 
@@ -932,7 +932,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 .foot__social a { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 999px; color: inherit; transition: background .25s, color .25s; }
 .foot__social a:hover { background: var(--signal); color: var(--on-signal); }
 .foot__social svg { width: 19px; height: 19px; }
-.foot__bar:has(.foot__social) { opacity: 1; color: rgba(239,239,236,.6); }
+.foot__bar:has(.foot__social) { opacity: 1; color: rgba(255, 255, 255,.6); }
 
 /* phones: drop the two effects that make scrolling heavy on mobile GPUs —
    the full-screen grain blend and the live blur behind the bar */
@@ -940,7 +940,7 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   .grain { display: none; }
   .nav.is-scrolled {
     -webkit-backdrop-filter: none; backdrop-filter: none;
-    background: rgba(242, 242, 239, .97);
+    background: rgba(255, 255, 255, .97);
   }
 }
 
