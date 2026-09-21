@@ -1067,8 +1067,12 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
    without the endless shine sweep (that repaint was what slowed scrolling) */
 .product__img img { transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 @media (max-width: 899px) {
-  .product__gallery { width: min(78%, 340px); margin-inline: auto; }
+  /* wide, short photo panel so the name, price and buttons are visible without scrolling */
+  .product__gallery { width: 100%; margin-inline: 0; }
+  .product__img { aspect-ratio: auto; height: min(42svh, 380px); background-color: #F2F3F5; }
+  .product__img img { object-fit: contain; }
 }
+.product__img { background-color: #F2F3F5; }
 @media (hover: none), (pointer: coarse) {
   .btn--neon::before, .btn--pearl::before { animation: none; display: none; }
   .btn--neon { box-shadow: 0 0 0 1px rgba(255,79,176,.6), 0 6px 18px rgba(255,31,142,.4); }
