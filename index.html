@@ -1031,6 +1031,69 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 }
 .hs__media .media__label { z-index: 1; }
 .hscroll__track { will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+
+/* ===== welcome popup (first visit only) ===== */
+.pop { position: fixed; inset: 0; z-index: 1300; display: grid; place-items: center; padding: 1rem;
+  opacity: 0; visibility: hidden; transition: opacity .4s var(--ease), visibility 0s .4s; }
+.pop::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.55); }
+body.pop-open { overflow: hidden; }
+body.pop-open .pop { opacity: 1; visibility: visible; transition: opacity .4s var(--ease); }
+.pop__box {
+  position: relative; width: min(920px, 100%); max-height: calc(100svh - 2rem);
+  display: grid; grid-template-columns: 1fr; overflow: hidden auto;
+  background: var(--paper); color: var(--ink); border-radius: 4px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.4);
+  transform: translateY(18px) scale(.98); transition: transform .45s var(--ease);
+}
+body.pop-open .pop__box { transform: none; }
+@media (min-width: 760px) { .pop__box { grid-template-columns: 1fr 1fr; overflow: hidden; } }
+@media (prefers-reduced-motion: reduce) { .pop, .pop__box { transition: none; } }
+.pop__close {
+  position: absolute; top: .6rem; right: .6rem; z-index: 3;
+  width: 42px; height: 42px; display: grid; place-items: center; cursor: pointer;
+  background: var(--paper); color: var(--ink); border: 0; border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+.pop__close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.pop__body { padding: clamp(1.6rem, 4vw, 2.6rem); display: flex; flex-direction: column; justify-content: center; }
+.pop__eyebrow { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); font-weight: 650; margin: 0 0 .8rem; }
+.pop__title { font-size: clamp(1.9rem, 5vw, 2.7rem); line-height: .98; letter-spacing: -.02em; font-weight: 800; font-variation-settings: "wdth" 105, "wght" 800; margin: 0 0 .9rem; text-transform: uppercase; }
+.pop__text { margin: 0 0 1.4rem; color: var(--dim); max-width: 34ch; }
+.pop__form { display: grid; gap: .6rem; }
+.pop__form input {
+  width: 100%; padding: 1em 1.2em; font: inherit; color: var(--ink);
+  background: #fff; border: 1.5px solid var(--rule); border-radius: 999px;
+}
+.pop__form input:focus { outline: none; border-color: var(--ink); }
+.pop__send { padding: 1.05em 1.4em; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--ink); color: var(--paper); font: inherit; font-weight: 750;
+  font-variation-settings: "wdth" 95, "wght" 750; letter-spacing: .02em; text-transform: uppercase; }
+.pop__send:hover { background: var(--signal); color: var(--on-signal); }
+.pop__send[disabled] { opacity: .5; pointer-events: none; }
+.pop__spond { margin-top: .6rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: 1em 1.4em; border-radius: 999px; background: var(--spond); color: #fff; font-weight: 700; }
+.pop__note { margin: .9rem 0 0; font-size: .78rem; color: var(--dim); }
+.pop__msg { margin: .8rem 0 0; font-size: .85rem; font-weight: 650; min-height: 1.2em; }
+.pop__art { position: relative; min-height: 190px; background: var(--paper-2); order: -1; }
+@media (min-width: 760px) { .pop__art { order: 0; min-height: 100%; } }
+.pop__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.pop__art::after {            /* the grain */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  opacity: .55; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E"); background-size: 180px 180px;
+}
+.pop__stamp { position: absolute; left: 1rem; bottom: 1rem; z-index: 2; color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,.45);
+  font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+
+/* NEW tag on the home page socks */
+.range__img { position: relative; }
+.range__new {
+  position: absolute; top: 14px; left: 14px; z-index: 1;
+  background: var(--ink); color: var(--paper);
+  padding: .4rem .7rem; font-size: .68rem; letter-spacing: .08em;
+  font-weight: 750; font-variation-settings: "wdth" 100, "wght" 750;
+}
+@media (max-width: 719px) { .range__new { top: 10px; left: 10px; padding: .35rem .6rem; font-size: .62rem; } }
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1142,16 +1205,14 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     </div>
     <div class="range__cards">
       <a class="range__card up" href="/socks-pink">
-        <div class="range__img"><img src="kit-01.jpg" alt="Pink Lento Socks" width="1080" height="1350" loading="lazy" decoding="async" draggable="false"></div>
+        <div class="range__img"><img src="kit-01.jpg" alt="Pink Lento Socks" width="1080" height="1350" loading="lazy" decoding="async" draggable="false"><span class="range__new">NEW</span></div>
         <span class="range__name">Pink Lento Socks</span>
         <span class="range__price">199 kr</span>
-        <span class="range__btn">Select size</span>
       </a>
       <a class="range__card up" data-delay=".06" href="/socks-white">
-        <div class="range__img"><img src="kit-02.jpg" alt="White Lento Socks" width="1080" height="1350" loading="lazy" decoding="async" draggable="false"></div>
+        <div class="range__img"><img src="kit-02.jpg" alt="White Lento Socks" width="1080" height="1350" loading="lazy" decoding="async" draggable="false"><span class="range__new">NEW</span></div>
         <span class="range__name">White Lento Socks</span>
         <span class="range__price">199 kr</span>
-        <span class="range__btn">Select size</span>
       </a>
     </div>
   </div>
@@ -1766,6 +1827,81 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
     var total = runs.reduce(function (n, x) { return n + x.photos.length; }, 0);
     sub.textContent = total + " new photos";
   }).catch(function () {});
+})();
+</script>
+
+<!-- ===== welcome popup ===== -->
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-title" aria-hidden="true">
+  <div class="pop__box">
+    <button class="pop__close" type="button" data-pop-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="pop__body">
+      <p class="pop__eyebrow">Stavanger · Saturdays 10:15</p>
+      <h2 class="pop__title" id="pop-title">Nobody gets dropped here.</h2>
+      <p class="pop__text">Free club run every Saturday, 6–8 km from the city centre. Every pace welcome. Drop your email and we'll send you the details, or jump straight into Spond.</p>
+      <form class="pop__form" data-pop-form>
+        <input type="email" name="email" placeholder="Your email" autocomplete="email" required aria-label="Your email">
+        <input type="hidden" name="_subject" value="New runner from the website popup">
+        <button class="pop__send" type="submit">Send me the details</button>
+      </form>
+      <a class="pop__spond" href="https://spond.com/invite/PETIK" target="_blank" rel="noopener" data-pop-spond>Join on Spond</a>
+      <p class="pop__msg" data-pop-msg role="status"></p>
+      <p class="pop__note">No membership fee, no pace requirement. Just turn up.</p>
+    </div>
+    <div class="pop__art">
+      <img src="run-01.jpg" alt="Lento Running Club on a Saturday run in Stavanger" loading="eager" decoding="async">
+      <span class="pop__stamp">Slow is still moving</span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* welcome popup: shows once per visitor, first visit only */
+(function () {
+  var pop = document.getElementById("pop");
+  if (!pop) return;
+  var KEY = "lento_pop_seen";
+  var seen = false;
+  try { seen = localStorage.getItem(KEY) === "1"; } catch (e) {}
+  var form = pop.querySelector("[data-pop-form]");
+  var msg = pop.querySelector("[data-pop-msg]");
+  var last = null;
+
+  function open() {
+    if (document.body.classList.contains("menu-open") || document.body.classList.contains("bag-open")) return;
+    last = document.activeElement;
+    document.body.classList.add("pop-open");
+    pop.setAttribute("aria-hidden", "false");
+    setTimeout(function () { var c = pop.querySelector(".pop__close"); if (c) c.focus(); }, 80);
+  }
+  function close() {
+    document.body.classList.remove("pop-open");
+    pop.setAttribute("aria-hidden", "true");
+    try { localStorage.setItem(KEY, "1"); } catch (e) {}
+    if (last && last.focus) last.focus();
+  }
+  pop.querySelectorAll("[data-pop-close]").forEach(function (b) { b.addEventListener("click", close); });
+  pop.addEventListener("click", function (e) { if (e.target === pop) close(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.body.classList.contains("pop-open")) close(); });
+  pop.querySelector("[data-pop-spond]").addEventListener("click", function () { try { localStorage.setItem(KEY, "1"); } catch (e) {} });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = form.querySelector("button");
+    btn.disabled = true; msg.textContent = "Sending…";
+    fetch("https://formspree.io/f/xjykvedr", {
+      method: "POST", headers: { Accept: "application/json" }, body: new FormData(form)
+    }).then(function (r) {
+      if (!r.ok) throw new Error();
+      msg.textContent = "You're on the list. See you Saturday.";
+      form.reset(); form.style.display = "none";
+      try { localStorage.setItem(KEY, "1"); } catch (e2) {}
+    }).catch(function () {
+      msg.textContent = "Something went wrong — email hello@clublento.no instead.";
+      btn.disabled = false;
+    });
+  });
+
+  if (!seen) setTimeout(open, 2600);   /* after the intro animation */
 })();
 </script>
 </body>
