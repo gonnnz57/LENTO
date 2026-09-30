@@ -1094,6 +1094,11 @@ body.pop-open .pop__box { transform: none; }
   font-weight: 750; font-variation-settings: "wdth" 100, "wght" 750;
 }
 @media (max-width: 719px) { .range__new { top: 10px; left: 10px; padding: .35rem .6rem; font-size: .62rem; } }
+
+/* popup: show the people in the photo, not their feet */
+.pop__art img { object-position: center 28%; }
+.pop__spond { margin-top: 1.2rem; }
+@media (max-width: 759px) { .pop__art { min-height: 200px; } .pop__art img { object-position: center 25%; } }
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1835,17 +1840,9 @@ body.pop-open .pop__box { transform: none; }
   <div class="pop__box">
     <button class="pop__close" type="button" data-pop-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="pop__body">
-      <p class="pop__eyebrow">Stavanger · Saturdays 10:15</p>
-      <h2 class="pop__title" id="pop-title">Nobody gets dropped here.</h2>
-      <p class="pop__text">Free club run every Saturday, 6–8 km from the city centre. Every pace welcome. Drop your email and we'll send you the details, or jump straight into Spond.</p>
-      <form class="pop__form" data-pop-form>
-        <input type="email" name="email" placeholder="Your email" autocomplete="email" required aria-label="Your email">
-        <input type="hidden" name="_subject" value="New runner from the website popup">
-        <button class="pop__send" type="submit">Send me the details</button>
-      </form>
+      <h2 class="pop__title" id="pop-title">Lento Running Club</h2>
+      <p class="pop__text">Social run club. All paces, one community. Join our next run via Spond.</p>
       <a class="pop__spond" href="https://spond.com/invite/PETIK" target="_blank" rel="noopener" data-pop-spond>Join on Spond</a>
-      <p class="pop__msg" data-pop-msg role="status"></p>
-      <p class="pop__note">No membership fee, no pace requirement. Just turn up.</p>
     </div>
     <div class="pop__art">
       <img src="run-01.jpg" alt="Lento Running Club on a Saturday run in Stavanger" loading="eager" decoding="async">
@@ -1862,8 +1859,6 @@ body.pop-open .pop__box { transform: none; }
   var KEY = "lento_pop_seen";
   var seen = false;
   try { seen = localStorage.getItem(KEY) === "1"; } catch (e) {}
-  var form = pop.querySelector("[data-pop-form]");
-  var msg = pop.querySelector("[data-pop-msg]");
   var last = null;
 
   function open() {
@@ -1883,23 +1878,6 @@ body.pop-open .pop__box { transform: none; }
   pop.addEventListener("click", function (e) { if (e.target === pop) close(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.body.classList.contains("pop-open")) close(); });
   pop.querySelector("[data-pop-spond]").addEventListener("click", function () { try { localStorage.setItem(KEY, "1"); } catch (e) {} });
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var btn = form.querySelector("button");
-    btn.disabled = true; msg.textContent = "Sending…";
-    fetch("https://formspree.io/f/xjykvedr", {
-      method: "POST", headers: { Accept: "application/json" }, body: new FormData(form)
-    }).then(function (r) {
-      if (!r.ok) throw new Error();
-      msg.textContent = "You're on the list. See you Saturday.";
-      form.reset(); form.style.display = "none";
-      try { localStorage.setItem(KEY, "1"); } catch (e2) {}
-    }).catch(function () {
-      msg.textContent = "Something went wrong — email hello@clublento.no instead.";
-      btn.disabled = false;
-    });
-  });
 
   if (!seen) setTimeout(open, 2600);   /* after the intro animation */
 })();
