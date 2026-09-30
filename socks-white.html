@@ -1078,6 +1078,38 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
   .btn--neon { box-shadow: 0 0 0 1px rgba(255,79,176,.6), 0 6px 18px rgba(255,31,142,.4); }
   .up { transition-duration: .5s; }
 }
+
+/* ---------- fit scale + accordions on the product page ---------- */
+.fit { margin-top: 2.2rem; max-width: 460px; }
+.fit__label { font-size: var(--step--1); color: var(--dim); margin-bottom: .7rem; }
+.fit__bars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.fit__bars i { display: block; height: 4px; border-radius: 2px; background: var(--rule); }
+.fit__bars i.is-on { background: var(--ink); height: 6px; margin-top: -1px; }
+.fit__ends { display: flex; justify-content: space-between; margin-top: .6rem; font-size: var(--step--1); }
+.fit__ends span { color: var(--dim); }
+.fit__ends span.is-on { color: var(--ink); font-variation-settings: "wdth" 95, "wght" 700; }
+
+.acc { max-width: 460px; border-bottom: 1px solid var(--rule); }
+.acc:first-of-type { border-top: 1px solid var(--rule); margin-top: 2.2rem; }
+.acc > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.15rem 0; cursor: pointer; list-style: none;
+  font-size: var(--step-0); font-variation-settings: "wdth" 95, "wght" 650;
+}
+.acc > summary::-webkit-details-marker { display: none; }
+.acc > summary::after {
+  content: ""; width: 13px; height: 13px; flex: none;
+  background:
+    linear-gradient(var(--ink), var(--ink)) center/100% 1.5px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center/1.5px 100% no-repeat;
+  transition: transform .3s var(--ease);
+}
+.acc[open] > summary::after { background-size: 100% 1.5px, 0 0; }
+.acc__body { padding: 0 0 1.3rem; color: var(--dim); font-size: var(--step--1); line-height: 1.55; }
+.acc__body p { margin: 0 0 .7rem; }
+.acc__body p:last-child { margin-bottom: 0; }
+.acc__body b { color: var(--ink); font-variation-settings: "wdth" 95, "wght" 650; }
+@media (prefers-reduced-motion: reduce) { .acc > summary::after { transition: none; } }
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1174,6 +1206,33 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
           <button class="btn btn--line" type="button" data-add-bag>Add to cart</button>
           <button class="btn btn--neon" type="button" data-buy-now>Buy now</button>
         </div>
+
+        <div class="fit up">
+          <p class="fit__label">Fit</p>
+          <div class="fit__bars" role="img" aria-label="Fit: runs large">
+            <i></i><i></i><i></i><i class="is-on"></i><i></i>
+          </div>
+          <div class="fit__ends"><span>Small</span><span>True to size</span><span class="is-on">Large</span></div>
+        </div>
+
+        <details class="acc up">
+          <summary>Product description</summary>
+          <div class="acc__body">
+            <p>Ribbed crew socks in white with the club name up the leg, the snail mark on the side and &#8220;Slow is still moving&#8221; across the foot. Cushioned heel and toe, made to be run in.</p>
+            <p><b>They run large.</b> If you are between two sizes, take the smaller one.</p>
+            <p>S&#8211;M fits EU 38&#8211;42. L&#8211;XL fits EU 42&#8211;45.</p>
+          </div>
+        </details>
+
+        <details class="acc up">
+          <summary>Shipping &amp; pickup</summary>
+          <div class="acc__body">
+            <p><b>Pick up at the next run, free.</b> Say your name to one of us at the Saturday run and the socks are yours.</p>
+            <p><b>Sent home, 79 kr.</b> Posted within a few days, anywhere in Norway.</p>
+            <p>Wrong size? Send us a message at hello@clublento.no and we swap it at the next run.</p>
+          </div>
+        </details>
+
             </div>
     </div>
   </div>
