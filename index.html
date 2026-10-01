@@ -1175,9 +1175,20 @@ body.pop-open .pop__box { transform: none; }
 <!-- ===== hero ===== -->
 <section class="hero invert" data-nav-dark>
   <video class="hero__vid" autoplay muted loop playsinline preload="metadata"
-         poster="hero-poster.jpg" aria-hidden="true">
-    <source src="hero.mp4" type="video/mp4">
-  </video>
+         poster="hero-poster.jpg" aria-hidden="true" data-hero-video></video>
+  <script>
+    /* phones load the vertical clip, laptops the wide one — never both */
+    (function () {
+      var v = document.querySelector("[data-hero-video]");
+      var portrait = window.matchMedia("(max-aspect-ratio: 1/1)").matches;
+      v.poster = portrait ? "hero-poster-portrait.jpg" : "hero-poster.jpg";
+      var src = document.createElement("source");
+      src.src = portrait ? "hero-portrait.mp4" : "hero-landscape.mp4";
+      src.type = "video/mp4";
+      v.appendChild(src);
+      v.load();
+    })();
+  </script>
   <div class="hero__scrim" aria-hidden="true"></div>
 
   <div class="rail hero__center">
