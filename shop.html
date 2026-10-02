@@ -1051,6 +1051,11 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 .lang button[aria-pressed="true"] { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
 .lang span { opacity: .35; }
 @media (max-width: 719px) { .lang { margin-right: .1rem; font-size: .68rem; } .lang button { padding: .45rem .22rem; } }
+
+/* shop page: slim banner, straight down to the products */
+.hero--shop { min-height: 0; height: clamp(150px, 26svh, 260px); padding-block: 0; margin-top: calc(-1 * var(--nav-h)); }
+.hero--shop .hero__vid { object-position: center 60%; }
+.hero--shop + .band, .band--shop { padding-top: clamp(1.6rem, 4vw, 2.6rem); }
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -1115,10 +1120,10 @@ body.bag-open .bag__pay::after { animation: crawl 6s linear infinite 1.8s; }
 <main id="top">
 
 <!-- ===== photo header ===== -->
-<section class="hero hero--photo invert" data-nav-dark aria-label="Lento Running Club group run">
+<section class="hero hero--photo hero--shop invert" data-nav-dark aria-label="Lento Running Club group run">
   <img class="hero__vid" src="shop-hero.jpg" alt="Lento Running Club gathered before a group run in Stavanger">
   <div class="hero__scrim" aria-hidden="true"></div>
-  <h1 class="display display--xl hero__title">Shop</h1>
+  <h1 class="sr-only">Lento Running Club shop</h1>
 </section>
 
 <!-- ===== products ===== -->
