@@ -183,7 +183,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   pointer-events: none; opacity: .3; mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
 }
-.cursor {
+.cursor { display: none;
   position: fixed; top: 0; left: 0; z-index: 950;
   width: 10px; height: 10px; border-radius: 50%;
   background: var(--signal);
@@ -194,7 +194,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   margin: -5px 0 0 -5px;
 }
 .cursor.is-wide { width: 76px; height: 76px; margin: -38px 0 0 -38px; background: rgba(255,255,51,.35); }
-@media (hover: none), (pointer: coarse) { .cursor { display: none; } }
+@media (hover: none), (pointer: coarse) { .cursor { display: none; display: none; } }
 
 /* ---------- preloader ---------- */
 .boot {
@@ -818,7 +818,7 @@ body.booted .scale__line::after { transform: scaleX(1); }
   }
   .up { opacity: 1; transform: none; }
   .hero__word > span { transform: none; }
-  .cursor { display: none; }
+  .cursor { display: none; display: none; }
 }
 
 
@@ -1431,22 +1431,6 @@ body.lb-open .lb { opacity: 1; visibility: visible; transition: opacity .3s var(
   /* ---------- 8. cursor + magnetic buttons ---------- */
   function pointer() {
     if (!fine || reduced) return;
-    var dot = document.createElement("div");
-    dot.className = "cursor";
-    document.body.appendChild(dot);
-
-    var x = 0, y = 0, cx = 0, cy = 0;
-    document.addEventListener("mousemove", function (e) { x = e.clientX; y = e.clientY; });
-    (function loop() {
-      cx += (x - cx) * 0.18; cy += (y - cy) * 0.18;
-      dot.style.transform = "translate3d(" + cx + "px," + cy + "px,0)";
-      requestAnimationFrame(loop);
-    })();
-
-    $$(".media, .partner").forEach(function (el) {
-      el.addEventListener("mouseenter", function () { dot.classList.add("is-wide"); });
-      el.addEventListener("mouseleave", function () { dot.classList.remove("is-wide"); });
-    });
 
     $$("[data-magnet]").forEach(function (el) {
       el.addEventListener("mousemove", function (e) {
@@ -1462,7 +1446,7 @@ body.lb-open .lb { opacity: 1; visibility: visible; transition: opacity .3s var(
   /* ---------- 8b. hero video: honour reduced motion, idle when offscreen ---------- */
   function heroVideo() {
     var v = $(".hero__vid");
-    if (!v) return;
+    if (!v || typeof v.play !== "function") return;   /* photo heroes use an <img> with the same class */
     if (reduced) { v.removeAttribute("autoplay"); v.pause(); return; }
     var play = v.play();
     if (play && play.catch) play.catch(function () { /* browser blocked it; poster shows */ });
