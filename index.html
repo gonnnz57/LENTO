@@ -2077,7 +2077,7 @@ body.pop-open .pop__box { transform: none; }
       runs.slice(0, 4).forEach(function (r) {
         var t = fmt(r.start, r.allDay, r.local);
         var a = document.createElement("a");
-        a.className = "run"; a.href = SPOND; a.target = "_blank"; a.rel = "noopener";
+        a.className = "run"; a.href = r.link || SPOND; a.target = "_blank"; a.rel = "noopener";
         a.innerHTML = '<span class="run__date"><span class="run__day"></span><span class="run__mon"></span></span>' +
           '<span class="run__txt"><span class="run__name"></span><span class="run__meta"></span></span>' +
           '<span class="run__cta">Sign up</span>';
@@ -2092,12 +2092,21 @@ body.pop-open .pop__box { transform: none; }
   /* 1. the club calendar (Spond -> Google -> /api/runs)
      2. if that is empty, the hand-written runs.json
      3. if that is empty too, the Saturday line */
-  fetch("/api/runs", { cache: "no-cache" })
+  /* show something straight away, then upgrade it when the calendar answers */
+  var painted = false;
+  function paint(runs) {
+    if (!runs || !runs.length) { if (!painted) empty.hidden = false; return; }
+    box.innerHTML = ""; empty.hidden = true; painted = true;
+    show(runs);
+  }
+  manual().then(function (runs) { if (!painted) paint(runs); });
+
+  var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+  if (ctrl) setTimeout(function () { ctrl.abort(); }, 5000);
+  fetch("/api/runs", { cache: "no-cache", signal: ctrl ? ctrl.signal : undefined })
     .then(function (r) { return r.json(); })
-    .then(function (d) { return (d && d.runs && d.runs.length) ? d.runs : manual(); })
-    .catch(manual)
-    .then(function (runs) { show(runs || []); })
-    .catch(function () { empty.hidden = false; });
+    .then(function (d) { if (d && d.runs && d.runs.length) paint(d.runs); })
+    .catch(function () {});
 
   function manual() {
     return fetch("/runs.json", { cache: "no-cache" })
