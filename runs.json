@@ -1,0 +1,8 @@
+{
+  "_readme": "Manuell liste over løp. Vises på forsiden hvis kalenderen ikke er koblet til. Slett løp som er ferdige.",
+  "runs": [
+    { "title": "Saturday Club Run", "start": "2026-10-10T10:15", "place": "Stavanger sentrum" },
+    { "title": "Wednesday Easy Run", "start": "2026-10-14T18:00", "place": "Hotel Victoria" },
+    { "title": "Saturday Club Run", "start": "2026-10-17T10:15", "place": "Stavanger sentrum" }
+  ]
+}
